@@ -123,7 +123,7 @@ export default {
       formSubmit(){
         axios.post(this.url+'api/entregar', this.form).then(response => {
             console.log('hecho');
-            this.loadData();
+            this.init();
         });
       },
       sig(){
@@ -149,6 +149,15 @@ export default {
                 // document.querySelector('#imageCode').value = obj.imageData;
                 //Process the response
             }
+      },
+      init(){
+          this.form = {
+              'imagen': '',
+              'id_cliente': '',
+              'id_paquete': '',
+              'comentario': ''
+          };
+          this.loadData();
       }
   }
 }

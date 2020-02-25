@@ -138,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(this.url + 'api/entregar', this.form).then(function (response) {
         console.log('hecho');
 
-        _this2.loadData();
+        _this2.init();
       });
     },
     sig: function sig() {
@@ -174,6 +174,15 @@ __webpack_require__.r(__webpack_exports__);
         me.form.imagen = obj.imageData; // document.querySelector('#imageCode').value = obj.imageData;
         //Process the response
       }
+    },
+    init: function init() {
+      this.form = {
+        'imagen': '',
+        'id_cliente': '',
+        'id_paquete': '',
+        'comentario': ''
+      };
+      this.loadData();
     }
   }
 });
