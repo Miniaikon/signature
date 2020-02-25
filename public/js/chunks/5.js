@@ -15,7 +15,374 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h4", [_vm._v("You are in home.")])
+  return _c(
+    "vs-row",
+    {
+      attrs: {
+        "vs-align": "center",
+        "vs-type": "flex",
+        "vs-justify": "space-around",
+        "vs-w": "12"
+      }
+    },
+    [
+      _c(
+        "vs-col",
+        {
+          staticClass: "pr-1",
+          attrs: {
+            "vs-type": "flex",
+            "vs-justify": "center",
+            "vs-align": "center",
+            "vs-w": "6"
+          }
+        },
+        [
+          _c("vs-card", [
+            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+              _c("h3", [
+                _vm._v(
+                  "\n                    Buscar cliente\n                    "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Nro. Cliente")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c("vs-input", {
+                      staticClass: "inputx",
+                      attrs: { placeholder: "Nro. Cliente" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: {
+                      "vs-type": "flex",
+                      "vs-justify": "center",
+                      "vs-w": "4"
+                    }
+                  },
+                  [
+                    _c("vs-button", { attrs: { color: "primary" } }, [
+                      _vm._v("Buscar")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-row",
+                  [
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                      },
+                      [
+                        _c("label", { attrs: { for: "" } }, [
+                          _vm._v("Nro. Envío")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                      },
+                      [
+                        _c("vs-input", {
+                          staticClass: "inputx",
+                          attrs: { placeholder: "Nro. Envío" }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [_c("label", { attrs: { for: "" } }, [_vm._v("Documento")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "vs-inputx vs-input--input normal",
+                        attrs: { name: "", id: "" }
+                      },
+                      [
+                        _c("option", { attrs: { value: "C.I" } }, [
+                          _vm._v("C.I")
+                        ])
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c("vs-input", {
+                      staticClass: "inputx",
+                      attrs: { placeholder: "" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-row",
+                  [
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                      },
+                      [
+                        _c("label", { attrs: { for: "" } }, [
+                          _vm._v("Nombre / Apellido")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                      },
+                      [
+                        _c("vs-input", {
+                          staticClass: "inputx",
+                          attrs: { placeholder: "Nombre" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                      },
+                      [
+                        _c("vs-input", {
+                          staticClass: "inputx",
+                          attrs: { placeholder: "Apellido" }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "vs-col",
+        {
+          staticClass: "pl-1",
+          attrs: {
+            "vs-type": "flex",
+            "vs-justify": "center",
+            "vs-align": "center",
+            "vs-w": "6"
+          }
+        },
+        [
+          _c("vs-card", [
+            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+              _c("h3", [
+                _vm._v(
+                  "\n                        Datos de quien recive\n                    "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "pb-5",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [_c("label", { attrs: { for: "" } }, [_vm._v("Fecha")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "pb-5",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c("vs-input", {
+                      staticClass: "inputx",
+                      attrs: { placeholder: "Fecha" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "pb-5",
+                    attrs: {
+                      "vs-type": "flex",
+                      "vs-justify": "center",
+                      "vs-w": "4"
+                    }
+                  },
+                  [
+                    _c("vs-button", { attrs: { color: "primary" } }, [
+                      _vm._v("Retira Cliente")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "pb-5",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [_c("label", { attrs: { for: "" } }, [_vm._v("Documento")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "pb-5",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "vs-inputx vs-input--input normal",
+                        attrs: { name: "", id: "" }
+                      },
+                      [
+                        _c("option", { attrs: { value: "C.I" } }, [
+                          _vm._v("C.I")
+                        ])
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "pb-5",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c("vs-input", {
+                      staticClass: "inputx",
+                      attrs: { placeholder: "" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-row",
+                  [
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-5",
+                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                      },
+                      [_c("label", { attrs: { for: "" } }, [_vm._v("Nombre")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-6",
+                        attrs: { "vs-type": "flex", "vs-w": "8" }
+                      },
+                      [
+                        _c("vs-input", {
+                          staticClass: "inputx",
+                          attrs: { placeholder: "Nombre" }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
