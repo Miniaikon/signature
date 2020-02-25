@@ -104,7 +104,7 @@ export default {
   data() {
     return {
       items: [],
-      url: 'http://'+window.location.host+'/',
+      url: 'https://'+window.location.host+'/',
       form: {
         imagen: '',
       },

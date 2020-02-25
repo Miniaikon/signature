@@ -114,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [],
-      url: 'http://' + window.location.host + '/',
+      url: 'https://' + window.location.host + '/',
       form: {
         imagen: ''
       }
