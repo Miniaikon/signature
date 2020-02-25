@@ -248,7 +248,7 @@ var render = function() {
             _c("div", { attrs: { slot: "header" }, slot: "header" }, [
               _c("h3", [
                 _vm._v(
-                  "\n                        Datos de quien recive\n                    "
+                  "\n                        Datos de quien retira\n                    "
                 )
               ])
             ]),

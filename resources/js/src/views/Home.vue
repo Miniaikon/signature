@@ -58,7 +58,7 @@
             <vs-card>
                 <div slot="header">
                     <h3>
-                        Datos de quien recive
+                        Datos de quien retira
                     </h3>
                 </div>
                 <div>

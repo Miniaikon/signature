@@ -46,7 +46,7 @@
                         </vs-col>
                     </vs-row>
                     <vs-row class="p-5">
-                        <vs-button color="success">Retirar pedido</vs-button>
+                        <vs-button color="success">Registrar Entrega</vs-button>
                     </vs-row>
                 </div>
 
@@ -77,26 +77,10 @@ export default {
           });
       },
       formSubmit(){
-          if(this.formPart < 3){
-              this.formPart++;
-          }else{
-              let formData = new FormData();
-              formData.append('courier', this.form.courier);
-              formData.append('tienda', this.form.tienda);
-              formData.append('valor', this.form.valor);
-              formData.append('orden', this.form.orden);
-              formData.append('tracking', this.form.tracking);
-              formData.append('descripcion', this.form.descripcion);
-              for(let i = 0; i < this.form.images.length; i++){
-                  formData.append('images[]', this.form.images[i]);
-              }
-              formData.append('estatus', this.form.estatus);
-              formData.append('direccion', this.form.direccion);
-              axios.post(this.url+'api/prealerta', formData,{ headers: { 'Content-Type': 'multipart/form-data' } }).then(response => {
-                  console.log('hecho');
-                  this.loadData();
-              });
-          }
+        axios.post(this.url+'api/prealerta', formData,{ headers: { 'Content-Type': 'multipart/form-data' } }).then(response => {
+            console.log('hecho');
+            this.loadData();
+        });
       },
       sig(){
           var message = { "firstName": "", "lastName": "", "eMail": "", "location": "", "imageFormat": 1, "imageX": "200",

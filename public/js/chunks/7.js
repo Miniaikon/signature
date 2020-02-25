@@ -90,33 +90,15 @@ __webpack_require__.r(__webpack_exports__);
     formSubmit: function formSubmit() {
       var _this2 = this;
 
-      if (this.formPart < 3) {
-        this.formPart++;
-      } else {
-        var formData = new FormData();
-        formData.append('courier', this.form.courier);
-        formData.append('tienda', this.form.tienda);
-        formData.append('valor', this.form.valor);
-        formData.append('orden', this.form.orden);
-        formData.append('tracking', this.form.tracking);
-        formData.append('descripcion', this.form.descripcion);
-
-        for (var i = 0; i < this.form.images.length; i++) {
-          formData.append('images[]', this.form.images[i]);
+      axios.post(this.url + 'api/prealerta', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
+      }).then(function (response) {
+        console.log('hecho');
 
-        formData.append('estatus', this.form.estatus);
-        formData.append('direccion', this.form.direccion);
-        axios.post(this.url + 'api/prealerta', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(function (response) {
-          console.log('hecho');
-
-          _this2.loadData();
-        });
-      }
+        _this2.loadData();
+      });
     },
     sig: function sig() {
       var message = {
@@ -394,7 +376,7 @@ var render = function() {
                   { staticClass: "p-5" },
                   [
                     _c("vs-button", { attrs: { color: "success" } }, [
-                      _vm._v("Retirar pedido")
+                      _vm._v("Registrar Entrega")
                     ])
                   ],
                   1
