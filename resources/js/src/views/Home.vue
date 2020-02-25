@@ -92,6 +92,12 @@
                             <vs-input class="inputx" placeholder="Nombre" />
                         </vs-col>
                     </vs-row>
+                    <vs-row>
+                        <vs-col vs-type="flex" vs-w="12" vs-justify="left">
+                            <vs-button color="danger">Cancelar</vs-button>
+                            <vs-button color="success" class=" ml-3">Registrar Entrega</vs-button>
+                        </vs-col>
+                    </vs-row>
                 </div>
 
             </vs-card>

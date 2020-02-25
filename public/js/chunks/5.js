@@ -372,6 +372,35 @@ var render = function() {
                     )
                   ],
                   1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-row",
+                  [
+                    _c(
+                      "vs-col",
+                      {
+                        attrs: {
+                          "vs-type": "flex",
+                          "vs-w": "12",
+                          "vs-justify": "left"
+                        }
+                      },
+                      [
+                        _c("vs-button", { attrs: { color: "danger" } }, [
+                          _vm._v("Cancelar")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "vs-button",
+                          { staticClass: " ml-3", attrs: { color: "success" } },
+                          [_vm._v("Registrar Entrega")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
                 )
               ],
               1

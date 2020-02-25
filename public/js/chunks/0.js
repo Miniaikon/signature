@@ -6832,9 +6832,9 @@ __webpack_require__.r(__webpack_exports__);
   slug: "home",
   icon: "HomeIcon"
 }, {
-  url: "/page2",
-  name: "Page 2",
-  slug: "page2",
+  url: "/retirar",
+  name: "Retirar",
+  slug: "Retiro",
   icon: "FileIcon"
 }]);
 

@@ -55771,8 +55771,8 @@ __webpack_require__.r(__webpack_exports__);
       icon: 'HomeIcon',
       is_bookmarked: false
     }, {
-      title: 'Page 2',
-      url: '/page2',
+      title: 'Retirar',
+      url: '/retirar',
       icon: 'FileIcon',
       is_bookmarked: false
     }]
@@ -55969,10 +55969,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
         return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/Home.vue */ "./resources/js/src/views/Home.vue"));
       }
     }, {
-      path: '/page2',
-      name: 'page-2',
+      path: '/retirar',
+      name: 'retiro',
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/Page2.vue */ "./resources/js/src/views/Page2.vue"));
+        return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./views/Retirar.vue */ "./resources/js/src/views/Retirar.vue"));
       }
     }]
   }, // =============================================================================
