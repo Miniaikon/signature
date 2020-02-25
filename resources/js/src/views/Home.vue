@@ -1,6 +1,6 @@
 <template>
 	<vs-row vs-align="center" vs-type="flex" vs-justify="space-around" vs-w="12">
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pr-1" vs-w="6">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pr-1" vs-w="5">
             <vs-card>
                 <div slot="header">
                     <h3>
@@ -54,7 +54,7 @@
 
             </vs-card>
         </vs-col>
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pl-1" vs-w="6">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pl-1" vs-w="7">
             <vs-card>
                 <div slot="header">
                     <h3>
@@ -62,40 +62,50 @@
                     </h3>
                 </div>
                 <div>
-                    <vs-col vs-type="flex" vs-w="4" class="pb-5">
-                        <label for="">Fecha</label>
-                    </vs-col>
-                     <vs-col vs-type="flex" vs-w="4" class="pb-5">
-                        <vs-input class="inputx" placeholder="Fecha" />
-                    </vs-col>
-                    <vs-col vs-type="flex" vs-justify="center" vs-w="4" class="pb-5">
-                         <vs-button color="primary">Retira Cliente</vs-button>
-                    </vs-col>
-                    <!-- other -->
-                    <vs-col vs-type="flex" vs-w="4" class="pb-5">
-                        <label for="">Documento</label>
-                    </vs-col>
-                    <vs-col vs-type="flex" vs-w="4" class="pb-5">
-                        <select name="" class="vs-inputx vs-input--input normal" id="">
-                            <option value="C.I">C.I</option>
-                        </select>
-                    </vs-col>
-                    <vs-col vs-type="flex" vs-w="4" class="pb-5">
-                        <vs-input class="inputx" placeholder="" />
-                    </vs-col>
-                    <!-- Other -->
                     <vs-row>
-                        <vs-col vs-type="flex" vs-w="4" class="pb-5">
-                            <label for="">Nombre</label>
+                        <vs-col vs-type="flex" vs-w="2" class="pb-5">
+                            <label for="">Fecha</label>
                         </vs-col>
-                        <vs-col vs-type="flex" vs-w="8" class="pb-6">
-                            <vs-input class="inputx" placeholder="Nombre" />
+                        <vs-col vs-type="flex" vs-w="3" class="pb-5">
+                            <vs-input class="inputx" placeholder="Fecha" />
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-justify="center" vs-w="4" class="pb-5">
+                            <vs-button color="primary">Retira Cliente</vs-button>
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-justify="center" vs-w="3" class="pb-5">
+
+                            <vs-button color="success" class=" ml-3">Registrar Entrega</vs-button>
                         </vs-col>
                     </vs-row>
+                    <!-- other -->
                     <vs-row>
-                        <vs-col vs-type="flex" vs-w="12" vs-justify="left">
-                            <vs-button color="danger">Cancelar</vs-button>
-                            <vs-button color="success" class=" ml-3">Registrar Entrega</vs-button>
+                        <vs-col vs-type="flex" vs-w="2" class="pb-5">
+                            <label for="">Documento</label>
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-w="3" class="pb-5">
+                            <select name="" class="vs-inputx vs-input--input normal" id="">
+                                <option value="C.I">C.I</option>
+                            </select>
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-w="4" class="pb-5 pl-3">
+                            <vs-input class="inputx" placeholder="" />
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-justify="center" vs-w="3" class="pb-5">
+
+                            <vs-button color="warning" class=" ml-3">Cancelar</vs-button>
+                        </vs-col>
+                    </vs-row>
+                    <!-- Other -->
+                    <vs-row>
+                        <vs-col vs-type="flex" vs-w="2" class="pb-5">
+                            <label for="">Nombre</label>
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-w="7" class="pb-6">
+                            <vs-input class="inputx block" placeholder="Nombre" />
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-justify="center" vs-w="3" class="pb-5">
+
+                            <vs-button color="danger" class=" ml-3">Salir</vs-button>
                         </vs-col>
                     </vs-row>
                 </div>

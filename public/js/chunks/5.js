@@ -34,7 +34,7 @@ var render = function() {
             "vs-type": "flex",
             "vs-justify": "center",
             "vs-align": "center",
-            "vs-w": "6"
+            "vs-w": "5"
           }
         },
         [
@@ -240,7 +240,7 @@ var render = function() {
             "vs-type": "flex",
             "vs-justify": "center",
             "vs-align": "center",
-            "vs-w": "6"
+            "vs-w": "7"
           }
         },
         [
@@ -257,116 +257,66 @@ var render = function() {
               "div",
               [
                 _c(
-                  "vs-col",
-                  {
-                    staticClass: "pb-5",
-                    attrs: { "vs-type": "flex", "vs-w": "4" }
-                  },
-                  [_c("label", { attrs: { for: "" } }, [_vm._v("Fecha")])]
-                ),
-                _vm._v(" "),
-                _c(
-                  "vs-col",
-                  {
-                    staticClass: "pb-5",
-                    attrs: { "vs-type": "flex", "vs-w": "4" }
-                  },
-                  [
-                    _c("vs-input", {
-                      staticClass: "inputx",
-                      attrs: { placeholder: "Fecha" }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "vs-col",
-                  {
-                    staticClass: "pb-5",
-                    attrs: {
-                      "vs-type": "flex",
-                      "vs-justify": "center",
-                      "vs-w": "4"
-                    }
-                  },
-                  [
-                    _c("vs-button", { attrs: { color: "primary" } }, [
-                      _vm._v("Retira Cliente")
-                    ])
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "vs-col",
-                  {
-                    staticClass: "pb-5",
-                    attrs: { "vs-type": "flex", "vs-w": "4" }
-                  },
-                  [_c("label", { attrs: { for: "" } }, [_vm._v("Documento")])]
-                ),
-                _vm._v(" "),
-                _c(
-                  "vs-col",
-                  {
-                    staticClass: "pb-5",
-                    attrs: { "vs-type": "flex", "vs-w": "4" }
-                  },
-                  [
-                    _c(
-                      "select",
-                      {
-                        staticClass: "vs-inputx vs-input--input normal",
-                        attrs: { name: "", id: "" }
-                      },
-                      [
-                        _c("option", { attrs: { value: "C.I" } }, [
-                          _vm._v("C.I")
-                        ])
-                      ]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "vs-col",
-                  {
-                    staticClass: "pb-5",
-                    attrs: { "vs-type": "flex", "vs-w": "4" }
-                  },
-                  [
-                    _c("vs-input", {
-                      staticClass: "inputx",
-                      attrs: { placeholder: "" }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
                   "vs-row",
                   [
                     _c(
                       "vs-col",
                       {
                         staticClass: "pb-5",
-                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                        attrs: { "vs-type": "flex", "vs-w": "2" }
                       },
-                      [_c("label", { attrs: { for: "" } }, [_vm._v("Nombre")])]
+                      [_c("label", { attrs: { for: "" } }, [_vm._v("Fecha")])]
                     ),
                     _vm._v(" "),
                     _c(
                       "vs-col",
                       {
-                        staticClass: "pb-6",
-                        attrs: { "vs-type": "flex", "vs-w": "8" }
+                        staticClass: "pb-5",
+                        attrs: { "vs-type": "flex", "vs-w": "3" }
                       },
                       [
                         _c("vs-input", {
                           staticClass: "inputx",
-                          attrs: { placeholder: "Nombre" }
+                          attrs: { placeholder: "Fecha" }
                         })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-5",
+                        attrs: {
+                          "vs-type": "flex",
+                          "vs-justify": "center",
+                          "vs-w": "4"
+                        }
+                      },
+                      [
+                        _c("vs-button", { attrs: { color: "primary" } }, [
+                          _vm._v("Retira Cliente")
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-5",
+                        attrs: {
+                          "vs-type": "flex",
+                          "vs-justify": "center",
+                          "vs-w": "3"
+                        }
+                      },
+                      [
+                        _c(
+                          "vs-button",
+                          { staticClass: " ml-3", attrs: { color: "success" } },
+                          [_vm._v("Registrar Entrega")]
+                        )
                       ],
                       1
                     )
@@ -380,21 +330,118 @@ var render = function() {
                     _c(
                       "vs-col",
                       {
+                        staticClass: "pb-5",
+                        attrs: { "vs-type": "flex", "vs-w": "2" }
+                      },
+                      [
+                        _c("label", { attrs: { for: "" } }, [
+                          _vm._v("Documento")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-5",
+                        attrs: { "vs-type": "flex", "vs-w": "3" }
+                      },
+                      [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "vs-inputx vs-input--input normal",
+                            attrs: { name: "", id: "" }
+                          },
+                          [
+                            _c("option", { attrs: { value: "C.I" } }, [
+                              _vm._v("C.I")
+                            ])
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-5 pl-3",
+                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                      },
+                      [
+                        _c("vs-input", {
+                          staticClass: "inputx",
+                          attrs: { placeholder: "" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-5",
                         attrs: {
                           "vs-type": "flex",
-                          "vs-w": "12",
-                          "vs-justify": "left"
+                          "vs-justify": "center",
+                          "vs-w": "3"
                         }
                       },
                       [
-                        _c("vs-button", { attrs: { color: "danger" } }, [
-                          _vm._v("Cancelar")
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "vs-button",
-                          { staticClass: " ml-3", attrs: { color: "success" } },
-                          [_vm._v("Registrar Entrega")]
+                          { staticClass: " ml-3", attrs: { color: "warning" } },
+                          [_vm._v("Cancelar")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-row",
+                  [
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-5",
+                        attrs: { "vs-type": "flex", "vs-w": "2" }
+                      },
+                      [_c("label", { attrs: { for: "" } }, [_vm._v("Nombre")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-6",
+                        attrs: { "vs-type": "flex", "vs-w": "7" }
+                      },
+                      [
+                        _c("vs-input", {
+                          staticClass: "inputx block",
+                          attrs: { placeholder: "Nombre" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pb-5",
+                        attrs: {
+                          "vs-type": "flex",
+                          "vs-justify": "center",
+                          "vs-w": "3"
+                        }
+                      },
+                      [
+                        _c(
+                          "vs-button",
+                          { staticClass: " ml-3", attrs: { color: "danger" } },
+                          [_vm._v("Salir")]
                         )
                       ],
                       1

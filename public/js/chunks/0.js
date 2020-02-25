@@ -3300,17 +3300,9 @@ var render = function(_h, _vm) {
     [
       _c("span", [
         _vm._v("COPYRIGHT © " + _vm._s(new Date().getFullYear()) + " "),
-        _c(
-          "a",
-          {
-            attrs: {
-              href: "https://1.envato.market/vuexy_admin",
-              target: "_blank",
-              rel: "nofollow"
-            }
-          },
-          [_vm._v("Pixinvent")]
-        ),
+        _c("a", { attrs: { href: "#", target: "_blank", rel: "nofollow" } }, [
+          _vm._v("Exur Envios")
+        ]),
         _vm._v(", All rights Reserved")
       ]),
       _vm._v(" "),
