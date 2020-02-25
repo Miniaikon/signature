@@ -46,10 +46,55 @@
                         </vs-col>
                     </vs-row>
                     <vs-row class="p-5">
-                        <vs-button color="success">Registrar Entrega</vs-button>
+                        <vs-button color="success" v-on:click="formSubmit()">Registrar Entrega</vs-button>
                     </vs-row>
                 </div>
 
+            </vs-card>
+        </vs-col>
+        <vs-col vs-w="12" class="mt-10">
+            <vs-card>
+                <vs-table pagination max-items="3" search :data="items">
+                    <template slot="header">
+                        <h3>
+                        Entregados
+                        </h3>
+                    </template>
+                    <template slot="thead">
+                        <vs-th sort-key="id_paquete">
+                        # Paquete
+                        </vs-th>
+                        <vs-th sort-key="id_cliente">
+                        # Cliente
+                        </vs-th>
+                        <vs-th sort-key="comentario">
+                        Comentario
+                        </vs-th>
+                        <vs-th sort-key="firma">
+                        Firma
+                        </vs-th>
+                    </template>
+
+                    <template slot-scope="{data}">
+                        <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
+                            <vs-td :data="data[indextr].id_paquete">
+                                {{data[indextr].id_paquete}}
+                            </vs-td>
+
+                            <vs-td :data="data[indextr].id_cliente">
+                                {{data[indextr].id_cliente}}
+                            </vs-td>
+
+                            <vs-td :data="data[indextr].comentario">
+                                {{data[indextr].comentario}}
+                            </vs-td>
+
+                            <vs-td :data="data[indextr].firma">
+                                <img :src="'data:image/gif;base64,'+data[indextr].firma" style="height: 64px" alt="">
+                            </vs-td>
+                        </vs-tr>
+                    </template>
+                    </vs-table>
             </vs-card>
         </vs-col>
     </vs-row>
@@ -58,12 +103,11 @@
 export default {
   data() {
     return {
-      users: [],
+      items: [],
       url: 'http://'+window.location.host+'/',
-      newPrealerta: false,
       form: {
+        imagen: '',
       },
-      formPart: 1,
     }
   },
   mounted(){
@@ -71,18 +115,19 @@ export default {
   },
   methods: {
       loadData(){
-          axios.get(this.url+'api/pre-alerta').then(response => {
-              this.users = response.data;
+          axios.get(this.url+'api/entregados').then(response => {
+              this.items = response.data;
               console.log(response);
           });
       },
       formSubmit(){
-        axios.post(this.url+'api/prealerta', formData,{ headers: { 'Content-Type': 'multipart/form-data' } }).then(response => {
+        axios.post(this.url+'api/entregar', this.form).then(response => {
             console.log('hecho');
             this.loadData();
         });
       },
       sig(){
+          let me = this;
           var message = { "firstName": "", "lastName": "", "eMail": "", "location": "", "imageFormat": 1, "imageX": "200",
                         "imageY": "200", "imageTransparency": false, "imageScaling": false, "maxUpScalePercent": 0.0,
                         "rawDataFormat": "ENC", "minSigPoints": 25 };
@@ -100,15 +145,10 @@ export default {
                 var obj = JSON.parse(str);
                 console.log(obj);
                 document.querySelector('#img_sig').setAttribute('src', 'data:image/gif;base64,'+obj.imageData)
-                this.form.imagen = obj.imageData;
+                me.form.imagen = obj.imageData;
                 // document.querySelector('#imageCode').value = obj.imageData;
                 //Process the response
             }
-      },
-      getImage(e){
-          let file = e.target.files;
-          console.log(file);
-          this.form.images = file;
       }
   }
 }

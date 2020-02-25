@@ -65,14 +65,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: [],
+      items: [],
       url: 'http://' + window.location.host + '/',
-      newPrealerta: false,
-      form: {},
-      formPart: 1
+      form: {
+        imagen: ''
+      }
     };
   },
   mounted: function mounted() {
@@ -82,25 +127,22 @@ __webpack_require__.r(__webpack_exports__);
     loadData: function loadData() {
       var _this = this;
 
-      axios.get(this.url + 'api/pre-alerta').then(function (response) {
-        _this.users = response.data;
+      axios.get(this.url + 'api/entregados').then(function (response) {
+        _this.items = response.data;
         console.log(response);
       });
     },
     formSubmit: function formSubmit() {
       var _this2 = this;
 
-      axios.post(this.url + 'api/prealerta', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {
+      axios.post(this.url + 'api/entregar', this.form).then(function (response) {
         console.log('hecho');
 
         _this2.loadData();
       });
     },
     sig: function sig() {
+      var me = this;
       var message = {
         "firstName": "",
         "lastName": "",
@@ -129,14 +171,9 @@ __webpack_require__.r(__webpack_exports__);
         var obj = JSON.parse(str);
         console.log(obj);
         document.querySelector('#img_sig').setAttribute('src', 'data:image/gif;base64,' + obj.imageData);
-        this.form.imagen = obj.imageData; // document.querySelector('#imageCode').value = obj.imageData;
+        me.form.imagen = obj.imageData; // document.querySelector('#imageCode').value = obj.imageData;
         //Process the response
       }
-    },
-    getImage: function getImage(e) {
-      var file = e.target.files;
-      console.log(file);
-      this.form.images = file;
     }
   }
 });
@@ -375,9 +412,18 @@ var render = function() {
                   "vs-row",
                   { staticClass: "p-5" },
                   [
-                    _c("vs-button", { attrs: { color: "success" } }, [
-                      _vm._v("Registrar Entrega")
-                    ])
+                    _c(
+                      "vs-button",
+                      {
+                        attrs: { color: "success" },
+                        on: {
+                          click: function($event) {
+                            return _vm.formSubmit()
+                          }
+                        }
+                      },
+                      [_vm._v("Registrar Entrega")]
+                    )
                   ],
                   1
                 )
@@ -385,6 +431,140 @@ var render = function() {
               1
             )
           ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "vs-col",
+        { staticClass: "mt-10", attrs: { "vs-w": "12" } },
+        [
+          _c(
+            "vs-card",
+            [
+              _c(
+                "vs-table",
+                {
+                  attrs: {
+                    pagination: "",
+                    "max-items": "3",
+                    search: "",
+                    data: _vm.items
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(ref) {
+                        var data = ref.data
+                        return _vm._l(data, function(tr, indextr) {
+                          return _c(
+                            "vs-tr",
+                            { key: indextr, attrs: { data: tr } },
+                            [
+                              _c(
+                                "vs-td",
+                                { attrs: { data: data[indextr].id_paquete } },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(data[indextr].id_paquete) +
+                                      "\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "vs-td",
+                                { attrs: { data: data[indextr].id_cliente } },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(data[indextr].id_cliente) +
+                                      "\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "vs-td",
+                                { attrs: { data: data[indextr].comentario } },
+                                [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(data[indextr].comentario) +
+                                      "\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "vs-td",
+                                { attrs: { data: data[indextr].firma } },
+                                [
+                                  _c("img", {
+                                    staticStyle: { height: "64px" },
+                                    attrs: {
+                                      src:
+                                        "data:image/gif;base64," +
+                                        data[indextr].firma,
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        })
+                      }
+                    }
+                  ])
+                },
+                [
+                  _c("template", { slot: "header" }, [
+                    _c("h3", [
+                      _vm._v(
+                        "\n                        Entregados\n                        "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "template",
+                    { slot: "thead" },
+                    [
+                      _c("vs-th", { attrs: { "sort-key": "id_paquete" } }, [
+                        _vm._v(
+                          "\n                        # Paquete\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-th", { attrs: { "sort-key": "id_cliente" } }, [
+                        _vm._v(
+                          "\n                        # Cliente\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-th", { attrs: { "sort-key": "comentario" } }, [
+                        _vm._v(
+                          "\n                        Comentario\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-th", { attrs: { "sort-key": "firma" } }, [
+                        _vm._v(
+                          "\n                        Firma\n                        "
+                        )
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                2
+              )
+            ],
+            1
+          )
         ],
         1
       )

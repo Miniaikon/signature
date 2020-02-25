@@ -18,7 +18,7 @@ class CreateSignaturesTable extends Migration
             $table->string('id_cliente', 191);
             $table->string('id_paquete', 191)->nullable();
             $table->text('firma', 191);
-            $table->text('comentario, 191');
+            $table->text('comentario',191);
             $table->timestamps();
         });
     }
