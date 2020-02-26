@@ -51,7 +51,6 @@
                         </vs-col>
                     </vs-row>
                 </div>
-
             </vs-card>
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pl-1" vs-w="7">
@@ -108,9 +107,84 @@
                             <vs-button color="danger" class=" ml-3">Salir</vs-button>
                         </vs-col>
                     </vs-row>
+                    <vs-row>
+                        <!-- other -->
+                        <vs-col vs-type="flex" vs-w="2" class="p-1">
+                            <label for="">Firma</label>
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-w="2" class="p-1" vs-justify="center" vs-align="center">
+                            <vs-button v-on:click.prevent="sig()">Firmar</vs-button>
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-w="8" class="p-1">
+                            <img  id="img_sig" width="100%" style="height: 100px; border: 1px solid black; border-radius: 10px;" alt="">
+                        </vs-col>
+                    </vs-row>
                 </div>
 
             </vs-card>
         </vs-col>
     </vs-row>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      items: [],
+      url: 'https://'+window.location.host+'/',
+      form: {
+        imagen: '',
+      },
+    }
+  },
+  mounted(){
+      this.loadData();
+  },
+  methods: {
+      loadData(){
+          axios.get(this.url+'api/entregados').then(response => {
+              this.items = response.data;
+              console.log(response);
+          });
+      },
+      formSubmit(){
+        axios.post(this.url+'api/entregar', this.form).then(response => {
+            console.log('hecho');
+            this.init();
+        });
+      },
+      sig(){
+          let me = this;
+          var message = { "firstName": "", "lastName": "", "eMail": "", "location": "", "imageFormat": 1, "imageX": "200",
+                        "imageY": "200", "imageTransparency": false, "imageScaling": false, "maxUpScalePercent": 0.0,
+                        "rawDataFormat": "ENC", "minSigPoints": 25 };
+            top.document.addEventListener('SignResponse', SignResponse, false);
+            var messageData = JSON.stringify(message);
+            var element = document.createElement("MyExtensionDataElement");
+            element.setAttribute("messageAttribute", messageData);
+            document.documentElement.appendChild(element);
+            var evt = document.createEvent("Events");
+            evt.initEvent("SignStartEvent", true, false);
+            element.dispatchEvent(evt);
+            function SignResponse(event)
+            {
+                var str = event.target.getAttribute("msgAttribute");
+                var obj = JSON.parse(str);
+                console.log(obj);
+                document.querySelector('#img_sig').setAttribute('src', 'data:image/gif;base64,'+obj.imageData)
+                me.form.imagen = obj.imageData;
+                // document.querySelector('#imageCode').value = obj.imageData;
+                //Process the response
+            }
+      },
+      init(){
+          this.form = {
+              'imagen': '',
+              'id_cliente': '',
+              'id_paquete': '',
+              'comentario': ''
+          };
+          this.loadData();
+      }
+  }
+}
+</script>
