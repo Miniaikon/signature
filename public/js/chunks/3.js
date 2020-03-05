@@ -131,40 +131,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: [],
-      url: 'https://' + window.location.host + '/',
+      url: window.location.host + '/',
       form: {
         imagen: ''
       }
     };
   },
   mounted: function mounted() {
-    this.loadData();
+    this.verifyAuth();
   },
   methods: {
-    loadData: function loadData() {
+    verifyAuth: function verifyAuth() {
       var _this = this;
 
+      axios.get('/auth/who-am-i').then(function (response) {
+        console.log(response.data);
+
+        if (response.data == true) {
+          _this.loadData();
+        } else {
+          _this.$router.push('/pages/login');
+        }
+      }).catch(function (error) {
+        _this.$router.push('/pages/login');
+      });
+    },
+    loadData: function loadData() {
+      var _this2 = this;
+
       axios.get(this.url + 'api/entregados').then(function (response) {
-        _this.items = response.data;
+        _this2.items = response.data;
         console.log(response);
       });
     },
     formSubmit: function formSubmit() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post(this.url + 'api/entregar', this.form).then(function (response) {
         console.log('hecho');
 
-        _this2.init();
+        _this3.init();
       });
     },
     sig: function sig() {
@@ -487,7 +497,7 @@ var render = function() {
                       "vs-col",
                       {
                         staticClass: "pb-5",
-                        attrs: { "vs-type": "flex", "vs-w": "3" }
+                        attrs: { "vs-type": "flex", "vs-w": "5" }
                       },
                       [
                         _c("vs-input", {
@@ -505,33 +515,13 @@ var render = function() {
                         attrs: {
                           "vs-type": "flex",
                           "vs-justify": "center",
-                          "vs-w": "4"
+                          "vs-w": "5"
                         }
                       },
                       [
                         _c("vs-button", { attrs: { color: "primary" } }, [
                           _vm._v("Retira Cliente")
                         ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "vs-col",
-                      {
-                        staticClass: "pb-5",
-                        attrs: {
-                          "vs-type": "flex",
-                          "vs-justify": "center",
-                          "vs-w": "3"
-                        }
-                      },
-                      [
-                        _c(
-                          "vs-button",
-                          { staticClass: " ml-3", attrs: { color: "success" } },
-                          [_vm._v("Registrar Entrega")]
-                        )
                       ],
                       1
                     )
@@ -559,7 +549,7 @@ var render = function() {
                       "vs-col",
                       {
                         staticClass: "pb-5",
-                        attrs: { "vs-type": "flex", "vs-w": "3" }
+                        attrs: { "vs-type": "flex", "vs-w": "5" }
                       },
                       [
                         _c(
@@ -581,33 +571,13 @@ var render = function() {
                       "vs-col",
                       {
                         staticClass: "pb-5 pl-3",
-                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                        attrs: { "vs-type": "flex", "vs-w": "5" }
                       },
                       [
                         _c("vs-input", {
                           staticClass: "inputx",
                           attrs: { placeholder: "" }
                         })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "vs-col",
-                      {
-                        staticClass: "pb-5",
-                        attrs: {
-                          "vs-type": "flex",
-                          "vs-justify": "center",
-                          "vs-w": "3"
-                        }
-                      },
-                      [
-                        _c(
-                          "vs-button",
-                          { staticClass: " ml-3", attrs: { color: "warning" } },
-                          [_vm._v("Cancelar")]
-                        )
                       ],
                       1
                     )
@@ -638,26 +608,6 @@ var render = function() {
                           staticClass: "inputx block",
                           attrs: { placeholder: "Nombre" }
                         })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "vs-col",
-                      {
-                        staticClass: "pb-5",
-                        attrs: {
-                          "vs-type": "flex",
-                          "vs-justify": "center",
-                          "vs-w": "3"
-                        }
-                      },
-                      [
-                        _c(
-                          "vs-button",
-                          { staticClass: " ml-3", attrs: { color: "danger" } },
-                          [_vm._v("Salir")]
-                        )
                       ],
                       1
                     )
@@ -721,6 +671,37 @@ var render = function() {
                           attrs: { id: "img_sig", width: "100%", alt: "" }
                         })
                       ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-row",
+                  [
+                    _c(
+                      "vs-col",
+                      { attrs: { "vs-w": "12" } },
+                      [
+                        _c(
+                          "vs-button",
+                          { staticClass: " ml-3", attrs: { color: "danger" } },
+                          [_vm._v("Salir")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "vs-button",
+                          { staticClass: " ml-3", attrs: { color: "warning" } },
+                          [_vm._v("Cancelar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "vs-button",
+                          { staticClass: " ml-3", attrs: { color: "success" } },
+                          [_vm._v("Registrar Entrega")]
+                        )
+                      ],
+                      1
                     )
                   ],
                   1

@@ -53,7 +53,7 @@
                       <router-link to="">Forgot Password?</router-link>
                   </div>
                   <vs-button  type="border">Register</vs-button>
-                  <vs-button class="float-right">Login</vs-button>
+                  <vs-button class="float-right" @click.prevent="login()">Login</vs-button>
 
                   <vs-divider>OR</vs-divider>
 
@@ -97,6 +97,26 @@ export default{
       email: "",
       password: "",
       checkbox_remember_me: false,
+    }
+  },
+  mounted(){
+      this.verifyAuth();
+  },
+  methods: {
+    login(){
+        axios.post('/auth/login', {'email': this.email, 'password': this.password}).then(response => {
+            this.$router.push('/');
+        }).catch(error => {
+            alert('Falló la autenticación');
+        });
+    },
+    verifyAuth(){
+        axios.get('/auth/who-am-i').then(response => {
+            console.log(response.data);
+            if(response.data == true){
+                this.$router.push('/');
+            }
+        });
     }
   }
 }

@@ -11,5 +11,19 @@
 |
 */
 
-Route::get('/{any}', 'ApplicationController')->where('any', '.*');
+Route::get('/{any}', 'ApplicationController')->where('any', '^(?!auth).*$');
+
+Route::prefix('auth')->group(function(){
+    Route::post('login', 'LoginController@login');
+    Route::get('who-am-i', function(){
+        if(Auth::user()){
+            return response()->json(true, 200);
+        }
+        return response()->json(false, 200);
+    })->middleware('auth');
+
+    Route::get('logout', function() {
+        Auth::logout();
+    });
+});
 

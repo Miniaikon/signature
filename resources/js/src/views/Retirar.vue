@@ -111,26 +111,38 @@ export default {
     }
   },
   mounted(){
-      this.loadData();
+      this.verifyAuth();
   },
   methods: {
-      loadData(){
-          axios.get(this.url+'api/entregados').then(response => {
-              this.items = response.data;
-              console.log(response);
-          });
-      },
-      formSubmit(){
-        axios.post(this.url+'api/entregar', this.form).then(response => {
-            console.log('hecho');
-            this.init();
-        });
-      },
-      sig(){
-          let me = this;
-          var message = { "firstName": "", "lastName": "", "eMail": "", "location": "", "imageFormat": 1, "imageX": "200",
-                        "imageY": "200", "imageTransparency": false, "imageScaling": false, "maxUpScalePercent": 0.0,
-                        "rawDataFormat": "ENC", "minSigPoints": 25 };
+        verifyAuth(){
+            axios.get('/auth/who-am-i').then(response => {
+                console.log(response.data);
+                if(response.data == true){
+                    this.loadData();
+                }else{
+                    this.$router.push('/pages/login');
+                }
+            }).catch(error => {
+                    this.$router.push('/pages/login');
+            });
+        },
+        loadData(){
+            axios.get(this.url+'api/entregados').then(response => {
+                this.items = response.data;
+                console.log(response);
+            });
+        },
+        formSubmit(){
+            axios.post(this.url+'api/entregar', this.form).then(response => {
+                console.log('hecho');
+                this.init();
+            });
+        },
+        sig(){
+            let me = this;
+            var message = { "firstName": "", "lastName": "", "eMail": "", "location": "", "imageFormat": 1, "imageX": "200",
+                            "imageY": "200", "imageTransparency": false, "imageScaling": false, "maxUpScalePercent": 0.0,
+                            "rawDataFormat": "ENC", "minSigPoints": 25 };
             top.document.addEventListener('SignResponse', SignResponse, false);
             var messageData = JSON.stringify(message);
             var element = document.createElement("MyExtensionDataElement");
@@ -149,16 +161,16 @@ export default {
                 // document.querySelector('#imageCode').value = obj.imageData;
                 //Process the response
             }
-      },
-      init(){
-          this.form = {
-              'imagen': '',
-              'id_cliente': '',
-              'id_paquete': '',
-              'comentario': ''
-          };
-          this.loadData();
-      }
-  }
+        },
+        init(){
+            this.form = {
+                'imagen': '',
+                'id_cliente': '',
+                'id_paquete': '',
+                'comentario': ''
+            };
+            this.verifyAuth();
+        }
+    }
 }
 </script>

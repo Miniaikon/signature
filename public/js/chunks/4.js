@@ -121,24 +121,39 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.loadData();
+    this.verifyAuth();
   },
   methods: {
-    loadData: function loadData() {
+    verifyAuth: function verifyAuth() {
       var _this = this;
 
+      axios.get('/auth/who-am-i').then(function (response) {
+        console.log(response.data);
+
+        if (response.data == true) {
+          _this.loadData();
+        } else {
+          _this.$router.push('/pages/login');
+        }
+      }).catch(function (error) {
+        _this.$router.push('/pages/login');
+      });
+    },
+    loadData: function loadData() {
+      var _this2 = this;
+
       axios.get(this.url + 'api/entregados').then(function (response) {
-        _this.items = response.data;
+        _this2.items = response.data;
         console.log(response);
       });
     },
     formSubmit: function formSubmit() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post(this.url + 'api/entregar', this.form).then(function (response) {
         console.log('hecho');
 
-        _this2.init();
+        _this3.init();
       });
     },
     sig: function sig() {
@@ -182,7 +197,7 @@ __webpack_require__.r(__webpack_exports__);
         'id_paquete': '',
         'comentario': ''
       };
-      this.loadData();
+      this.verifyAuth();
     }
   }
 });

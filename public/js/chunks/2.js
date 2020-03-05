@@ -108,6 +108,34 @@ __webpack_require__.r(__webpack_exports__);
       password: "",
       checkbox_remember_me: false
     };
+  },
+  mounted: function mounted() {
+    this.verifyAuth();
+  },
+  methods: {
+    login: function login() {
+      var _this = this;
+
+      axios.post('/auth/login', {
+        'email': this.email,
+        'password': this.password
+      }).then(function (response) {
+        _this.$router.push('/');
+      }).catch(function (error) {
+        alert('Falló la autenticación');
+      });
+    },
+    verifyAuth: function verifyAuth() {
+      var _this2 = this;
+
+      axios.get('/auth/who-am-i').then(function (response) {
+        console.log(response.data);
+
+        if (response.data == true) {
+          _this2.$router.push('/');
+        }
+      });
+    }
   }
 });
 
@@ -313,9 +341,19 @@ var render = function() {
                                 _vm._v("Register")
                               ]),
                               _vm._v(" "),
-                              _c("vs-button", { staticClass: "float-right" }, [
-                                _vm._v("Login")
-                              ]),
+                              _c(
+                                "vs-button",
+                                {
+                                  staticClass: "float-right",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.login()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Login")]
+                              ),
                               _vm._v(" "),
                               _c("vs-divider", [_vm._v("OR")]),
                               _vm._v(" "),
