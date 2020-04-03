@@ -12,10 +12,10 @@
                         <label for="">Nro. Cliente</label>
                     </vs-col>
                      <vs-col vs-type="flex" vs-w="4" class="p-1">
-                        <vs-input class="inputx" placeholder="Nro. Cliente" />
+                        <vs-input class="inputx" v-model="form.CodCliente" placeholder="Nro. Cliente" />
                     </vs-col>
                     <vs-col vs-type="flex" vs-justify="center" vs-w="4" class="p-1">
-                         <vs-button color="primary">Buscar</vs-button>
+                         <vs-button color="primary" v-on:click="searchClient()">Buscar</vs-button>
                     </vs-col>
                     <!-- other -->
                     <vs-row>
@@ -23,7 +23,7 @@
                             <label for="">Nro. Envío</label>
                         </vs-col>
                         <vs-col vs-type="flex" vs-w="4" class="p-1">
-                            <vs-input class="inputx" placeholder="Nro. Envío" />
+                            <vs-input class="inputx" v-model="form.CodEnvio" placeholder="Nro. Envío" />
                         </vs-col>
                     </vs-row>
                     <!-- other -->
@@ -43,11 +43,8 @@
                         <vs-col vs-type="flex" vs-w="4" class="p-1">
                             <label for="">Nombre / Apellido</label>
                         </vs-col>
-                        <vs-col vs-type="flex" vs-w="4" class="p-1">
-                            <vs-input class="inputx" placeholder="Nombre" />
-                        </vs-col>
-                        <vs-col vs-type="flex" vs-w="4" class="p-1">
-                            <vs-input class="inputx" placeholder="Apellido" />
+                        <vs-col vs-type="flex" vs-w="8" class="p-1">
+                            <vs-input class="inputx" v-model="form.NombreCliente" placeholder="Nombre" />
                         </vs-col>
                     </vs-row>
                 </div>
@@ -62,62 +59,119 @@
                 </div>
                 <div>
                     <vs-row>
-                        <vs-col vs-type="flex" vs-w="2" class="pb-5">
-                            <label for="">Fecha</label>
+                        <vs-col vs-w="9" class="pr-2">
+                            <vs-row>
+                                <vs-col vs-type="flex" vs-w="2" class="pb-1">
+                                    <label for="">Fecha</label>
+                                </vs-col>
+                                <vs-col vs-type="flex" vs-w="5" class="pb-1">
+                                    <vs-input class="inputx" style="width: 100%;" />
+                                </vs-col>
+                                <vs-col vs-type="flex" vs-justify="center" vs-w="5" class="pb-1 pl-3">
+                                    <vs-button color="primary" style="width: 100%;">Retira Cliente</vs-button>
+                                </vs-col>
+                            </vs-row>
+                            <!-- other -->
+                            <vs-row>
+                                <vs-col vs-type="flex" vs-w="2" class="pb-1">
+                                    <label for="">Documento</label>
+                                </vs-col>
+                                <vs-col vs-type="flex" vs-w="5" class="pb-1">
+                                    <select name="" class="vs-inputx vs-input--input small" id="">
+                                        <option value="C.I">C.I</option>
+                                    </select>
+                                </vs-col>
+                                <vs-col vs-type="flex" vs-w="5" class="pb-1 pl-3">
+                                    <vs-input class="inputx" />
+                                </vs-col>
+                            </vs-row>
+                            <!-- Other -->
+                            <vs-row>
+                                <vs-col vs-type="flex" vs-w="2" class="pb-1">
+                                    <label for="">Nombre</label>
+                                </vs-col>
+                                <vs-col vs-type="flex" vs-w="10" class="pb-1">
+                                    <vs-input class="inputx block" style="width: 100%;" />
+                                </vs-col>
+                            </vs-row>
+                            <vs-row>
+                                <vs-col vs-type="flex" vs-w="2" class="p-1">
+                                    <vs-col vs-type="flex" vs-w="12" class="p-1">
+                                        <label for="">Firma</label>
+                                    </vs-col>
+                                </vs-col>
+                                <vs-col vs-w="10">
+                                    <vs-button style="width: 100%;" v-on:click.prevent="sig()">Firmar</vs-button>
+                                </vs-col>
+                            </vs-row>
                         </vs-col>
-                        <vs-col vs-type="flex" vs-w="5" class="pb-5">
-                            <vs-input class="inputx" placeholder="Fecha" />
-                        </vs-col>
-                        <vs-col vs-type="flex" vs-justify="center" vs-w="5" class="pb-5">
-                            <vs-button color="primary">Retira Cliente</vs-button>
+                        <vs-col vs-w="3" class="p-1">
+                            <vs-button color="success">Registrar entrega</vs-button>
+                            <center class="pt-1">
+                                <vs-button color="danger">Cancelar</vs-button>
+                            </center>
+                            <vs-col vs-type="flex" vs-w="12" class="p-1">
+                                <img  id="img_sig" width="100%" style="height: 90px; border: 1px solid #ccc; border-radius: 10px;" alt="">
+                            </vs-col>
                         </vs-col>
                     </vs-row>
-                    <!-- other -->
-                    <vs-row>
-                        <vs-col vs-type="flex" vs-w="2" class="pb-5">
-                            <label for="">Documento</label>
-                        </vs-col>
-                        <vs-col vs-type="flex" vs-w="5" class="pb-5">
-                            <select name="" class="vs-inputx vs-input--input normal" id="">
-                                <option value="C.I">C.I</option>
-                            </select>
-                        </vs-col>
-                        <vs-col vs-type="flex" vs-w="5" class="pb-5 pl-3">
-                            <vs-input class="inputx" placeholder="" />
-                        </vs-col>
-                    </vs-row>
-                    <!-- Other -->
-                    <vs-row>
-                        <vs-col vs-type="flex" vs-w="2" class="pb-5">
-                            <label for="">Nombre</label>
-                        </vs-col>
-                        <vs-col vs-type="flex" vs-w="7" class="pb-6">
-                            <vs-input class="inputx block" placeholder="Nombre" />
-                        </vs-col>
-                    </vs-row>
-                    <vs-row>
-                        <!-- other -->
-                        <vs-col vs-type="flex" vs-w="2" class="p-1">
-                            <label for="">Firma</label>
-                        </vs-col>
-                        <vs-col vs-type="flex" vs-w="2" class="p-1" vs-justify="center" vs-align="center">
-                            <vs-button v-on:click.prevent="sig()">Firmar</vs-button>
-                        </vs-col>
-                        <vs-col vs-type="flex" vs-w="8" class="p-1">
-                            <img  id="img_sig" width="100%" style="height: 100px; border: 1px solid black; border-radius: 10px;" alt="">
-                        </vs-col>
-                    </vs-row>
-                    <vs-row>
-                        <vs-col vs-w="12">
-                            <vs-button color="danger" class=" ml-3">Salir</vs-button>
-                            <vs-button color="warning" class=" ml-3">Cancelar</vs-button>
-                            <vs-button color="success" class= " ml-3">Registrar Entrega</vs-button>
-                        </vs-col>
-                    </vs-row>
+
                 </div>
 
             </vs-card>
         </vs-col>
+        <vs-popup classContent="popup-example" :active.sync="modals.option">
+        <vs-col vs-w="12" class="mt-10">
+                <vs-table pagination max-items="3" search :data="options">
+                    <template slot="header">
+                        <h3>
+                        Seleccione un paquete
+                        </h3>
+                    </template>
+                    <template slot="thead">
+                        <vs-th sort-key="CodEnvio">
+                            # Envío
+                        </vs-th>
+                        <vs-th sort-key="CantidadPiezas">
+                            # Piezas
+                        </vs-th>
+                        <vs-th sort-key="CodMovimiento">
+                            Código de movimiento
+                        </vs-th>
+                        <vs-th sort-key="Estado">
+                            Estado
+                        </vs-th>
+                        <vs-th>
+                            Seleccionar
+                        </vs-th>
+                    </template>
+
+                    <template slot-scope="{data}">
+                        <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
+                            <vs-td :data="data[indextr].CodEnvio">
+                                {{data[indextr].CodEnvio}}
+                            </vs-td>
+
+                            <vs-td :data="data[indextr].CantidadPiezas">
+                                {{data[indextr].CantidadPiezas}}
+                            </vs-td>
+
+                            <vs-td :data="data[indextr].CodMovimiento">
+                                {{data[indextr].CodMovimiento}}
+                            </vs-td>
+
+                            <vs-td :data="data[indextr].Estado">
+                                {{data[indextr].Estado}}
+                            </vs-td>
+
+                            <vs-td>
+                                <vs-button v-on:click="form = data[indextr]; modals.option = false">Seleccion</vs-button>
+                            </vs-td>
+                        </vs-tr>
+                    </template>
+                </vs-table>
+        </vs-col>
+    </vs-popup>
     </vs-row>
 </template>
 <script>
@@ -128,7 +182,12 @@ export default {
             url: window.location.host+'/',
             form: {
                 imagen: '',
+                CodCliente: '',
             },
+            options: [],
+            modals: {
+                option: false
+            }
         }
     },
     mounted(){
@@ -191,6 +250,14 @@ export default {
                 'comentario': ''
             };
             this.loadData();
+        },
+        searchClient(){
+            let me = this;
+
+            axios.get('/api/getClient/'+me.form.CodCliente).then(response => {
+                me.options = response.data.Envio;
+                me.modals.option = true;
+            });
         }
     }
 }
