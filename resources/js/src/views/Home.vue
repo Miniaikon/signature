@@ -254,7 +254,7 @@ export default {
         searchClient(){
             let me = this;
 
-            axios.get('/api/getClient/'+me.form.CodCliente).then(response => {
+            axios.get('http://exurcompras.com/getPaquetes.php?id_cliente='+me.form.CodCliente).then(response => {
                 me.options = response.data.Envio;
                 me.modals.option = true;
             });

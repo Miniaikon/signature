@@ -281,7 +281,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchClient: function searchClient() {
       var me = this;
-      axios.get('/api/getClient/' + me.form.CodCliente).then(function (response) {
+      axios.get('http://exurcompras.com/getPaquetes.php?id_cliente=' + me.form.CodCliente).then(function (response) {
         me.options = response.data.Envio;
         me.modals.option = true;
       });
