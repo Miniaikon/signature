@@ -98,6 +98,8 @@ __webpack_require__.r(__webpack_exports__);
         'password': this.password
       }).then(function (response) {
         _this.$router.push('/');
+
+        localStorage.setItem('userCode', response.data);
       }).catch(function (error) {
         alert('Falló la autenticación');
       });

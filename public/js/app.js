@@ -56424,9 +56424,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuesax__WEBPACK_IMPORTED_MODULE_1
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\Nicaragua\signature\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\Nicaragua\signature\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\Nicaragua\signature\resources\assets\css\main.css */"./resources/assets/css/main.css");
+__webpack_require__(/*! C:\laragon\www\signature\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\signature\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\signature\resources\assets\css\main.css */"./resources/assets/css/main.css");
 
 
 /***/ })

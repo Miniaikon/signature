@@ -83,6 +83,7 @@ export default{
     login(){
         axios.post('/auth/login', {'email': this.email, 'password': this.password}).then(response => {
             this.$router.push('/');
+            localStorage.setItem('userCode', response.data);
         }).catch(error => {
             alert('Falló la autenticación');
         });

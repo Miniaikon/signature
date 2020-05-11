@@ -25,6 +25,8 @@ Route::get('/entregados', 'SignatureController@entregados')->name('signature.ent
 
 Route::get('/getClient/{id}', 'SignatureController@getClient')->name('get.client');
 
+Route::post('/enviar', 'SignatureController@enviarPaquetes')->name('signature.enviar');
+
 Route::get('test', function(){
     return view('test');
 });

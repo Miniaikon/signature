@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Signature;
+use Auth;
 
 class SignatureController extends Controller
 {
@@ -43,5 +44,35 @@ class SignatureController extends Controller
 
 
         echo PHP_EOL;
+    }
+
+    public function enviarPaquetes(Request $request){
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://exurcompras.com/proccessSend.php",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "unaListaEnvios=".$request->unaListaEnvios."&unaFirma=".$request->unaFirma."&unCodTipoDocumento=".$request->unCodTipoDocumento."&unNroDocumento=".$request->unNroDocumento."&unNombreClienteRetira=".$request->unNombreClienteRetira."&unCodUsuarioModif=".$request->unCodUsuarioModif."",
+        CURLOPT_HTTPHEADER => array(
+            "Content-Type: application/x-www-form-urlencoded"
+        ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $res = json_encode($response);
+
+        if(isset($res->Mensaje) && $res->Mensaje->CodMensaje == 0)
+            return response()->json('El envío que interntas procesar con es correcto', 412);
+
+        return response()->json($res, 201);
     }
 }

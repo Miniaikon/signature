@@ -31,12 +31,17 @@
                         <label for="">Documento</label>
                     </vs-col>
                     <vs-col vs-type="flex" vs-w="4" class="p-1">
-                        <select name="" class="vs-inputx vs-input--input normal" id="">
-                            <option value="C.I">C.I</option>
+                        <select name="" class="vs-inputx vs-input--input normal" >
+                            <option value="1">C.I</option>
+                            <option value="2">RUT</option>
+                            <option value="3">PASAPORTE</option>
+                            <option value="4">NIFE</option>
+                            <option value="5">OTROS</option>
+                            <option value="6">DNI</option>
                         </select>
                     </vs-col>
                     <vs-col vs-type="flex" vs-w="4" class="p-1">
-                        <vs-input class="inputx" placeholder="" />
+                        <vs-input class="inputx" placeholder="" v-model="form.NroDocumento" />
                     </vs-col>
                     <!-- Other -->
                     <vs-row>
@@ -65,7 +70,7 @@
                                     <label for="">Fecha</label>
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="5" class="pb-1">
-                                    <vs-input class="inputx" style="width: 100%;" />
+                                    <input type="date" class="vs-inputx vs-input--input normal">
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-justify="center" vs-w="5" class="pb-1 pl-3">
                                     <vs-button color="primary" style="width: 100%;">Retira Cliente</vs-button>
@@ -77,12 +82,17 @@
                                     <label for="">Documento</label>
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="5" class="pb-1">
-                                    <select name="" class="vs-inputx vs-input--input small" id="">
-                                        <option value="C.I">C.I</option>
+                                    <select name="" class="vs-inputx vs-input--input small" v-model="form.TipoDocumentoRetira">
+                                        <option value="1">C.I</option>
+                                        <option value="2">RUT</option>
+                                        <option value="3">PASAPORTE</option>
+                                        <option value="4">NIFE</option>
+                                        <option value="5">OTROS</option>
+                                        <option value="6">DNI</option>
                                     </select>
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="5" class="pb-1 pl-3">
-                                    <vs-input class="inputx" />
+                                    <vs-input class="inputx" v-model="form.NroDocumentoRetira" />
                                 </vs-col>
                             </vs-row>
                             <!-- Other -->
@@ -91,7 +101,7 @@
                                     <label for="">Nombre</label>
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="10" class="pb-1">
-                                    <vs-input class="inputx block" style="width: 100%;" />
+                                    <vs-input class="inputx block" style="width: 100%;" v-model="form.NombreRetira" />
                                 </vs-col>
                             </vs-row>
                             <vs-row>
@@ -106,7 +116,7 @@
                             </vs-row>
                         </vs-col>
                         <vs-col vs-w="3" class="p-1">
-                            <vs-button color="success">Registrar entrega</vs-button>
+                            <vs-button color="success" @click.prevent="send()">Registrar entrega</vs-button>
                             <center class="pt-1">
                                 <vs-button color="danger">Cancelar</vs-button>
                             </center>
@@ -119,6 +129,35 @@
                 </div>
 
             </vs-card>
+        </vs-col>
+        <vs-col vs-type="flex" class="pl-1" vs-w="12">
+
+            <vs-row v-if="options.length">
+                <vs-col vs-type="flex" class="pl-1" vs-w="12" vs-justify="center" vs-align="center">
+                    <h3>Todos los envíos</h3>
+                </vs-col>
+                <template v-for="item in options">
+                    <vs-col vs-type="flex" class="pl-1" vs-w="4">
+                        <vs-card>
+                            <div slot="header">
+                                <h3>{{ item.CodEnvio }}</h3>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li><b>Documento:</b> {{ item.Estado }} </li>
+                                    <li><b>Cantidad de piezas:</b> {{ item.CantidadPiezas }} </li>
+                                    <li><b>Codigo de Movimiento:</b> {{ item.CodMovimiento }} </li>
+                                    <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
+                                    <li><b>Estado:</b> {{ item.Estado }} </li>
+                                </ul>
+                            </div>
+
+                        </vs-card>
+                    </vs-col>
+                </template>
+            </vs-row>
+
+
         </vs-col>
         <vs-popup classContent="popup-example" :active.sync="modals.option">
         <vs-col vs-w="12" class="mt-10">
@@ -183,8 +222,17 @@ export default {
             form: {
                 imagen: '',
                 CodCliente: '',
+                TipoDocumentoRetira: '',
+                NroDocumentoRetira: '',
+                NombreRetira: '',
+                CodCliente: '',
+                CodEnvio:'',
+                NroDocumento: '',
+                NombreCliente: '',
             },
-            options: [],
+            options: [
+
+            ],
             modals: {
                 option: false
             }
@@ -255,9 +303,44 @@ export default {
             let me = this;
 
             axios.get('http://exurcompras.com/getPaquetes.php?id_cliente='+me.form.CodCliente).then(response => {
-                me.options = response.data.Envio;
-                me.modals.option = true;
+                let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
+                me.options = res;
+                me.form = res[0];
+                console.log('options', typeof me.option);
             });
+        },
+        send(){
+            let me = this;
+            let listaEnvio = me.options.reduce((count, item) => {
+                return count.CodEnvio + '|'+ item.CodEnvio;
+            });
+            let data = {
+                unaListaEnvios: me.options.length>1 ? listaEnvio: listaEnvio.CodEnvio,
+                unaFirma: me.form.imagen,
+                unCodTipoDocumento: me.form.TipoDocumentoRetira,
+                unNroDocumento: me.form.NroDocumentoRetira,
+                unNombreClienteRetira: me.form.NombreRetira,
+                unCodUsuarioModif: localStorage.getItem('userCode')
+            }
+
+            axios.post('/api/enviar', data).then(res => {
+                me.form = {
+                    imagen: '',
+                    CodCliente: '',
+                    TipoDocumentoRetira: '',
+                    NroDocumentoRetira: '',
+                    NombreRetira: '',
+                    CodCliente: '',
+                    CodEnvio:'',
+                    NroDocumento: '',
+                    NombreCliente: '',
+                };
+                alert('Paquetes procesados con éxito');
+            }).catch(err => {
+                alert(err.response.data);
+            });
+
+            console.log(data);
         }
     }
 }

@@ -9,6 +9,49 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -187,13 +230,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    var _form;
+
     return {
       items: [],
       url: window.location.host + '/',
-      form: {
+      form: (_form = {
         imagen: '',
-        CodCliente: ''
-      },
+        CodCliente: '',
+        TipoDocumentoRetira: '',
+        NroDocumentoRetira: '',
+        NombreRetira: ''
+      }, _defineProperty(_form, "CodCliente", ''), _defineProperty(_form, "CodEnvio", ''), _defineProperty(_form, "NroDocumento", ''), _defineProperty(_form, "NombreCliente", ''), _form),
       options: [],
       modals: {
         option: false
@@ -282,9 +330,40 @@ __webpack_require__.r(__webpack_exports__);
     searchClient: function searchClient() {
       var me = this;
       axios.get('http://exurcompras.com/getPaquetes.php?id_cliente=' + me.form.CodCliente).then(function (response) {
-        me.options = response.data.Envio;
-        me.modals.option = true;
+        var res = Array.isArray(response.data.Envio) ? response.data.Envio : [response.data.Envio];
+        me.options = res;
+        me.form = res[0];
+        console.log('options', _typeof(me.option));
       });
+    },
+    send: function send() {
+      var me = this;
+      var listaEnvio = me.options.reduce(function (count, item) {
+        return count.CodEnvio + '|' + item.CodEnvio;
+      });
+      var data = {
+        unaListaEnvios: me.options.length > 1 ? listaEnvio : listaEnvio.CodEnvio,
+        unaFirma: me.form.imagen,
+        unCodTipoDocumento: me.form.TipoDocumentoRetira,
+        unNroDocumento: me.form.NroDocumentoRetira,
+        unNombreClienteRetira: me.form.NombreRetira,
+        unCodUsuarioModif: localStorage.getItem('userCode')
+      };
+      axios.post('/api/enviar', data).then(function (res) {
+        var _me$form;
+
+        me.form = (_me$form = {
+          imagen: '',
+          CodCliente: '',
+          TipoDocumentoRetira: '',
+          NroDocumentoRetira: '',
+          NombreRetira: ''
+        }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _me$form);
+        alert('Paquetes procesados con éxito');
+      }).catch(function (err) {
+        alert(err.response.data);
+      });
+      console.log(data);
     }
   }
 });
@@ -464,12 +543,30 @@ var render = function() {
                       "select",
                       {
                         staticClass: "vs-inputx vs-input--input normal",
-                        attrs: { name: "", id: "" }
+                        attrs: { name: "" }
                       },
                       [
-                        _c("option", { attrs: { value: "C.I" } }, [
+                        _c("option", { attrs: { value: "1" } }, [
                           _vm._v("C.I")
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("RUT")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "3" } }, [
+                          _vm._v("PASAPORTE")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "4" } }, [
+                          _vm._v("NIFE")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "5" } }, [
+                          _vm._v("OTROS")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "6" } }, [_vm._v("DNI")])
                       ]
                     )
                   ]
@@ -484,7 +581,14 @@ var render = function() {
                   [
                     _c("vs-input", {
                       staticClass: "inputx",
-                      attrs: { placeholder: "" }
+                      attrs: { placeholder: "" },
+                      model: {
+                        value: _vm.form.NroDocumento,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "NroDocumento", $$v)
+                        },
+                        expression: "form.NroDocumento"
+                      }
                     })
                   ],
                   1
@@ -592,12 +696,12 @@ var render = function() {
                                 attrs: { "vs-type": "flex", "vs-w": "5" }
                               },
                               [
-                                _c("vs-input", {
-                                  staticClass: "inputx",
-                                  staticStyle: { width: "100%" }
+                                _c("input", {
+                                  staticClass:
+                                    "vs-inputx vs-input--input normal",
+                                  attrs: { type: "date" }
                                 })
-                              ],
-                              1
+                              ]
                             ),
                             _vm._v(" "),
                             _c(
@@ -652,13 +756,63 @@ var render = function() {
                                 _c(
                                   "select",
                                   {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.TipoDocumentoRetira,
+                                        expression: "form.TipoDocumentoRetira"
+                                      }
+                                    ],
                                     staticClass:
                                       "vs-inputx vs-input--input small",
-                                    attrs: { name: "", id: "" }
+                                    attrs: { name: "" },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "TipoDocumentoRetira",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
                                   },
                                   [
-                                    _c("option", { attrs: { value: "C.I" } }, [
+                                    _c("option", { attrs: { value: "1" } }, [
                                       _vm._v("C.I")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "2" } }, [
+                                      _vm._v("RUT")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "3" } }, [
+                                      _vm._v("PASAPORTE")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "4" } }, [
+                                      _vm._v("NIFE")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "5" } }, [
+                                      _vm._v("OTROS")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "6" } }, [
+                                      _vm._v("DNI")
                                     ])
                                   ]
                                 )
@@ -671,7 +825,22 @@ var render = function() {
                                 staticClass: "pb-1 pl-3",
                                 attrs: { "vs-type": "flex", "vs-w": "5" }
                               },
-                              [_c("vs-input", { staticClass: "inputx" })],
+                              [
+                                _c("vs-input", {
+                                  staticClass: "inputx",
+                                  model: {
+                                    value: _vm.form.NroDocumentoRetira,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.form,
+                                        "NroDocumentoRetira",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "form.NroDocumentoRetira"
+                                  }
+                                })
+                              ],
                               1
                             )
                           ],
@@ -703,7 +872,14 @@ var render = function() {
                               [
                                 _c("vs-input", {
                                   staticClass: "inputx block",
-                                  staticStyle: { width: "100%" }
+                                  staticStyle: { width: "100%" },
+                                  model: {
+                                    value: _vm.form.NombreRetira,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.form, "NombreRetira", $$v)
+                                    },
+                                    expression: "form.NombreRetira"
+                                  }
                                 })
                               ],
                               1
@@ -769,9 +945,19 @@ var render = function() {
                       "vs-col",
                       { staticClass: "p-1", attrs: { "vs-w": "3" } },
                       [
-                        _c("vs-button", { attrs: { color: "success" } }, [
-                          _vm._v("Registrar entrega")
-                        ]),
+                        _c(
+                          "vs-button",
+                          {
+                            attrs: { color: "success" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.send()
+                              }
+                            }
+                          },
+                          [_vm._v("Registrar entrega")]
+                        ),
                         _vm._v(" "),
                         _c(
                           "center",
@@ -811,6 +997,88 @@ var render = function() {
               1
             )
           ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "vs-col",
+        { staticClass: "pl-1", attrs: { "vs-type": "flex", "vs-w": "12" } },
+        [
+          _vm.options.length
+            ? _c(
+                "vs-row",
+                [
+                  _c(
+                    "vs-col",
+                    {
+                      staticClass: "pl-1",
+                      attrs: {
+                        "vs-type": "flex",
+                        "vs-w": "12",
+                        "vs-justify": "center",
+                        "vs-align": "center"
+                      }
+                    },
+                    [_c("h3", [_vm._v("Todos los envíos")])]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.options, function(item) {
+                    return [
+                      _c(
+                        "vs-col",
+                        {
+                          staticClass: "pl-1",
+                          attrs: { "vs-type": "flex", "vs-w": "4" }
+                        },
+                        [
+                          _c("vs-card", [
+                            _c(
+                              "div",
+                              { attrs: { slot: "header" }, slot: "header" },
+                              [_c("h3", [_vm._v(_vm._s(item.CodEnvio))])]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("ul", [
+                                _c("li", [
+                                  _c("b", [_vm._v("Documento:")]),
+                                  _vm._v(" " + _vm._s(item.Estado) + " ")
+                                ]),
+                                _vm._v(" "),
+                                _c("li", [
+                                  _c("b", [_vm._v("Cantidad de piezas:")]),
+                                  _vm._v(
+                                    " " + _vm._s(item.CantidadPiezas) + " "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("li", [
+                                  _c("b", [_vm._v("Codigo de Movimiento:")]),
+                                  _vm._v(" " + _vm._s(item.CodMovimiento) + " ")
+                                ]),
+                                _vm._v(" "),
+                                _c("li", [
+                                  _c("b", [_vm._v("Ubicación:")]),
+                                  _vm._v(" " + _vm._s(item.Ubicacion) + " ")
+                                ]),
+                                _vm._v(" "),
+                                _c("li", [
+                                  _c("b", [_vm._v("Estado:")]),
+                                  _vm._v(" " + _vm._s(item.Estado) + " ")
+                                ])
+                              ])
+                            ])
+                          ])
+                        ],
+                        1
+                      )
+                    ]
+                  })
+                ],
+                2
+              )
+            : _vm._e()
         ],
         1
       ),
