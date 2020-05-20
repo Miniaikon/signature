@@ -347,9 +347,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var paquete = this.options.find(function (item) {
         return item.NombreMedioPago == 'PAGO PENDIENTE';
       });
-      console.log(paquete);
 
-      if (false) {} else {
+      if (paquete != undefined) {
+        alert('Tienes paquetes sin pagar');
+      } else {
         var me = this;
         var listaEnvio = me.options.reduce(function (count, item) {
           return count.CodEnvio + '|' + item.CodEnvio;
