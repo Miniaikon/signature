@@ -321,9 +321,8 @@ export default {
             let paquete = this.options.find(item => {
                 return item.NombreMedioPago == 'PAGO PENDIENTE';
             });
-            console.log(paquete);
-            if(paquete === undefined){
-                alert('Tienes paquetes sin enviar');
+            if(paquete != undefined){
+                alert('Tienes paquetes sin pagar');
             }else{
                 let me = this;
                 let listaEnvio = me.options.reduce((count, item) => {
