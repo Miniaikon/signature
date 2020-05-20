@@ -335,7 +335,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     searchClient: function searchClient() {
       var me = this;
-      axios.get('http://exurcompras.com/getPaquetes.php?id_cliente=' + me.form.CodCliente).then(function (response) {
+      axios.get('https://exurcompras.com/getPaquetes.php?id_cliente=' + me.form.CodCliente).then(function (response) {
         var res = Array.isArray(response.data.Envio) ? response.data.Envio : [response.data.Envio];
         me.options = res;
         me.form = res[0];
