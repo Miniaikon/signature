@@ -322,7 +322,7 @@ export default {
                 return item.NombreMedioPago == 'PAGO PENDIENTE';
             });
             console.log(paquete);
-            if(paquete !== undefined){
+            if(paquete === undefined){
                 alert('Tienes paquetes sin enviar');
             }else{
                 let me = this;
