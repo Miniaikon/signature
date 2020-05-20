@@ -309,7 +309,7 @@ export default {
         searchClient(){
             let me = this;
 
-            axios.get('http://exurcompras.com/getPaquetes.php?id_cliente='+me.form.CodCliente).then(response => {
+            axios.get('https://exurcompras.com/getPaquetes.php?id_cliente='+me.form.CodCliente).then(response => {
                 let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
                 me.options = res;
                 me.form = res[0];

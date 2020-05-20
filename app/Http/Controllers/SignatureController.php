@@ -23,7 +23,7 @@ class SignatureController extends Controller
     }
 
     public function getClient($id){
-        $url = "http://148.72.153.90:8080/WsEntregasUes/WsEntregasUes.asmx?wsdl";
+        $url = "https://148.72.153.90:8080/WsEntregasUes/WsEntregasUes.asmx?wsdl";
 
         $options = array(
             'login' => 'WSExurClientesUser',
@@ -51,7 +51,7 @@ class SignatureController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://exurcompras.com/proccessSend.php",
+        CURLOPT_URL => "https://exurcompras.com/proccessSend.php",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
