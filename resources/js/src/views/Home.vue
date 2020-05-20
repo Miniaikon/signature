@@ -138,7 +138,7 @@
                 </vs-col>
                 <template v-for="item in options">
                     <vs-col vs-type="flex" class="pl-1" vs-w="4">
-                        <vs-card>
+                        <vs-card  vz-color="danger" class="" v-bind:class="{'danger-color':item.NombreMedioPago == 'PAGO PENDIENTE'}">
                             <div slot="header">
                                 <h3>{{ item.CodEnvio }}</h3>
                             </div>
@@ -213,6 +213,12 @@
     </vs-popup>
     </vs-row>
 </template>
+<style lang="stylus">
+    .danger-color{
+        background: red;
+        color: white;
+    }
+</style>
 <script>
 export default {
     data() {
@@ -261,10 +267,11 @@ export default {
             });
         },
         formSubmit(){
-            axios.post(this.url+'api/entregar', this.form).then(response => {
+                axios.post(this.url+'api/entregar', this.form).then(response => {
                 console.log('hecho');
                 this.init();
             });
+
         },
         sig(){
             let me = this;
@@ -310,37 +317,49 @@ export default {
             });
         },
         send(){
-            let me = this;
-            let listaEnvio = me.options.reduce((count, item) => {
-                return count.CodEnvio + '|'+ item.CodEnvio;
+            let validator = true;
+            let paquete = this.options.find(item => {
+                return item.NombreMedioPago == 'PAGO PENDIENTE';
             });
-            let data = {
-                unaListaEnvios: me.options.length>1 ? listaEnvio: listaEnvio.CodEnvio,
-                unaFirma: me.form.imagen,
-                unCodTipoDocumento: me.form.TipoDocumentoRetira,
-                unNroDocumento: me.form.NroDocumentoRetira,
-                unNombreClienteRetira: me.form.NombreRetira,
-                unCodUsuarioModif: localStorage.getItem('userCode')
+            console.log(paquete);
+            if(false){
+                alert('Tienes paquetes sin enviar');
+            }else{
+                let me = this;
+                let listaEnvio = me.options.reduce((count, item) => {
+                    return count.CodEnvio + '|'+ item.CodEnvio;
+                });
+                if(me.form.imagen === null || me.form.imagen === '' || me.form.imagen === undefined){
+                    alert('Debes firmar antes de procesar');
+                    return;
+                }
+                let data = {
+                    unaListaEnvios: me.options.length>1 ? listaEnvio: listaEnvio.CodEnvio,
+                    unaFirma: me.form.imagen,
+                    unCodTipoDocumento: me.form.TipoDocumentoRetira,
+                    unNroDocumento: me.form.NroDocumentoRetira,
+                    unNombreClienteRetira: me.form.NombreRetira,
+                    unCodUsuarioModif: localStorage.getItem('userCode')
+                }
+
+                axios.post('/api/enviar', data).then(res => {
+                    me.form = {
+                        imagen: '',
+                        CodCliente: '',
+                        TipoDocumentoRetira: '',
+                        NroDocumentoRetira: '',
+                        NombreRetira: '',
+                        CodCliente: '',
+                        CodEnvio:'',
+                        NroDocumento: '',
+                        NombreCliente: '',
+                    };
+                    alert('Paquetes procesados con éxito');
+                }).catch(err => {
+                    alert(err.response.data);
+                });
             }
 
-            axios.post('/api/enviar', data).then(res => {
-                me.form = {
-                    imagen: '',
-                    CodCliente: '',
-                    TipoDocumentoRetira: '',
-                    NroDocumentoRetira: '',
-                    NombreRetira: '',
-                    CodCliente: '',
-                    CodEnvio:'',
-                    NroDocumento: '',
-                    NombreCliente: '',
-                };
-                alert('Paquetes procesados con éxito');
-            }).catch(err => {
-                alert(err.response.data);
-            });
-
-            console.log(data);
         }
     }
 }
