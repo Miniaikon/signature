@@ -302,18 +302,33 @@ export default {
                 'imagen': '',
                 'id_cliente': '',
                 'id_paquete': '',
-                'comentario': ''
+                'comentario': '',
+                'CodCliente': ''
             };
             this.loadData();
         },
         searchClient(){
             let me = this;
 
-            axios.get('https://exurcompras.com/getPaquetes.php?id_cliente='+me.form.CodCliente).then(response => {
+            axios.get('https://exurcompras.com/getPaquetes.php?id_cliente='+(me.form.CodCliente ? me.form.CodCliente : 'null')).then(response => {
                 let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
-                me.options = res;
-                me.form = res[0];
-                console.log('options', typeof me.option);
+                if(res[0]){
+                    me.options = res;
+                    me.form = res[0];
+                    console.log('options', typeof me.option);
+                }else{
+                    console.log(response.data);
+                    axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento='+me.form.NroDocumento).then(response => {
+                        let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
+                        if(res[0]){
+                            me.options = res;
+                            me.form = res[0];
+                            console.log('options', typeof me.option);
+                        }else{
+                            alert('No se encontró ningun paquete');
+                        }
+                    });
+                }
             });
         },
         send(){
