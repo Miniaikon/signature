@@ -234,6 +234,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _form;
@@ -1095,84 +1137,264 @@ var render = function() {
             ? _c(
                 "vs-row",
                 [
-                  _c(
-                    "vs-col",
-                    {
-                      staticClass: "pl-1",
-                      attrs: {
-                        "vs-type": "flex",
-                        "vs-w": "12",
-                        "vs-justify": "center",
-                        "vs-align": "center"
-                      }
-                    },
-                    [_c("h3", [_vm._v("Todos los envíos")])]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.options, function(item) {
-                    return [
-                      _c(
-                        "vs-col",
-                        {
-                          staticClass: "pl-1",
-                          attrs: { "vs-type": "flex", "vs-w": "4" }
-                        },
-                        [
-                          _c(
-                            "vs-card",
-                            {
-                              class: {
-                                "danger-color":
-                                  item.NombreMedioPago == "PAGO PENDIENTE"
+                  [
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "pl-1",
+                        attrs: { "vs-type": "flex", "vs-w": "12" }
+                      },
+                      [
+                        _c(
+                          "vs-card",
+                          { attrs: { "vz-color": "danger" } },
+                          [
+                            _c(
+                              "vs-table",
+                              {
+                                attrs: {
+                                  pagination: "",
+                                  "max-items": "100",
+                                  search: "",
+                                  data: _vm.options
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "default",
+                                      fn: function(ref) {
+                                        var data = ref.data
+                                        return _vm._l(data, function(
+                                          tr,
+                                          indextr
+                                        ) {
+                                          return _c(
+                                            "vs-tr",
+                                            {
+                                              key: indextr,
+                                              attrs: { data: tr }
+                                            },
+                                            [
+                                              _c(
+                                                "vs-td",
+                                                {
+                                                  attrs: {
+                                                    data: data[indextr].CodEnvio
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        data[indextr].CodEnvio
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "vs-td",
+                                                {
+                                                  attrs: {
+                                                    data:
+                                                      data[indextr]
+                                                        .CantidadPiezas
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        data[indextr]
+                                                          .CantidadPiezas
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "vs-td",
+                                                {
+                                                  attrs: {
+                                                    data:
+                                                      data[indextr]
+                                                        .CodMovimiento
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        data[indextr]
+                                                          .CodMovimiento
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "vs-td",
+                                                {
+                                                  attrs: {
+                                                    data: data[indextr].Estado
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        data[indextr].Estado
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "vs-td",
+                                                {
+                                                  attrs: {
+                                                    data:
+                                                      data[indextr].Ubicacion
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        data[indextr].Ubicacion
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "vs-td",
+                                                {
+                                                  attrs: {
+                                                    data:
+                                                      data[indextr]
+                                                        .NombreMedioPago
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(
+                                                        data[indextr]
+                                                          .NombreMedioPago
+                                                      ) +
+                                                      "\n                                        "
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        })
+                                      }
+                                    }
+                                  ],
+                                  null,
+                                  false,
+                                  1024636831
+                                )
                               },
-                              attrs: { "vz-color": "danger" }
-                            },
-                            [
-                              _c(
-                                "div",
-                                { attrs: { slot: "header" }, slot: "header" },
-                                [_c("h3", [_vm._v(_vm._s(item.CodEnvio))])]
-                              ),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c("ul", [
-                                  _c("li", [
-                                    _c("b", [_vm._v("Documento:")]),
-                                    _vm._v(" " + _vm._s(item.Estado) + " ")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c("b", [_vm._v("Cantidad de piezas:")]),
+                              [
+                                _c("template", { slot: "header" }, [
+                                  _c("h3", [
                                     _vm._v(
-                                      " " + _vm._s(item.CantidadPiezas) + " "
+                                      "\n                                        Todos los envíos\n                                    "
                                     )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c("b", [_vm._v("Codigo de Movimiento:")]),
-                                    _vm._v(
-                                      " " + _vm._s(item.CodMovimiento) + " "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c("b", [_vm._v("Ubicación:")]),
-                                    _vm._v(" " + _vm._s(item.Ubicacion) + " ")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c("b", [_vm._v("Estado:")]),
-                                    _vm._v(" " + _vm._s(item.Estado) + " ")
                                   ])
-                                ])
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  })
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "template",
+                                  { slot: "thead" },
+                                  [
+                                    _c(
+                                      "vs-th",
+                                      { attrs: { "sort-key": "CodEnvio" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                        CodEnvio\n                                    "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "vs-th",
+                                      {
+                                        attrs: { "sort-key": "CantidadPiezas" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        CantidadPiezas\n                                    "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "vs-th",
+                                      {
+                                        attrs: { "sort-key": "CodMovimiento" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        CodMovimiento\n                                    "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "vs-th",
+                                      { attrs: { "sort-key": "Estado" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                        Estado\n                                    "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "vs-th",
+                                      { attrs: { "sort-key": "Ubicacion" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                        Ubicacion\n                                    "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "vs-th",
+                                      {
+                                        attrs: { "sort-key": "NombreMedioPago" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        NombreMedioPago\n                                    "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              2
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
                 ],
                 2
               )

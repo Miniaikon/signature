@@ -133,24 +133,66 @@
         <vs-col vs-type="flex" class="pl-1" vs-w="12">
 
             <vs-row v-if="options.length">
-                <vs-col vs-type="flex" class="pl-1" vs-w="12" vs-justify="center" vs-align="center">
-                    <h3>Todos los envíos</h3>
-                </vs-col>
-                <template v-for="item in options">
-                    <vs-col vs-type="flex" class="pl-1" vs-w="4">
-                        <vs-card  vz-color="danger" class="" v-bind:class="{'danger-color':item.NombreMedioPago == 'PAGO PENDIENTE'}">
-                            <div slot="header">
-                                <h3>{{ item.CodEnvio }}</h3>
-                            </div>
-                            <div>
-                                <ul>
-                                    <li><b>Documento:</b> {{ item.Estado }} </li>
-                                    <li><b>Cantidad de piezas:</b> {{ item.CantidadPiezas }} </li>
-                                    <li><b>Codigo de Movimiento:</b> {{ item.CodMovimiento }} </li>
-                                    <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
-                                    <li><b>Estado:</b> {{ item.Estado }} </li>
-                                </ul>
-                            </div>
+                <template>
+                    <vs-col vs-type="flex" class="pl-1" vs-w="12">
+                        <vs-card  vz-color="danger" class="">
+                            <vs-table pagination max-items="100" search :data="options">
+                                <template slot="header">
+                                    <h3>
+                                        Todos los envíos
+                                    </h3>
+                                </template>
+                                <template slot="thead">
+                                    <vs-th sort-key="CodEnvio">
+                                        CodEnvio
+                                    </vs-th>
+                                    <vs-th sort-key="CantidadPiezas">
+                                        CantidadPiezas
+                                    </vs-th>
+                                    <vs-th sort-key="CodMovimiento">
+                                        CodMovimiento
+                                    </vs-th>
+                                    <vs-th sort-key="Estado">
+                                        Estado
+                                    </vs-th>
+
+                                    <vs-th sort-key="Ubicacion">
+                                        Ubicacion
+                                    </vs-th>
+
+                                    <vs-th sort-key="NombreMedioPago">
+                                        NombreMedioPago
+                                    </vs-th>
+                                </template>
+
+                                <template slot-scope="{data}">
+                                    <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
+                                        <vs-td :data="data[indextr].CodEnvio">
+                                            {{data[indextr].CodEnvio}}
+                                        </vs-td>
+
+                                        <vs-td :data="data[indextr].CantidadPiezas">
+                                            {{data[indextr].CantidadPiezas}}
+                                        </vs-td>
+
+                                        <vs-td :data="data[indextr].CodMovimiento">
+                                            {{data[indextr].CodMovimiento}}
+                                        </vs-td>
+
+                                        <vs-td :data="data[indextr].Estado">
+                                            {{data[indextr].Estado}}
+                                        </vs-td>
+
+                                        <vs-td :data="data[indextr].Ubicacion">
+                                            {{data[indextr].Ubicacion}}
+                                        </vs-td>
+
+                                        <vs-td :data="data[indextr].NombreMedioPago">
+                                            {{data[indextr].NombreMedioPago}}
+                                        </vs-td>
+                                    </vs-tr>
+                                </template>
+                            </vs-table>
 
                         </vs-card>
                     </vs-col>
