@@ -41,7 +41,7 @@
                         </select>
                     </vs-col>
                     <vs-col vs-type="flex" vs-w="4" class="p-1">
-                        <vs-input class="inputx" placeholder="" v-model="form.NroDocumento" />
+                        <vs-input class="inputx" placeholder="" readonly="" v-model="form.NroDocumento" />
                     </vs-col>
                     <!-- Other -->
                     <vs-row>
@@ -70,7 +70,7 @@
                                     <label for="">Fecha</label>
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="5" class="pb-1">
-                                    <input type="date" class="vs-inputx vs-input--input normal">
+                                    <input type="date" v-model="form.FechaRetira" readonly class="vs-inputx vs-input--input normal">
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-justify="center" vs-w="5" class="pb-1 pl-3">
                                     <vs-button color="primary" style="width: 100%;">Retira Cliente</vs-button>
@@ -118,7 +118,7 @@
                         <vs-col vs-w="3" class="p-1">
                             <vs-button color="success" @click.prevent="send()">Registrar entrega</vs-button>
                             <center class="pt-1">
-                                <vs-button color="danger">Cancelar</vs-button>
+                                <vs-button color="danger" @click="init()">Cancelar</vs-button>
                             </center>
                             <vs-col vs-type="flex" vs-w="12" class="p-1">
                                 <img  id="img_sig" width="100%" style="height: 90px; border: 1px solid #ccc; border-radius: 10px;" alt="">
@@ -276,8 +276,7 @@ export default {
                 CodCliente: '',
                 CodEnvio:'',
                 NroDocumento: '',
-                NombreCliente: '',
-            },
+                NombreCliente: '',},
             options: [
 
             ],
@@ -287,6 +286,7 @@ export default {
         }
     },
     mounted(){
+        this.init();
         this.verifyAuth();
     },
     methods: {
@@ -340,13 +340,17 @@ export default {
                 }
         },
         init(){
+            let f = new Date();
+
             this.form = {
                 'imagen': '',
                 'id_cliente': '',
                 'id_paquete': '',
                 'comentario': '',
-                'CodCliente': ''
+                'CodCliente': '',
+                'FechaRetira': f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2),
             };
+            this.option = [];
             this.loadData();
         },
         searchClient(){
@@ -416,6 +420,25 @@ export default {
                 });
             }
 
+        },
+        zfill(number, width) {
+            var numberOutput = Math.abs(number); /* Valor absoluto del número */
+            var length = number.toString().length; /* Largo del número */
+            var zero = "0"; /* String de cero */
+
+            if (width <= length) {
+                if (number < 0) {
+                    return ("-" + numberOutput.toString());
+                } else {
+                    return numberOutput.toString();
+                }
+            } else {
+                if (number < 0) {
+                    return ("-" + (zero.repeat(width - length)) + numberOutput.toString());
+                } else {
+                    return ((zero.repeat(width - length)) + numberOutput.toString());
+                }
+            }
         }
     }
 }

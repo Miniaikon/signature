@@ -297,6 +297,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   mounted: function mounted() {
+    this.init();
     this.verifyAuth();
   },
   methods: {
@@ -367,13 +368,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     init: function init() {
+      var f = new Date();
       this.form = {
         'imagen': '',
         'id_cliente': '',
         'id_paquete': '',
         'comentario': '',
-        'CodCliente': ''
+        'CodCliente': '',
+        'FechaRetira': f.getFullYear() + "-" + this.zfill(f.getMonth() + 1, 2) + "-" + this.zfill(f.getDate(), 2)
       };
+      this.option = [];
       this.loadData();
     },
     searchClient: function searchClient() {
@@ -442,6 +446,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }).catch(function (err) {
           alert(err.response.data);
         });
+      }
+    },
+    zfill: function zfill(number, width) {
+      var numberOutput = Math.abs(number);
+      /* Valor absoluto del número */
+
+      var length = number.toString().length;
+      /* Largo del número */
+
+      var zero = "0";
+      /* String de cero */
+
+      if (width <= length) {
+        if (number < 0) {
+          return "-" + numberOutput.toString();
+        } else {
+          return numberOutput.toString();
+        }
+      } else {
+        if (number < 0) {
+          return "-" + zero.repeat(width - length) + numberOutput.toString();
+        } else {
+          return zero.repeat(width - length) + numberOutput.toString();
+        }
       }
     }
   }
@@ -709,7 +737,7 @@ var render = function() {
                   [
                     _c("vs-input", {
                       staticClass: "inputx",
-                      attrs: { placeholder: "" },
+                      attrs: { placeholder: "", readonly: "" },
                       model: {
                         value: _vm.form.NroDocumento,
                         callback: function($$v) {
@@ -825,9 +853,30 @@ var render = function() {
                               },
                               [
                                 _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.FechaRetira,
+                                      expression: "form.FechaRetira"
+                                    }
+                                  ],
                                   staticClass:
                                     "vs-inputx vs-input--input normal",
-                                  attrs: { type: "date" }
+                                  attrs: { type: "date", readonly: "" },
+                                  domProps: { value: _vm.form.FechaRetira },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "FechaRetira",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
                                 })
                               ]
                             ),
@@ -1091,9 +1140,18 @@ var render = function() {
                           "center",
                           { staticClass: "pt-1" },
                           [
-                            _c("vs-button", { attrs: { color: "danger" } }, [
-                              _vm._v("Cancelar")
-                            ])
+                            _c(
+                              "vs-button",
+                              {
+                                attrs: { color: "danger" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.init()
+                                  }
+                                }
+                              },
+                              [_vm._v("Cancelar")]
+                            )
                           ],
                           1
                         ),
