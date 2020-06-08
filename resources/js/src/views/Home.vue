@@ -41,7 +41,7 @@
                         </select>
                     </vs-col>
                     <vs-col vs-type="flex" vs-w="4" class="p-1">
-                        <vs-input class="inputx" placeholder="" readonly="" v-model="form.NroDocumento" />
+                        <vs-input class="inputx" placeholder="" v-model="form.NroDocumento" />
                     </vs-col>
                     <!-- Other -->
                     <vs-row>

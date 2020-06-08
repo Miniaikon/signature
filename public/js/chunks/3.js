@@ -703,7 +703,7 @@ var render = function() {
                   [
                     _c("vs-input", {
                       staticClass: "inputx",
-                      attrs: { placeholder: "", readonly: "" },
+                      attrs: { placeholder: "" },
                       model: {
                         value: _vm.form.NroDocumento,
                         callback: function($$v) {
