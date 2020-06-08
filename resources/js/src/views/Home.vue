@@ -22,8 +22,8 @@
                         <vs-col vs-type="flex" vs-w="4" class="p-1">
                             <label for="">Nro. Envío</label>
                         </vs-col>
-                        <vs-col vs-type="flex" vs-w="4" class="p-1">
-                            <vs-input class="inputx" v-model="form.CodEnvio" placeholder="Nro. Envío" />
+                        <vs-col vs-type="flex" vs-w="8" class="p-1">
+                            <vs-input class="inputx" style="width: 100%;" v-model="form.CodEnvio" placeholder="Nro. Envío" />
                         </vs-col>
                     </vs-row>
                     <!-- other -->
@@ -49,7 +49,7 @@
                             <label for="">Nombre / Apellido</label>
                         </vs-col>
                         <vs-col vs-type="flex" vs-w="8" class="p-1">
-                            <vs-input class="inputx" v-model="form.NombreCliente" placeholder="Nombre" />
+                            <vs-input class="inputx" style="width: 100%;" v-model="form.NombreCliente" placeholder="Nombre" />
                         </vs-col>
                     </vs-row>
                 </div>

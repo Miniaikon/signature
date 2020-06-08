@@ -337,7 +337,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'CodCliente': '',
         'FechaRetira': f.getFullYear() + "-" + this.zfill(f.getMonth() + 1, 2) + "-" + this.zfill(f.getDate(), 2)
       };
-      this.option = [];
+      this.options = [];
       this.loadData();
     },
     searchClient: function searchClient() {
@@ -624,11 +624,12 @@ var render = function() {
                       "vs-col",
                       {
                         staticClass: "p-1",
-                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                        attrs: { "vs-type": "flex", "vs-w": "8" }
                       },
                       [
                         _c("vs-input", {
                           staticClass: "inputx",
+                          staticStyle: { width: "100%" },
                           attrs: { placeholder: "Nro. Envío" },
                           model: {
                             value: _vm.form.CodEnvio,
@@ -741,6 +742,7 @@ var render = function() {
                       [
                         _c("vs-input", {
                           staticClass: "inputx",
+                          staticStyle: { width: "100%" },
                           attrs: { placeholder: "Nombre" },
                           model: {
                             value: _vm.form.NombreCliente,
