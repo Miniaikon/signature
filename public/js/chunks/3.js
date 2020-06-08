@@ -9,48 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -381,6 +341,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.loadData();
     },
     searchClient: function searchClient() {
+      var _this4 = this;
+
       var me = this;
       axios.get('https://exurcompras.com/getPaquetes.php?id_cliente=' + (me.form.CodCliente ? me.form.CodCliente : 'null')).then(function (response) {
         var res = Array.isArray(response.data.Envio) ? response.data.Envio : [response.data.Envio];
@@ -388,7 +350,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (res[0]) {
           me.options = res;
           me.form = res[0];
-          console.log('options', _typeof(me.option));
+          var f = new Date();
+          me.form.FechaRetira = f.getFullYear() + "-" + _this4.zfill(f.getMonth() + 1, 2) + "-" + _this4.zfill(f.getDate(), 2);
         } else {
           console.log(response.data);
           axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento=' + me.form.NroDocumento).then(function (response) {
@@ -397,7 +360,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             if (res[0]) {
               me.options = res;
               me.form = res[0];
-              console.log('options', _typeof(me.option));
+
+              var _f = new Date();
+
+              me.form.FechaRetira = _f.getFullYear() + "-" + _this4.zfill(_f.getMonth() + 1, 2) + "-" + _this4.zfill(_f.getDate(), 2);
             } else {
               alert('No se encontró ningun paquete');
             }
@@ -545,7 +511,7 @@ var render = function() {
     "vs-row",
     {
       attrs: {
-        "vs-align": "center",
+        "vs-align": "top",
         "vs-type": "flex",
         "vs-justify": "space-around",
         "vs-w": "12"
@@ -559,7 +525,7 @@ var render = function() {
           attrs: {
             "vs-type": "flex",
             "vs-justify": "center",
-            "vs-align": "center",
+            "vs-align": "top",
             "vs-w": "5"
           }
         },
@@ -801,7 +767,7 @@ var render = function() {
       _c(
         "vs-col",
         {
-          staticClass: "pl-1",
+          staticClass: "pr-1",
           attrs: {
             "vs-type": "flex",
             "vs-justify": "center",
@@ -835,7 +801,7 @@ var render = function() {
                             _c(
                               "vs-col",
                               {
-                                staticClass: "pb-1",
+                                staticClass: "p-1",
                                 attrs: { "vs-type": "flex", "vs-w": "2" }
                               },
                               [
@@ -848,7 +814,7 @@ var render = function() {
                             _c(
                               "vs-col",
                               {
-                                staticClass: "pb-1",
+                                staticClass: "p-1",
                                 attrs: { "vs-type": "flex", "vs-w": "5" }
                               },
                               [
@@ -884,7 +850,7 @@ var render = function() {
                             _c(
                               "vs-col",
                               {
-                                staticClass: "pb-1 pl-3",
+                                staticClass: "p-1",
                                 attrs: {
                                   "vs-type": "flex",
                                   "vs-justify": "center",
@@ -913,7 +879,7 @@ var render = function() {
                             _c(
                               "vs-col",
                               {
-                                staticClass: "pb-1",
+                                staticClass: "p-1",
                                 attrs: { "vs-type": "flex", "vs-w": "2" }
                               },
                               [
@@ -926,7 +892,7 @@ var render = function() {
                             _c(
                               "vs-col",
                               {
-                                staticClass: "pb-1",
+                                staticClass: "p-1",
                                 attrs: { "vs-type": "flex", "vs-w": "5" }
                               },
                               [
@@ -942,7 +908,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      "vs-inputx vs-input--input small",
+                                      "vs-inputx vs-input--input normal",
                                     attrs: { name: "" },
                                     on: {
                                       change: function($event) {
@@ -999,7 +965,7 @@ var render = function() {
                             _c(
                               "vs-col",
                               {
-                                staticClass: "pb-1 pl-3",
+                                staticClass: "p-1",
                                 attrs: { "vs-type": "flex", "vs-w": "5" }
                               },
                               [
@@ -1030,7 +996,7 @@ var render = function() {
                             _c(
                               "vs-col",
                               {
-                                staticClass: "pb-1",
+                                staticClass: "p-1",
                                 attrs: { "vs-type": "flex", "vs-w": "2" }
                               },
                               [
@@ -1043,7 +1009,7 @@ var render = function() {
                             _c(
                               "vs-col",
                               {
-                                staticClass: "pb-1",
+                                staticClass: "p-1",
                                 attrs: { "vs-type": "flex", "vs-w": "10" }
                               },
                               [
@@ -1093,7 +1059,7 @@ var render = function() {
                             _vm._v(" "),
                             _c(
                               "vs-col",
-                              { attrs: { "vs-w": "10" } },
+                              { staticClass: "p-1", attrs: { "vs-w": "10" } },
                               [
                                 _c(
                                   "vs-button",
@@ -1120,42 +1086,8 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "vs-col",
-                      { staticClass: "p-1", attrs: { "vs-w": "3" } },
+                      { staticClass: "p-5 mb-5", attrs: { "vs-w": "3" } },
                       [
-                        _c(
-                          "vs-button",
-                          {
-                            attrs: { color: "success" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.send()
-                              }
-                            }
-                          },
-                          [_vm._v("Registrar entrega")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "center",
-                          { staticClass: "pt-1" },
-                          [
-                            _c(
-                              "vs-button",
-                              {
-                                attrs: { color: "danger" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.init()
-                                  }
-                                }
-                              },
-                              [_vm._v("Cancelar")]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
                         _c(
                           "vs-col",
                           {
@@ -1189,270 +1121,130 @@ var render = function() {
       _vm._v(" "),
       _c(
         "vs-col",
+        { staticClass: "p-1", attrs: { "vs-w": "12" } },
+        [
+          _c(
+            "center",
+            [
+              _c(
+                "vs-button",
+                {
+                  attrs: { color: "success" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.send()
+                    }
+                  }
+                },
+                [_vm._v("Registrar entrega")]
+              ),
+              _vm._v(" "),
+              _c(
+                "vs-button",
+                {
+                  attrs: { color: "danger" },
+                  on: {
+                    click: function($event) {
+                      return _vm.init()
+                    }
+                  }
+                },
+                [_vm._v("Cancelar")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "vs-col",
         { staticClass: "pl-1", attrs: { "vs-type": "flex", "vs-w": "12" } },
         [
           _vm.options.length
             ? _c(
                 "vs-row",
                 [
-                  [
-                    _c(
-                      "vs-col",
-                      {
-                        staticClass: "pl-1",
-                        attrs: { "vs-type": "flex", "vs-w": "12" }
-                      },
-                      [
-                        _c(
-                          "vs-card",
-                          { attrs: { "vz-color": "danger" } },
-                          [
-                            _c(
-                              "vs-table",
-                              {
-                                attrs: {
-                                  pagination: "",
-                                  "max-items": "100",
-                                  search: "",
-                                  data: _vm.options
-                                },
-                                scopedSlots: _vm._u(
-                                  [
-                                    {
-                                      key: "default",
-                                      fn: function(ref) {
-                                        var data = ref.data
-                                        return _vm._l(data, function(
-                                          tr,
-                                          indextr
-                                        ) {
-                                          return _c(
-                                            "vs-tr",
-                                            {
-                                              key: indextr,
-                                              attrs: { data: tr }
-                                            },
-                                            [
-                                              _c(
-                                                "vs-td",
-                                                {
-                                                  attrs: {
-                                                    data: data[indextr].CodEnvio
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        data[indextr].CodEnvio
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "vs-td",
-                                                {
-                                                  attrs: {
-                                                    data:
-                                                      data[indextr]
-                                                        .CantidadPiezas
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        data[indextr]
-                                                          .CantidadPiezas
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "vs-td",
-                                                {
-                                                  attrs: {
-                                                    data:
-                                                      data[indextr]
-                                                        .CodMovimiento
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        data[indextr]
-                                                          .CodMovimiento
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "vs-td",
-                                                {
-                                                  attrs: {
-                                                    data: data[indextr].Estado
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        data[indextr].Estado
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "vs-td",
-                                                {
-                                                  attrs: {
-                                                    data:
-                                                      data[indextr].Ubicacion
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        data[indextr].Ubicacion
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "vs-td",
-                                                {
-                                                  attrs: {
-                                                    data:
-                                                      data[indextr]
-                                                        .NombreMedioPago
-                                                  }
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        data[indextr]
-                                                          .NombreMedioPago
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        })
-                                      }
-                                    }
-                                  ],
-                                  null,
-                                  false,
-                                  1024636831
-                                )
+                  _c(
+                    "vs-col",
+                    {
+                      staticClass: "pl-1",
+                      attrs: {
+                        "vs-type": "flex",
+                        "vs-w": "12",
+                        "vs-justify": "center",
+                        "vs-align": "center"
+                      }
+                    },
+                    [_c("h3", [_vm._v("Todos los envíos")])]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.options, function(item) {
+                    return [
+                      _c(
+                        "vs-col",
+                        {
+                          staticClass: "pl-1",
+                          attrs: { "vs-type": "flex", "vs-w": "4" }
+                        },
+                        [
+                          _c(
+                            "vs-card",
+                            {
+                              class: {
+                                "danger-color":
+                                  item.NombreMedioPago == "PAGO PENDIENTE"
                               },
-                              [
-                                _c("template", { slot: "header" }, [
-                                  _c("h3", [
+                              attrs: { "vz-color": "danger" }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { attrs: { slot: "header" }, slot: "header" },
+                                [_c("h3", [_vm._v(_vm._s(item.CodEnvio))])]
+                              ),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c("ul", [
+                                  _c("li", [
+                                    _c("b", [_vm._v("Documento:")]),
+                                    _vm._v(" " + _vm._s(item.Estado) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Cantidad de piezas:")]),
                                     _vm._v(
-                                      "\n                                        Todos los envíos\n                                    "
+                                      " " + _vm._s(item.CantidadPiezas) + " "
                                     )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Codigo de Movimiento:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.CodMovimiento) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Ubicación:")]),
+                                    _vm._v(" " + _vm._s(item.Ubicacion) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Estado:")]),
+                                    _vm._v(" " + _vm._s(item.Estado) + " ")
                                   ])
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "template",
-                                  { slot: "thead" },
-                                  [
-                                    _c(
-                                      "vs-th",
-                                      { attrs: { "sort-key": "CodEnvio" } },
-                                      [
-                                        _vm._v(
-                                          "\n                                        CodEnvio\n                                    "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "vs-th",
-                                      {
-                                        attrs: { "sort-key": "CantidadPiezas" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        CantidadPiezas\n                                    "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "vs-th",
-                                      {
-                                        attrs: { "sort-key": "CodMovimiento" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        CodMovimiento\n                                    "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "vs-th",
-                                      { attrs: { "sort-key": "Estado" } },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Estado\n                                    "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "vs-th",
-                                      { attrs: { "sort-key": "Ubicacion" } },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Ubicacion\n                                    "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "vs-th",
-                                      {
-                                        attrs: { "sort-key": "NombreMedioPago" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        NombreMedioPago\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              2
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ]
+                                ])
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  })
                 ],
                 2
               )

@@ -1,6 +1,6 @@
 <template>
-	<vs-row vs-align="center" vs-type="flex" vs-justify="space-around" vs-w="12">
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pr-1" vs-w="5">
+	<vs-row vs-align="top" vs-type="flex" vs-justify="space-around" vs-w="12">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="top" class="pr-1" vs-w="5">
             <vs-card>
                 <div slot="header">
                     <h3>
@@ -55,7 +55,7 @@
                 </div>
             </vs-card>
         </vs-col>
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pl-1" vs-w="7">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pr-1" vs-w="7">
             <vs-card>
                 <div slot="header">
                     <h3>
@@ -66,23 +66,23 @@
                     <vs-row>
                         <vs-col vs-w="9" class="pr-2">
                             <vs-row>
-                                <vs-col vs-type="flex" vs-w="2" class="pb-1">
+                                <vs-col vs-type="flex" vs-w="2" class="p-1">
                                     <label for="">Fecha</label>
                                 </vs-col>
-                                <vs-col vs-type="flex" vs-w="5" class="pb-1">
+                                <vs-col vs-type="flex" vs-w="5" class="p-1">
                                     <input type="date" v-model="form.FechaRetira" readonly class="vs-inputx vs-input--input normal">
                                 </vs-col>
-                                <vs-col vs-type="flex" vs-justify="center" vs-w="5" class="pb-1 pl-3">
+                                <vs-col vs-type="flex" vs-justify="center" vs-w="5" class="p-1">
                                     <vs-button color="primary" style="width: 100%;">Retira Cliente</vs-button>
                                 </vs-col>
                             </vs-row>
                             <!-- other -->
                             <vs-row>
-                                <vs-col vs-type="flex" vs-w="2" class="pb-1">
+                                <vs-col vs-type="flex" vs-w="2" class="p-1">
                                     <label for="">Documento</label>
                                 </vs-col>
-                                <vs-col vs-type="flex" vs-w="5" class="pb-1">
-                                    <select name="" class="vs-inputx vs-input--input small" v-model="form.TipoDocumentoRetira">
+                                <vs-col vs-type="flex" vs-w="5" class="p-1">
+                                    <select name="" class="vs-inputx vs-input--input normal" v-model="form.TipoDocumentoRetira">
                                         <option value="1">C.I</option>
                                         <option value="2">RUT</option>
                                         <option value="3">PASAPORTE</option>
@@ -91,16 +91,16 @@
                                         <option value="6">DNI</option>
                                     </select>
                                 </vs-col>
-                                <vs-col vs-type="flex" vs-w="5" class="pb-1 pl-3">
+                                <vs-col vs-type="flex" vs-w="5" class="p-1">
                                     <vs-input class="inputx" v-model="form.NroDocumentoRetira" />
                                 </vs-col>
                             </vs-row>
                             <!-- Other -->
                             <vs-row>
-                                <vs-col vs-type="flex" vs-w="2" class="pb-1">
+                                <vs-col vs-type="flex" vs-w="2" class="p-1">
                                     <label for="">Nombre</label>
                                 </vs-col>
-                                <vs-col vs-type="flex" vs-w="10" class="pb-1">
+                                <vs-col vs-type="flex" vs-w="10" class="p-1">
                                     <vs-input class="inputx block" style="width: 100%;" v-model="form.NombreRetira" />
                                 </vs-col>
                             </vs-row>
@@ -110,89 +110,51 @@
                                         <label for="">Firma</label>
                                     </vs-col>
                                 </vs-col>
-                                <vs-col vs-w="10">
+                                <vs-col vs-w="10" class="p-1">
                                     <vs-button style="width: 100%;" v-on:click.prevent="sig()">Firmar</vs-button>
                                 </vs-col>
                             </vs-row>
                         </vs-col>
-                        <vs-col vs-w="3" class="p-1">
-                            <vs-button color="success" @click.prevent="send()">Registrar entrega</vs-button>
-                            <center class="pt-1">
-                                <vs-button color="danger" @click="init()">Cancelar</vs-button>
-                            </center>
+                        <vs-col vs-w="3" class="p-5 mb-5">
                             <vs-col vs-type="flex" vs-w="12" class="p-1">
                                 <img  id="img_sig" width="100%" style="height: 90px; border: 1px solid #ccc; border-radius: 10px;" alt="">
                             </vs-col>
                         </vs-col>
                     </vs-row>
 
+
                 </div>
 
             </vs-card>
         </vs-col>
+        <vs-col vs-w="12" class="p-1">
+            <center>
+                <vs-button color="success" @click.prevent="send()">Registrar entrega</vs-button>
+                <vs-button color="danger" @click="init()">Cancelar</vs-button>
+            </center>
+
+        </vs-col>
         <vs-col vs-type="flex" class="pl-1" vs-w="12">
 
-            <vs-row v-if="options.length">
-                <template>
-                    <vs-col vs-type="flex" class="pl-1" vs-w="12">
-                        <vs-card  vz-color="danger" class="">
-                            <vs-table pagination max-items="100" search :data="options">
-                                <template slot="header">
-                                    <h3>
-                                        Todos los envíos
-                                    </h3>
-                                </template>
-                                <template slot="thead">
-                                    <vs-th sort-key="CodEnvio">
-                                        CodEnvio
-                                    </vs-th>
-                                    <vs-th sort-key="CantidadPiezas">
-                                        CantidadPiezas
-                                    </vs-th>
-                                    <vs-th sort-key="CodMovimiento">
-                                        CodMovimiento
-                                    </vs-th>
-                                    <vs-th sort-key="Estado">
-                                        Estado
-                                    </vs-th>
-
-                                    <vs-th sort-key="Ubicacion">
-                                        Ubicacion
-                                    </vs-th>
-
-                                    <vs-th sort-key="NombreMedioPago">
-                                        NombreMedioPago
-                                    </vs-th>
-                                </template>
-
-                                <template slot-scope="{data}">
-                                    <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
-                                        <vs-td :data="data[indextr].CodEnvio">
-                                            {{data[indextr].CodEnvio}}
-                                        </vs-td>
-
-                                        <vs-td :data="data[indextr].CantidadPiezas">
-                                            {{data[indextr].CantidadPiezas}}
-                                        </vs-td>
-
-                                        <vs-td :data="data[indextr].CodMovimiento">
-                                            {{data[indextr].CodMovimiento}}
-                                        </vs-td>
-
-                                        <vs-td :data="data[indextr].Estado">
-                                            {{data[indextr].Estado}}
-                                        </vs-td>
-
-                                        <vs-td :data="data[indextr].Ubicacion">
-                                            {{data[indextr].Ubicacion}}
-                                        </vs-td>
-
-                                        <vs-td :data="data[indextr].NombreMedioPago">
-                                            {{data[indextr].NombreMedioPago}}
-                                        </vs-td>
-                                    </vs-tr>
-                                </template>
-                            </vs-table>
+             <vs-row v-if="options.length">
+                <vs-col vs-type="flex" class="pl-1" vs-w="12" vs-justify="center" vs-align="center">
+                    <h3>Todos los envíos</h3>
+                </vs-col>
+                <template v-for="item in options">
+                    <vs-col vs-type="flex" class="pl-1" vs-w="4">
+                        <vs-card  vz-color="danger" class="" v-bind:class="{'danger-color':item.NombreMedioPago == 'PAGO PENDIENTE'}">
+                            <div slot="header">
+                                <h3>{{ item.CodEnvio }}</h3>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li><b>Documento:</b> {{ item.Estado }} </li>
+                                    <li><b>Cantidad de piezas:</b> {{ item.CantidadPiezas }} </li>
+                                    <li><b>Codigo de Movimiento:</b> {{ item.CodMovimiento }} </li>
+                                    <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
+                                    <li><b>Estado:</b> {{ item.Estado }} </li>
+                                </ul>
+                            </div>
 
                         </vs-card>
                     </vs-col>
@@ -361,7 +323,8 @@ export default {
                 if(res[0]){
                     me.options = res;
                     me.form = res[0];
-                    console.log('options', typeof me.option);
+                    let f = new Date();
+                    me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
                 }else{
                     console.log(response.data);
                     axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento='+me.form.NroDocumento).then(response => {
@@ -369,7 +332,8 @@ export default {
                         if(res[0]){
                             me.options = res;
                             me.form = res[0];
-                            console.log('options', typeof me.option);
+                            let f = new Date();
+                            me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
                         }else{
                             alert('No se encontró ningun paquete');
                         }
