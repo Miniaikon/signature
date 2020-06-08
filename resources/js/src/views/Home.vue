@@ -312,7 +312,7 @@ export default {
                 'CodCliente': '',
                 'FechaRetira': f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2),
             };
-            this.option = [];
+            this.options = [];
             this.loadData();
         },
         searchClient(){
