@@ -64,16 +64,10 @@
                 </div>
                 <div>
                     <vs-row>
-                        <vs-col vs-w="9" class="pr-2">
+                        <vs-col vs-w="12" class="pr-2">
                             <vs-row>
-                                <vs-col vs-type="flex" vs-w="2" class="p-1">
-                                    <label for="">Fecha</label>
-                                </vs-col>
-                                <vs-col vs-type="flex" vs-w="5" class="p-1">
-                                    <input type="date" v-model="form.FechaRetira" readonly class="vs-inputx vs-input--input normal">
-                                </vs-col>
-                                <vs-col vs-type="flex" vs-justify="center" vs-w="5" class="p-1">
-                                    <vs-button color="primary" style="width: 100%;">Retira Cliente</vs-button>
+                                <input type="hidden" v-model="form.FechaRetira" readonly class="vs-inputx vs-input--input normal">
+                                <vs-col vs-type="flex" vs-justify="center" vs-w="12" class="p-1">
                                 </vs-col>
                             </vs-row>
                             <!-- other -->
@@ -92,7 +86,7 @@
                                     </select>
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="5" class="p-1">
-                                    <vs-input class="inputx" v-model="form.NroDocumentoRetira" />
+                                    <vs-input class="inputx" style="width:100%;" v-model="form.NroDocumentoRetira" />
                                 </vs-col>
                             </vs-row>
                             <!-- Other -->
@@ -105,20 +99,22 @@
                                 </vs-col>
                             </vs-row>
                             <vs-row>
-                                <vs-col vs-type="flex" vs-w="2" class="p-1">
-                                    <vs-col vs-type="flex" vs-w="12" class="p-1">
-                                        <label for="">Firma</label>
-                                    </vs-col>
+                                <vs-col vs-type="flex" vs-w="3" class="p-1">
+                                    <vs-button v-on:click.prevent="sig()" style="width:100%">Firmar</vs-button>
                                 </vs-col>
-                                <vs-col vs-w="10" class="p-1">
-                                    <vs-button style="width: 100%;" v-on:click.prevent="sig()">Firmar</vs-button>
+                                <vs-col vs-w="9" class="p-1">
+                                    <img  id="img_sig" width="100%" style="height: 90px; border: 1px solid #ccc; border-radius: 10px;" alt="">
+                                </vs-col>
+                                <vs-col vs-w="4" class="p-1">
+                                    <vs-button color="primary" style="width: 100%">Retira Cliente</vs-button>
+                                </vs-col>
+                                <vs-col vs-w="4" class="p-1">
+                                    <vs-button color="success" @click.prevent="send()" style="width: 100%">Registrar entrega</vs-button>
+                                </vs-col>
+                                <vs-col vs-w="4" class="p-1">
+                                        <vs-button color="danger" @click="init()" style="width: 100%">Cancelar</vs-button>
                                 </vs-col>
                             </vs-row>
-                        </vs-col>
-                        <vs-col vs-w="3" class="p-5 mb-5">
-                            <vs-col vs-type="flex" vs-w="12" class="p-1">
-                                <img  id="img_sig" width="100%" style="height: 90px; border: 1px solid #ccc; border-radius: 10px;" alt="">
-                            </vs-col>
                         </vs-col>
                     </vs-row>
 
@@ -127,13 +123,13 @@
 
             </vs-card>
         </vs-col>
-        <vs-col vs-w="12" class="p-1">
+        <!-- <vs-col vs-w="12" class="p-1">
             <center>
                 <vs-button color="success" @click.prevent="send()">Registrar entrega</vs-button>
                 <vs-button color="danger" @click="init()">Cancelar</vs-button>
             </center>
 
-        </vs-col>
+        </vs-col> -->
         <vs-col vs-type="flex" class="pl-1" vs-w="12">
 
              <vs-row v-if="options.length">

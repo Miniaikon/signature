@@ -232,10 +232,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _form;
@@ -795,82 +791,45 @@ var render = function() {
                   [
                     _c(
                       "vs-col",
-                      { staticClass: "pr-2", attrs: { "vs-w": "9" } },
+                      { staticClass: "pr-2", attrs: { "vs-w": "12" } },
                       [
                         _c(
                           "vs-row",
                           [
-                            _c(
-                              "vs-col",
-                              {
-                                staticClass: "p-1",
-                                attrs: { "vs-type": "flex", "vs-w": "2" }
-                              },
-                              [
-                                _c("label", { attrs: { for: "" } }, [
-                                  _vm._v("Fecha")
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "vs-col",
-                              {
-                                staticClass: "p-1",
-                                attrs: { "vs-type": "flex", "vs-w": "5" }
-                              },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.FechaRetira,
-                                      expression: "form.FechaRetira"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "vs-inputx vs-input--input normal",
-                                  attrs: { type: "date", readonly: "" },
-                                  domProps: { value: _vm.form.FechaRetira },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "FechaRetira",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "vs-col",
-                              {
-                                staticClass: "p-1",
-                                attrs: {
-                                  "vs-type": "flex",
-                                  "vs-justify": "center",
-                                  "vs-w": "5"
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.FechaRetira,
+                                  expression: "form.FechaRetira"
                                 }
-                              },
-                              [
-                                _c(
-                                  "vs-button",
-                                  {
-                                    staticStyle: { width: "100%" },
-                                    attrs: { color: "primary" }
-                                  },
-                                  [_vm._v("Retira Cliente")]
-                                )
                               ],
-                              1
-                            )
+                              staticClass: "vs-inputx vs-input--input normal",
+                              attrs: { type: "hidden", readonly: "" },
+                              domProps: { value: _vm.form.FechaRetira },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "FechaRetira",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("vs-col", {
+                              staticClass: "p-1",
+                              attrs: {
+                                "vs-type": "flex",
+                                "vs-justify": "center",
+                                "vs-w": "12"
+                              }
+                            })
                           ],
                           1
                         ),
@@ -973,6 +932,7 @@ var render = function() {
                               [
                                 _c("vs-input", {
                                   staticClass: "inputx",
+                                  staticStyle: { width: "100%" },
                                   model: {
                                     value: _vm.form.NroDocumentoRetira,
                                     callback: function($$v) {
@@ -1040,28 +1000,8 @@ var render = function() {
                               "vs-col",
                               {
                                 staticClass: "p-1",
-                                attrs: { "vs-type": "flex", "vs-w": "2" }
+                                attrs: { "vs-type": "flex", "vs-w": "3" }
                               },
-                              [
-                                _c(
-                                  "vs-col",
-                                  {
-                                    staticClass: "p-1",
-                                    attrs: { "vs-type": "flex", "vs-w": "12" }
-                                  },
-                                  [
-                                    _c("label", { attrs: { for: "" } }, [
-                                      _vm._v("Firma")
-                                    ])
-                                  ]
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "vs-col",
-                              { staticClass: "p-1", attrs: { "vs-w": "10" } },
                               [
                                 _c(
                                   "vs-button",
@@ -1078,34 +1018,87 @@ var render = function() {
                                 )
                               ],
                               1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "vs-col",
+                              { staticClass: "p-1", attrs: { "vs-w": "9" } },
+                              [
+                                _c("img", {
+                                  staticStyle: {
+                                    height: "90px",
+                                    border: "1px solid #ccc",
+                                    "border-radius": "10px"
+                                  },
+                                  attrs: {
+                                    id: "img_sig",
+                                    width: "100%",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "vs-col",
+                              { staticClass: "p-1", attrs: { "vs-w": "4" } },
+                              [
+                                _c(
+                                  "vs-button",
+                                  {
+                                    staticStyle: { width: "100%" },
+                                    attrs: { color: "primary" }
+                                  },
+                                  [_vm._v("Retira Cliente")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "vs-col",
+                              { staticClass: "p-1", attrs: { "vs-w": "4" } },
+                              [
+                                _c(
+                                  "vs-button",
+                                  {
+                                    staticStyle: { width: "100%" },
+                                    attrs: { color: "success" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.send()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Registrar entrega")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "vs-col",
+                              { staticClass: "p-1", attrs: { "vs-w": "4" } },
+                              [
+                                _c(
+                                  "vs-button",
+                                  {
+                                    staticStyle: { width: "100%" },
+                                    attrs: { color: "danger" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.init()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Cancelar")]
+                                )
+                              ],
+                              1
                             )
                           ],
                           1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "vs-col",
-                      { staticClass: "p-5 mb-5", attrs: { "vs-w": "3" } },
-                      [
-                        _c(
-                          "vs-col",
-                          {
-                            staticClass: "p-1",
-                            attrs: { "vs-type": "flex", "vs-w": "12" }
-                          },
-                          [
-                            _c("img", {
-                              staticStyle: {
-                                height: "90px",
-                                border: "1px solid #ccc",
-                                "border-radius": "10px"
-                              },
-                              attrs: { id: "img_sig", width: "100%", alt: "" }
-                            })
-                          ]
                         )
                       ],
                       1
@@ -1117,46 +1110,6 @@ var render = function() {
               1
             )
           ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "vs-col",
-        { staticClass: "p-1", attrs: { "vs-w": "12" } },
-        [
-          _c(
-            "center",
-            [
-              _c(
-                "vs-button",
-                {
-                  attrs: { color: "success" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.send()
-                    }
-                  }
-                },
-                [_vm._v("Registrar entrega")]
-              ),
-              _vm._v(" "),
-              _c(
-                "vs-button",
-                {
-                  attrs: { color: "danger" },
-                  on: {
-                    click: function($event) {
-                      return _vm.init()
-                    }
-                  }
-                },
-                [_vm._v("Cancelar")]
-              )
-            ],
-            1
-          )
         ],
         1
       ),
