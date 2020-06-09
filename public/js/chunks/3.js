@@ -232,6 +232,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _form;
@@ -245,7 +247,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         TipoDocumentoRetira: '',
         NroDocumentoRetira: '',
         NombreRetira: ''
-      }, _defineProperty(_form, "CodCliente", ''), _defineProperty(_form, "CodEnvio", ''), _defineProperty(_form, "NroDocumento", ''), _defineProperty(_form, "NombreCliente", ''), _form),
+      }, _defineProperty(_form, "CodCliente", ''), _defineProperty(_form, "CodEnvio", ''), _defineProperty(_form, "NroDocumento", ''), _defineProperty(_form, "NombreCliente", ''), _defineProperty(_form, "NroDocumentoRetira", ''), _defineProperty(_form, "TipoDocumentoRetira", '1'), _form),
       options: [],
       modals: {
         option: false
@@ -331,7 +333,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'id_paquete': '',
         'comentario': '',
         'CodCliente': '',
-        'FechaRetira': f.getFullYear() + "-" + this.zfill(f.getMonth() + 1, 2) + "-" + this.zfill(f.getDate(), 2)
+        'FechaRetira': f.getFullYear() + "-" + this.zfill(f.getMonth() + 1, 2) + "-" + this.zfill(f.getDate(), 2),
+        'NroDocumentoRetira': '',
+        'TipoDocumentoRetira': '1'
       };
       this.options = [];
       this.loadData();
@@ -348,6 +352,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           me.form = res[0];
           var f = new Date();
           me.form.FechaRetira = f.getFullYear() + "-" + _this4.zfill(f.getMonth() + 1, 2) + "-" + _this4.zfill(f.getDate(), 2);
+          me.form.TipoDocumentoRetira = '1';
         } else {
           console.log(response.data);
           axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento=' + me.form.NroDocumento).then(function (response) {
@@ -360,6 +365,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               var _f = new Date();
 
               me.form.FechaRetira = _f.getFullYear() + "-" + _this4.zfill(_f.getMonth() + 1, 2) + "-" + _this4.zfill(_f.getDate(), 2);
+              me.form.TipoDocumentoRetira = '1';
             } else {
               alert('No se encontró ningun paquete');
             }
@@ -403,7 +409,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             TipoDocumentoRetira: '',
             NroDocumentoRetira: '',
             NombreRetira: ''
-          }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _me$form);
+          }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _defineProperty(_me$form, "NroDocumentoRetira", ''), _defineProperty(_me$form, "TipoDocumentoRetira", '1'), _me$form);
           alert('Paquetes procesados con éxito');
         }).catch(function (err) {
           alert(err.response.data);
@@ -433,6 +439,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return zero.repeat(width - length) + numberOutput.toString();
         }
       }
+    },
+    retiraCliente: function retiraCliente() {
+      var me = this;
+      me.form.TipoDocumentoRetira = 1;
+      me.form.NroDocumentoRetira = me.form.NroDocumento;
+      me.form.NombreRetira = me.form.NombreCliente;
+      console.log(me.form.NroDocumentoRetira);
     }
   }
 });
@@ -895,9 +908,11 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _c("option", { attrs: { value: "1" } }, [
-                                      _vm._v("C.I")
-                                    ]),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "1", selected: "" } },
+                                      [_vm._v("C.I")]
+                                    ),
                                     _vm._v(" "),
                                     _c("option", { attrs: { value: "2" } }, [
                                       _vm._v("RUT")
@@ -1047,7 +1062,13 @@ var render = function() {
                                   "vs-button",
                                   {
                                     staticStyle: { width: "100%" },
-                                    attrs: { color: "primary" }
+                                    attrs: { color: "primary" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.retiraCliente()
+                                      }
+                                    }
                                   },
                                   [_vm._v("Retira Cliente")]
                                 )
@@ -1190,6 +1211,27 @@ var render = function() {
                                   _c("li", [
                                     _c("b", [_vm._v("Estado:")]),
                                     _vm._v(" " + _vm._s(item.Estado) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Método de pago:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.NombreMedioPago) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Pagado:")]),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(
+                                          item.NombreMedioPago ==
+                                            "PAGO PENDIENTE"
+                                            ? "No"
+                                            : "Si"
+                                        ) +
+                                        " "
+                                    )
                                   ])
                                 ])
                               ])

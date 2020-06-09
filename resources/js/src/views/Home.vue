@@ -77,7 +77,7 @@
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="5" class="p-1">
                                     <select name="" class="vs-inputx vs-input--input normal" v-model="form.TipoDocumentoRetira">
-                                        <option value="1">C.I</option>
+                                        <option value="1" selected>C.I</option>
                                         <option value="2">RUT</option>
                                         <option value="3">PASAPORTE</option>
                                         <option value="4">NIFE</option>
@@ -106,7 +106,7 @@
                                     <img  id="img_sig" width="100%" style="height: 90px; border: 1px solid #ccc; border-radius: 10px;" alt="">
                                 </vs-col>
                                 <vs-col vs-w="4" class="p-1">
-                                    <vs-button color="primary" style="width: 100%">Retira Cliente</vs-button>
+                                    <vs-button color="primary" @click.prevent="retiraCliente()" style="width: 100%">Retira Cliente</vs-button>
                                 </vs-col>
                                 <vs-col vs-w="4" class="p-1">
                                     <vs-button color="success" @click.prevent="send()" style="width: 100%">Registrar entrega</vs-button>
@@ -149,6 +149,8 @@
                                     <li><b>Codigo de Movimiento:</b> {{ item.CodMovimiento }} </li>
                                     <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
                                     <li><b>Estado:</b> {{ item.Estado }} </li>
+                                    <li><b>Método de pago:</b> {{ item.NombreMedioPago }} </li>
+                                    <li><b>Pagado:</b> {{ item.NombreMedioPago == 'PAGO PENDIENTE' ? 'No' : 'Si' }} </li>
                                 </ul>
                             </div>
 
@@ -234,7 +236,10 @@ export default {
                 CodCliente: '',
                 CodEnvio:'',
                 NroDocumento: '',
-                NombreCliente: '',},
+                NombreCliente: '',
+                NroDocumentoRetira: '',
+                TipoDocumentoRetira: '1'
+            },
             options: [
 
             ],
@@ -307,6 +312,8 @@ export default {
                 'comentario': '',
                 'CodCliente': '',
                 'FechaRetira': f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2),
+                'NroDocumentoRetira': '',
+                'TipoDocumentoRetira': '1'
             };
             this.options = [];
             this.loadData();
@@ -321,6 +328,7 @@ export default {
                     me.form = res[0];
                     let f = new Date();
                     me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
+                    me.form.TipoDocumentoRetira = '1';
                 }else{
                     console.log(response.data);
                     axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento='+me.form.NroDocumento).then(response => {
@@ -330,6 +338,8 @@ export default {
                             me.form = res[0];
                             let f = new Date();
                             me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
+                            me.form.TipoDocumentoRetira = '1';
+
                         }else{
                             alert('No se encontró ningun paquete');
                         }
@@ -373,6 +383,8 @@ export default {
                         CodEnvio:'',
                         NroDocumento: '',
                         NombreCliente: '',
+                        NroDocumentoRetira: '',
+                        TipoDocumentoRetira: '1'
                     };
                     alert('Paquetes procesados con éxito');
                 }).catch(err => {
@@ -399,6 +411,13 @@ export default {
                     return ((zero.repeat(width - length)) + numberOutput.toString());
                 }
             }
+        },
+        retiraCliente(){
+            let me = this;
+            me.form.TipoDocumentoRetira = 1;
+            me.form.NroDocumentoRetira = me.form.NroDocumento;
+            me.form.NombreRetira = me.form.NombreCliente;
+            console.log(me.form.NroDocumentoRetira);
         }
     }
 }
