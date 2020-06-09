@@ -445,6 +445,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       me.form.TipoDocumentoRetira = 1;
       me.form.NroDocumentoRetira = me.form.NroDocumento;
       me.form.NombreRetira = me.form.NombreCliente;
+      document.querySelector('#documento_retira').value = me.form.NroDocumento;
+      document.querySelector('#nombre_retira').value = me.form.NombreCliente;
       console.log(me.form.NroDocumentoRetira);
     }
   }
@@ -948,6 +950,7 @@ var render = function() {
                                 _c("vs-input", {
                                   staticClass: "inputx",
                                   staticStyle: { width: "100%" },
+                                  attrs: { id: "documento_retira" },
                                   model: {
                                     value: _vm.form.NroDocumentoRetira,
                                     callback: function($$v) {
@@ -993,6 +996,7 @@ var render = function() {
                                 _c("vs-input", {
                                   staticClass: "inputx block",
                                   staticStyle: { width: "100%" },
+                                  attrs: { id: "nombre_retira" },
                                   model: {
                                     value: _vm.form.NombreRetira,
                                     callback: function($$v) {

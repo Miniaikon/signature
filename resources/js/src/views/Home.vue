@@ -86,7 +86,7 @@
                                     </select>
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="5" class="p-1">
-                                    <vs-input class="inputx" style="width:100%;" v-model="form.NroDocumentoRetira" />
+                                    <vs-input class="inputx" style="width:100%;" id="documento_retira" v-model="form.NroDocumentoRetira" />
                                 </vs-col>
                             </vs-row>
                             <!-- Other -->
@@ -95,7 +95,7 @@
                                     <label for="">Nombre</label>
                                 </vs-col>
                                 <vs-col vs-type="flex" vs-w="10" class="p-1">
-                                    <vs-input class="inputx block" style="width: 100%;" v-model="form.NombreRetira" />
+                                    <vs-input class="inputx block" style="width: 100%;" id="nombre_retira" v-model="form.NombreRetira" />
                                 </vs-col>
                             </vs-row>
                             <vs-row>
@@ -417,6 +417,9 @@ export default {
             me.form.TipoDocumentoRetira = 1;
             me.form.NroDocumentoRetira = me.form.NroDocumento;
             me.form.NombreRetira = me.form.NombreCliente;
+
+            document.querySelector('#documento_retira').value = me.form.NroDocumento;
+            document.querySelector('#nombre_retira').value = me.form.NombreCliente;
             console.log(me.form.NroDocumentoRetira);
         }
     }
