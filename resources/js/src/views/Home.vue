@@ -138,7 +138,7 @@
                 </vs-col>
                 <template v-for="item in options">
                     <vs-col vs-type="flex" class="pl-1" vs-w="4">
-                        <vs-card  vz-color="danger" class="" v-bind:class="{'danger-color':item.NombreMedioPago == 'PAGO PENDIENTE'}">
+                        <vs-card  vz-color="danger" class="" v-bind:class="{'danger-color':item.Pago == '0'}">
                             <div slot="header">
                                 <h3>{{ item.CodEnvio }}</h3>
                             </div>
@@ -150,7 +150,7 @@
                                     <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
                                     <li><b>Estado:</b> {{ item.Estado }} </li>
                                     <li><b>Método de pago:</b> {{ item.NombreMedioPago }} </li>
-                                    <li><b>Pagado:</b> {{ item.NombreMedioPago == 'PAGO PENDIENTE' ? 'No' : 'Si' }} </li>
+                                    <li><b>Pagado:</b> {{ item.Pago == '0' ? 'No' : 'Si' }} </li>
                                 </ul>
                             </div>
 

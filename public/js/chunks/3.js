@@ -1173,10 +1173,7 @@ var render = function() {
                           _c(
                             "vs-card",
                             {
-                              class: {
-                                "danger-color":
-                                  item.NombreMedioPago == "PAGO PENDIENTE"
-                              },
+                              class: { "danger-color": item.Pago == "0" },
                               attrs: { "vz-color": "danger" }
                             },
                             [
@@ -1228,12 +1225,7 @@ var render = function() {
                                     _c("b", [_vm._v("Pagado:")]),
                                     _vm._v(
                                       " " +
-                                        _vm._s(
-                                          item.NombreMedioPago ==
-                                            "PAGO PENDIENTE"
-                                            ? "No"
-                                            : "Si"
-                                        ) +
+                                        _vm._s(item.Pago == "0" ? "No" : "Si") +
                                         " "
                                     )
                                   ])
