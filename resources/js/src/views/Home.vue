@@ -320,32 +320,15 @@ export default {
         },
         searchClient(){
             let me = this;
-
-            axios.get('https://exurcompras.com/getPaquetes.php?id_cliente='+(me.form.CodCliente ? me.form.CodCliente : 'null')).then(response => {
-                let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
-                if(res[0]){
-                    me.options = res;
-                    me.form = res[0];
-                    let f = new Date();
-                    me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
-                    me.form.TipoDocumentoRetira = '1';
-                }else{
-                    console.log(response.data);
-                    axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento='+me.form.NroDocumento).then(response => {
-                        let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
-                        if(res[0]){
-                            me.options = res;
-                            me.form = res[0];
-                            let f = new Date();
-                            me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
-                            me.form.TipoDocumentoRetira = '1';
-
-                        }else{
-                            alert('No se encontró ningun paquete');
-                        }
-                    });
-                }
-            });
+            if(me.form.CodCliente){
+                this.getByClient();
+            }else if(me.form.NroDocumento){
+                this.getByDocument();
+            }else if(me.form.CodEnvio){
+                this.getBySend()
+            }else{
+                alert("No hay parametros de busqueda");
+            }
         },
         send(){
             let validator = true;
@@ -421,6 +404,54 @@ export default {
             document.querySelector('#documento_retira').value = me.form.NroDocumento;
             document.querySelector('#nombre_retira').value = me.form.NombreCliente;
             console.log(me.form.NroDocumentoRetira);
+        },
+        getByDocument(){
+            let me = this;
+            axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento='+me.form.NroDocumento).then(response => {
+                let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
+                if(res[0]){
+                    me.options = res;
+                    me.form = res[0];
+                    let f = new Date();
+                    me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
+                    me.form.TipoDocumentoRetira = '1';
+
+                }else{
+                    alert('No se encontró ningun paquete');
+                }
+            });
+        },
+        getByClient(){
+            let me = this;
+            axios.get('https://exurcompras.com/getPaquetes.php?id_cliente='+(me.form.CodCliente ? me.form.CodCliente : 'null')).then(response => {
+                let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
+                if(res[0]){
+                    me.options = res;
+                    me.form = res[0];
+                    let f = new Date();
+                    me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
+                    me.form.TipoDocumentoRetira = '1';
+                }else{
+                    console.log("No se encontró ningun paquete");
+
+                }
+            });
+        },
+        getBySend(){
+            let me = this;
+            axios.get('https://exurcompras.com/getCodeSend.php?send_code='+(me.form.CodEnvio ? me.form.CodEnvio : 'null')).then(response => {
+                let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
+                if(res[0]){
+                    me.options = res;
+                    me.form = res[0];
+                    let f = new Date();
+                    me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
+                    me.form.TipoDocumentoRetira = '1';
+                }else{
+                    console.log("No se encontró ningun paquete");
+
+                }
+            });
         }
     }
 }
