@@ -338,14 +338,19 @@ export default {
             if(paquete != undefined){
                 alert('Tienes paquetes sin pagar');
             }else{
+
                 let me = this;
-                let listaEnvio = me.options.reduce((count, item) => {
-                    return count.CodEnvio + '|'+ item.CodEnvio;
-                });
+
+                console.log(me.options);
+
+                let codigosEnvio = me.options.map(item => item.CodEnvio);
+                let listaEnvio = codigosEnvio.join('|');
+
                 if(me.form.imagen === null || me.form.imagen === '' || me.form.imagen === undefined){
                     alert('Debes firmar antes de procesar');
                     return;
                 }
+
                 let data = {
                     unaListaEnvios: me.options.length>1 ? listaEnvio: listaEnvio.CodEnvio,
                     unaFirma: me.form.imagen,
@@ -449,7 +454,6 @@ export default {
                     me.form.TipoDocumentoRetira = '1';
                 }else{
                     console.log("No se encontró ningun paquete");
-
                 }
             });
         }

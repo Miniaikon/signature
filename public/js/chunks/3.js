@@ -363,9 +363,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         alert('Tienes paquetes sin pagar');
       } else {
         var me = this;
-        var listaEnvio = me.options.reduce(function (count, item) {
-          return count.CodEnvio + '|' + item.CodEnvio;
+        console.log(me.options);
+        var codigosEnvio = me.options.map(function (item) {
+          return item.CodEnvio;
         });
+        var listaEnvio = codigosEnvio.join('|');
 
         if (me.form.imagen === null || me.form.imagen === '' || me.form.imagen === undefined) {
           alert('Debes firmar antes de procesar');
