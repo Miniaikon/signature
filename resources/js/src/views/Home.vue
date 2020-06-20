@@ -317,6 +317,7 @@ export default {
             };
             this.options = [];
             this.loadData();
+            document.querySelector('#img_sig').setAttribute('src', '');
         },
         searchClient(){
             let me = this;
@@ -421,8 +422,7 @@ export default {
                     me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
                     me.form.TipoDocumentoRetira = '1';
 
-                }else{
-                    alert('No se encontró ningun paquete');
+                }else{alert('No se encontró ningun envío');
                 }
             });
         },
@@ -437,7 +437,7 @@ export default {
                     me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
                     me.form.TipoDocumentoRetira = '1';
                 }else{
-                    console.log("No se encontró ningun paquete");
+                    alert("No se encontró ningun envío");
 
                 }
             });
@@ -453,7 +453,7 @@ export default {
                     me.form.FechaRetira = f.getFullYear() + "-" + this.zfill(f.getMonth() +1, 2) + "-" + this.zfill(f.getDate(), 2);
                     me.form.TipoDocumentoRetira = '1';
                 }else{
-                    console.log("No se encontró ningun paquete");
+                    alert("No se encontró ningun envío");
                 }
             });
         }

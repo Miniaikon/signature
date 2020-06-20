@@ -339,6 +339,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       this.options = [];
       this.loadData();
+      document.querySelector('#img_sig').setAttribute('src', '');
     },
     searchClient: function searchClient() {
       var me = this;
@@ -445,7 +446,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           me.form.FechaRetira = f.getFullYear() + "-" + _this4.zfill(f.getMonth() + 1, 2) + "-" + _this4.zfill(f.getDate(), 2);
           me.form.TipoDocumentoRetira = '1';
         } else {
-          alert('No se encontró ningun paquete');
+          alert('No se encontró ningun envío');
         }
       });
     },
@@ -463,7 +464,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           me.form.FechaRetira = f.getFullYear() + "-" + _this5.zfill(f.getMonth() + 1, 2) + "-" + _this5.zfill(f.getDate(), 2);
           me.form.TipoDocumentoRetira = '1';
         } else {
-          console.log("No se encontró ningun paquete");
+          alert("No se encontró ningun envío");
         }
       });
     },
@@ -481,7 +482,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           me.form.FechaRetira = f.getFullYear() + "-" + _this6.zfill(f.getMonth() + 1, 2) + "-" + _this6.zfill(f.getDate(), 2);
           me.form.TipoDocumentoRetira = '1';
         } else {
-          console.log("No se encontró ningun paquete");
+          alert("No se encontró ningun envío");
         }
       });
     }
