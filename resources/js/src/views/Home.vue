@@ -376,6 +376,7 @@ export default {
                         TipoDocumentoRetira: '1'
                     };
                     alert('Paquetes procesados con éxito');
+                    location.reload();
                 }).catch(err => {
                     alert(err.response.data);
                 });

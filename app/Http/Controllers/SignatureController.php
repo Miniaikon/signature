@@ -71,7 +71,16 @@ class SignatureController extends Controller
         $res = json_encode($response);
 
         if(isset($res->Mensaje) && $res->Mensaje->CodMensaje == 0)
-            return response()->json('El envío que interntas procesar con es correcto', 412);
+            return response()->json('El envío que interntas procesar no es correcto', 412);
+
+        $item = Signature::create([
+            'id_cliente' => $request->unNroDocumento,
+            'id_paquete' => 'sdsdasd',
+            'firma' => $request->unaFirma,
+            'comentario' => 'asdasdds'
+        ]);
+
+        dd($res);
 
         return response()->json($res, 201);
     }

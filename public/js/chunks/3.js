@@ -394,6 +394,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             NombreRetira: ''
           }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _defineProperty(_me$form, "NroDocumentoRetira", ''), _defineProperty(_me$form, "TipoDocumentoRetira", '1'), _me$form);
           alert('Paquetes procesados con éxito');
+          location.reload();
         }).catch(function (err) {
           alert(err.response.data);
         });
