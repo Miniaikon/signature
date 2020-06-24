@@ -59,7 +59,7 @@ class SignatureController extends Controller
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "unaListaEnvios=".$request->unaListaEnvios."&unaFirma=".$request->unaFirma."&unCodTipoDocumento=".$request->unCodTipoDocumento."&unNroDocumento=".$request->unNroDocumento."&unNombreClienteRetira=".$request->unNombreClienteRetira."&unCodUsuarioModif=".$request->unCodUsuarioModif."",
+        CURLOPT_POSTFIELDS => "unaListaEnvios=".$request->unaListaEnvios."&unaFirma=".urlencode($request->unaFirma)."&unCodTipoDocumento=".$request->unCodTipoDocumento."&unNroDocumento=".$request->unNroDocumento."&unNombreClienteRetira=".$request->unNombreClienteRetira."&unCodUsuarioModif=".$request->unCodUsuarioModif."",
         CURLOPT_HTTPHEADER => array(
             "Content-Type: application/x-www-form-urlencoded"
         ),
