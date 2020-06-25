@@ -68,10 +68,10 @@ class SignatureController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        $res = json_encode($response);
+        $res = json_decode($response);
 
         if(isset($res->Mensaje) && $res->Mensaje->CodMensaje == 0)
-            return response()->json('El envío que interntas procesar no es correcto', 412);
+            return response()->json($res->Mensaje->Mensaje, 412);
 
         $item = Signature::create([
             'id_cliente' => $request->unNroDocumento,
@@ -79,8 +79,6 @@ class SignatureController extends Controller
             'firma' => $request->unaFirma,
             'comentario' => 'asdasdds'
         ]);
-
-        dd($res);
 
         return response()->json($res, 201);
     }
