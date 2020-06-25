@@ -353,7 +353,7 @@ export default {
                 }
 
                 let data = {
-                    unaListaEnvios: me.options.length>1 ? listaEnvio: listaEnvio.CodEnvio,
+                    unaListaEnvios: listaEnvio,
                     unaFirma: me.form.imagen,
                     unCodTipoDocumento: me.form.TipoDocumentoRetira,
                     unNroDocumento: me.form.NroDocumentoRetira,
