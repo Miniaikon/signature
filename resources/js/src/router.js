@@ -41,6 +41,11 @@ const router = new Router({
                 name: 'retiro',
                 component: () => import('./views/Retirar.vue')
               },
+              {
+                path: '/consultar',
+                name: 'consultar',
+                component: () => import('./views/Queries.vue')
+              },
             ],
         },
     // =============================================================================

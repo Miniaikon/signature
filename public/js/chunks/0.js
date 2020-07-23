@@ -6805,9 +6805,9 @@ __webpack_require__.r(__webpack_exports__);
   slug: "home",
   icon: "HomeIcon"
 }, {
-  url: "/retirar",
-  name: "Retirar",
-  slug: "Retiro",
+  url: "/consultar",
+  name: "Consultar",
+  slug: "consultar",
   icon: "FileIcon"
 }]);
 

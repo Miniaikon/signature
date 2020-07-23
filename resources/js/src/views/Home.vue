@@ -150,6 +150,9 @@
                                     <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
                                     <li><b>Estado:</b> {{ item.Estado }} </li>
                                     <li><b>Método de pago:</b> {{ item.NombreMedioPago }} </li>
+                                    <li><b>Agencia origen:</b> {{ item.AgenciaOrigen }} </li>
+                                    <li><b>Agencia destino:</b> {{ item.AgenciaDestino }} </li>
+                                    <li><b>Fecha de modificación:</b> {{ item.FechaModif }} </li>
                                     <li><b>Pagado:</b> {{ item.Pago == '0' ? 'No' : 'Si' }} </li>
                                 </ul>
                             </div>
@@ -276,7 +279,6 @@ export default {
                 console.log('hecho');
                 this.init();
             });
-
         },
         sig(){
             let me = this;
@@ -376,7 +378,7 @@ export default {
                         TipoDocumentoRetira: '1'
                     };
                     alert('Paquetes procesados con éxito');
-                    location.reload();
+                    // location.reload();
                 }).catch(err => {
                     alert(err.response.data);
                 });

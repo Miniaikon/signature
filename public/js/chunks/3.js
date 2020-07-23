@@ -234,6 +234,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _form;
@@ -393,8 +396,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             NroDocumentoRetira: '',
             NombreRetira: ''
           }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _defineProperty(_me$form, "NroDocumentoRetira", ''), _defineProperty(_me$form, "TipoDocumentoRetira", '1'), _me$form);
-          alert('Paquetes procesados con éxito');
-          location.reload();
+          alert('Paquetes procesados con éxito'); // location.reload();
         }).catch(function (err) {
           alert(err.response.data);
         });
@@ -1257,6 +1259,25 @@ var render = function() {
                                     _vm._v(
                                       " " + _vm._s(item.NombreMedioPago) + " "
                                     )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Agencia origen:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.AgenciaOrigen) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Agencia destino:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.AgenciaDestino) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Fecha de modificación:")]),
+                                    _vm._v(" " + _vm._s(item.FechaModif) + " ")
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [

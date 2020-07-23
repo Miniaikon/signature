@@ -27,6 +27,8 @@ Route::get('/getClient/{id}', 'SignatureController@getClient')->name('get.client
 
 Route::post('/enviar', 'SignatureController@enviarPaquetes')->name('signature.enviar');
 
+Route::post('/get-envios-pendientes', 'SignatureController@EnviosPendientes')->name('signature.EnviosPendientes');
+
 Route::get('test', function(){
     return view('test');
 });

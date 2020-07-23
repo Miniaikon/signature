@@ -16,9 +16,9 @@ export default [
     icon: "HomeIcon",
   },
   {
-    url: "/retirar",
-    name: "Retirar",
-    slug: "Retiro",
+    url: "/consultar",
+    name: "Consultar",
+    slug: "consultar",
     icon: "FileIcon",
   },
 ]

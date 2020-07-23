@@ -70,6 +70,8 @@ class SignatureController extends Controller
         curl_close($curl);
         $res = json_decode($response);
 
+        dd($res->Mensaje);
+
         if(isset($res->Mensaje) && $res->Mensaje->CodMensaje == 0)
             return response()->json($res->Mensaje->Mensaje, 412);
 
@@ -81,5 +83,46 @@ class SignatureController extends Controller
         ]);
 
         return response()->json($res, 201);
+    }
+
+    public function EnviosPendientes(Request $request){
+
+        $method = '';
+        if($request->type == 1){
+            $method = 'PendientesPorCliente';
+        }else if($request->type == 2){
+            $method = 'PendientesPorDocumento';
+        }else if($request->type == 3){
+            $method = 'PendientesPorEnvio';
+        }
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://exurcompras.com/ExurController.php",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "method=$method&search=$request->search",
+        CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer 67ac2b5faf2c0513ccfa2000f769d905",
+                "Content-Type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $res = json_decode($response);
+
+        if(isset($res->Mensaje) && $res->Mensaje->CodMensaje == 0)
+            return response()->json($res->Mensaje->Mensaje, 412);
+
+        return response()->json($res, 200);
+
     }
 }
