@@ -111,26 +111,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -138,7 +118,10 @@ __webpack_require__.r(__webpack_exports__);
       url: window.location.host + '/',
       form: {
         search: null,
-        type: 1
+        type: 1,
+        NroDocumento: null,
+        CodCliente: null,
+        CodEnvio: null
       },
       options: []
     };
@@ -180,6 +163,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     makeQuery: function makeQuery() {
       var me = this;
+
+      if (me.form.CodCliente) {
+        me.form.search = me.form.CodCliente;
+        me.form.type = 1;
+      } else if (me.form.CodEnvio) {
+        me.form.search = me.form.CodEnvio;
+        me.form.type = 3;
+      } else if (me.form.NroDocumento) {
+        me.form.search = me.form.NroDocumento;
+        me.form.type = 2;
+      }
+
       axios.post('/api/get-envios-pendientes', this.form).then(function (res) {
         var resp = Array.isArray(res.data.Envio) ? res.data.Envio : [res.data.Envio];
         console.log(resp);
@@ -224,136 +219,162 @@ var render = function() {
           attrs: {
             "vs-type": "flex",
             "vs-justify": "center",
-            "vs-align": "center",
-            "vs-w": "8"
+            "vs-align": "top",
+            "vs-w": "5"
           }
         },
         [
-          _c("vs-card", { staticClass: "cardx" }, [
+          _c("vs-card", [
             _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-              _c("h3", [_vm._v("Consultar envíos")])
+              _c("h3", [
+                _vm._v(
+                  "\n                    Consultar envios\n                    "
+                )
+              ])
             ]),
             _vm._v(" "),
-            _c("div", [
-              _c(
-                "form",
-                { attrs: { action: "" } },
-                [
-                  _c(
-                    "vs-col",
-                    {
-                      staticClass: "p-1",
-                      attrs: { "vs-type": "flex", "vs-w": "6" }
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.search,
-                            expression: "form.search"
-                          }
-                        ],
-                        staticClass: "vs-inputx vs-input--input normal",
-                        attrs: { placeholder: "Dato a buscar" },
-                        domProps: { value: _vm.form.search },
+            _c(
+              "div",
+              [
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Nro. Cliente")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c("vs-input", {
+                      staticClass: "inputx",
+                      attrs: { placeholder: "Nro. Cliente" },
+                      model: {
+                        value: _vm.form.CodCliente,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "CodCliente", $$v)
+                        },
+                        expression: "form.CodCliente"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: {
+                      "vs-type": "flex",
+                      "vs-justify": "center",
+                      "vs-w": "4"
+                    }
+                  },
+                  [
+                    _c(
+                      "vs-button",
+                      {
+                        attrs: { color: "primary" },
                         on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "search", $event.target.value)
+                          click: function($event) {
+                            return _vm.makeQuery()
                           }
                         }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "vs-col",
-                    {
-                      staticClass: "p-1",
-                      attrs: { "vs-type": "flex", "vs-w": "6" }
-                    },
-                    [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.type,
-                              expression: "form.type"
-                            }
-                          ],
-                          staticClass: "vs-inputx vs-input--input normal",
-                          attrs: { name: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "type",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("Codigo de cliente")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2" } }, [
-                            _vm._v("Número de documento")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "3" } }, [
-                            _vm._v("Número de envío")
-                          ])
-                        ]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "vs-col",
-                    {
-                      staticClass: "p-1",
-                      attrs: { "vs-type": "flex", "vs-w": "12" }
-                    },
-                    [
-                      _c(
-                        "vs-button",
-                        {
+                      },
+                      [_vm._v("Buscar")]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-row",
+                  [
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "vs-type": "flex", "vs-w": "4" }
+                      },
+                      [
+                        _c("label", { attrs: { for: "" } }, [
+                          _vm._v("Nro. Envío")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-col",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "vs-type": "flex", "vs-w": "8" }
+                      },
+                      [
+                        _c("vs-input", {
+                          staticClass: "inputx",
                           staticStyle: { width: "100%" },
-                          attrs: { color: "primary" },
-                          on: {
-                            click: function($event) {
-                              return _vm.makeQuery()
-                            }
+                          attrs: { placeholder: "Nro. Envío" },
+                          model: {
+                            value: _vm.form.CodEnvio,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "CodEnvio", $$v)
+                            },
+                            expression: "form.CodEnvio"
                           }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [_c("label", { attrs: { for: "" } }, [_vm._v("Documento")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                  },
+                  [
+                    _c("vs-input", {
+                      staticClass: "inputx",
+                      attrs: { placeholder: "" },
+                      model: {
+                        value: _vm.form.NroDocumento,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "NroDocumento", $$v)
                         },
-                        [_vm._v("Buscar")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ])
+                        expression: "form.NroDocumento"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("vs-row")
+              ],
+              1
+            )
           ])
         ],
         1
@@ -361,272 +382,106 @@ var render = function() {
       _vm._v(" "),
       _c(
         "vs-col",
-        { staticClass: "mt-10", attrs: { "vs-w": "12" } },
+        {
+          staticClass: "pr-1",
+          attrs: {
+            "vs-type": "flex",
+            "vs-justify": "center",
+            "vs-align": "center",
+            "vs-w": "7"
+          }
+        },
+        [_c("vs-card")],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "vs-col",
+        { staticClass: "pl-1", attrs: { "vs-type": "flex", "vs-w": "12" } },
         [
-          _c(
-            "vs-card",
-            [
-              _c(
-                "vs-table",
-                {
-                  attrs: {
-                    pagination: "",
-                    "max-items": "20",
-                    search: "",
-                    data: _vm.items
-                  },
-                  scopedSlots: _vm._u([
+          _vm.items.length
+            ? _c(
+                "vs-row",
+                [
+                  _c(
+                    "vs-col",
                     {
-                      key: "default",
-                      fn: function(ref) {
-                        var data = ref.data
-                        return _vm._l(data, function(tr, indextr) {
-                          return _c(
-                            "vs-tr",
-                            { key: indextr, attrs: { data: tr } },
+                      staticClass: "pl-1",
+                      attrs: {
+                        "vs-type": "flex",
+                        "vs-w": "12",
+                        "vs-justify": "center",
+                        "vs-align": "center"
+                      }
+                    },
+                    [_c("h3", [_vm._v("Todos los envíos")])]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.items, function(item) {
+                    return [
+                      _c(
+                        "vs-col",
+                        {
+                          staticClass: "pl-1",
+                          attrs: { "vs-type": "flex", "vs-w": "4" }
+                        },
+                        [
+                          _c(
+                            "vs-card",
+                            {
+                              class: { "danger-color": item.Pago == "0" },
+                              attrs: { "vz-color": "danger" }
+                            },
                             [
                               _c(
-                                "vs-td",
-                                { attrs: { data: data[indextr].CodEnvio } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].CodEnvio) +
-                                      "\n                            "
-                                  )
-                                ]
+                                "div",
+                                { attrs: { slot: "header" }, slot: "header" },
+                                [_c("h3", [_vm._v(_vm._s(item.CodEnvio))])]
                               ),
                               _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                { attrs: { data: data[indextr].CodCliente } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].CodCliente) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                { attrs: { data: data[indextr].NroDocumento } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].NroDocumento) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                {
-                                  attrs: { data: data[indextr].CodMovimiento }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].CodMovimiento) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                {
-                                  attrs: { data: data[indextr].CantidadPiezas }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].CantidadPiezas) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                { attrs: { data: data[indextr].FechaModif } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].FechaModif) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                {
-                                  attrs: { data: data[indextr].NombreMedioPago }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].NombreMedioPago) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                {
-                                  attrs: { data: data[indextr].NombreCliente }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].NombreCliente) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                {
-                                  attrs: { data: data[indextr].AgenciaOrigen }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].AgenciaOrigen) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                {
-                                  attrs: { data: data[indextr].AgenciaDestino }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].AgenciaDestino) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                { attrs: { data: data[indextr].Estado } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].Estado) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
+                              _c("div", [
+                                _c("ul", [
+                                  _c("li", [
+                                    _c("b", [_vm._v("AWB:")]),
+                                    _vm._v(" " + _vm._s(item.CodEnvio) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Fecha generado:")]),
+                                    _vm._v(" " + _vm._s(item.FechaModif) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Remitente:")]),
+                                    _vm._v(" " + _vm._s(item.Remitente) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Agencia de origen:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.AgenciaOrigen) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Agencia de destino:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.AgenciaDestino) + " "
+                                    )
+                                  ])
+                                ])
+                              ])
+                            ]
                           )
-                        })
-                      }
-                    }
-                  ])
-                },
-                [
-                  _c("template", { slot: "header" }, [
-                    _c("h3", [
-                      _vm._v(
-                        "\n                        Entregados\n                        "
+                        ],
+                        1
                       )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "template",
-                    { slot: "thead" },
-                    [
-                      _c("vs-th", { attrs: { "sort-key": "CodEnvio" } }, [
-                        _vm._v(
-                          "\n                        # Envio\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "CodCliente" } }, [
-                        _vm._v(
-                          "\n                        # Cliente\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "NroDocumento" } }, [
-                        _vm._v(
-                          "\n                        # Documento\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "CodMovimiento" } }, [
-                        _vm._v(
-                          "\n                        # Movimiento\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "CantidadPiezas" } }, [
-                        _vm._v(
-                          "\n                        Piezas\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "FechaModif" } }, [
-                        _vm._v(
-                          "\n                        Fecha\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "vs-th",
-                        { attrs: { "sort-key": "NombreMedioPago" } },
-                        [
-                          _vm._v(
-                            "\n                        Medio de pago\n                        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "NombreCliente" } }, [
-                        _vm._v(
-                          "\n                        Nombre\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "AgenciaOrigen" } }, [
-                        _vm._v(
-                          "\n                        Origen\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "AgenciaDestino" } }, [
-                        _vm._v(
-                          "\n                        Destino\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "Estado" } }, [
-                        _vm._v(
-                          "\n                        Estado\n                        "
-                        )
-                      ])
-                    ],
-                    1
-                  )
+                    ]
+                  })
                 ],
                 2
               )
-            ],
-            1
-          )
+            : _vm._e()
         ],
         1
       )

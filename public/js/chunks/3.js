@@ -234,9 +234,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _form;
@@ -1226,8 +1223,8 @@ var render = function() {
                               _c("div", [
                                 _c("ul", [
                                   _c("li", [
-                                    _c("b", [_vm._v("Documento:")]),
-                                    _vm._v(" " + _vm._s(item.Estado) + " ")
+                                    _c("b", [_vm._v("AWB:")]),
+                                    _vm._v(" " + _vm._s(item.CodEnvio) + " ")
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [
@@ -1238,20 +1235,15 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [
-                                    _c("b", [_vm._v("Codigo de Movimiento:")]),
-                                    _vm._v(
-                                      " " + _vm._s(item.CodMovimiento) + " "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
                                     _c("b", [_vm._v("Ubicación:")]),
                                     _vm._v(" " + _vm._s(item.Ubicacion) + " ")
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [
-                                    _c("b", [_vm._v("Estado:")]),
-                                    _vm._v(" " + _vm._s(item.Estado) + " ")
+                                    _c("b", [_vm._v("Codigo de Movimiento:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.CodMovimiento) + " "
+                                    )
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [
@@ -1261,24 +1253,14 @@ var render = function() {
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _c("li", [
-                                    _c("b", [_vm._v("Agencia origen:")]),
-                                    _vm._v(
-                                      " " + _vm._s(item.AgenciaOrigen) + " "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c("b", [_vm._v("Agencia destino:")]),
-                                    _vm._v(
-                                      " " + _vm._s(item.AgenciaDestino) + " "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c("b", [_vm._v("Fecha de modificación:")]),
-                                    _vm._v(" " + _vm._s(item.FechaModif) + " ")
-                                  ]),
+                                  item.importeFlete
+                                    ? _c("li", [
+                                        _c("b", [_vm._v("Flete:")]),
+                                        _vm._v(
+                                          " " + _vm._s(item.importeFlete) + " "
+                                        )
+                                      ])
+                                    : _vm._e(),
                                   _vm._v(" "),
                                   _c("li", [
                                     _c("b", [_vm._v("Pagado:")]),

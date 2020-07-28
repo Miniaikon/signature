@@ -144,15 +144,12 @@
                             </div>
                             <div>
                                 <ul>
-                                    <li><b>Documento:</b> {{ item.Estado }} </li>
+                                    <li><b>AWB:</b> {{ item.CodEnvio }} </li>
                                     <li><b>Cantidad de piezas:</b> {{ item.CantidadPiezas }} </li>
-                                    <li><b>Codigo de Movimiento:</b> {{ item.CodMovimiento }} </li>
                                     <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
-                                    <li><b>Estado:</b> {{ item.Estado }} </li>
+                                    <li><b>Codigo de Movimiento:</b> {{ item.CodMovimiento }} </li>
                                     <li><b>Método de pago:</b> {{ item.NombreMedioPago }} </li>
-                                    <li><b>Agencia origen:</b> {{ item.AgenciaOrigen }} </li>
-                                    <li><b>Agencia destino:</b> {{ item.AgenciaDestino }} </li>
-                                    <li><b>Fecha de modificación:</b> {{ item.FechaModif }} </li>
+                                    <li v-if="item.importeFlete"><b>Flete:</b> {{ item.importeFlete }} </li>
                                     <li><b>Pagado:</b> {{ item.Pago == '0' ? 'No' : 'Si' }} </li>
                                 </ul>
                             </div>

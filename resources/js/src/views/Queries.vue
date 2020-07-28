@@ -1,6 +1,51 @@
 <template>
 	<vs-row vs-align="center" vs-type="flex" vs-justify="space-around" vs-w="12">
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pr-1" vs-w="8">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="top" class="pr-1" vs-w="5">
+            <vs-card>
+                <div slot="header">
+                    <h3>
+                    Consultar envios
+                    </h3>
+                </div>
+                <div>
+                    <vs-col vs-type="flex" vs-w="4" class="p-1">
+                        <label for="">Nro. Cliente</label>
+                    </vs-col>
+                     <vs-col vs-type="flex" vs-w="4" class="p-1">
+                        <vs-input class="inputx" v-model="form.CodCliente" placeholder="Nro. Cliente" />
+                    </vs-col>
+                    <vs-col vs-type="flex" vs-justify="center" vs-w="4" class="p-1">
+                         <vs-button color="primary" v-on:click="makeQuery()">Buscar</vs-button>
+                    </vs-col>
+                    <!-- other -->
+                    <vs-row>
+                        <vs-col vs-type="flex" vs-w="4" class="p-1">
+                            <label for="">Nro. Envío</label>
+                        </vs-col>
+                        <vs-col vs-type="flex" vs-w="8" class="p-1">
+                            <vs-input class="inputx" style="width: 100%;" v-model="form.CodEnvio" placeholder="Nro. Envío" />
+                        </vs-col>
+                    </vs-row>
+                    <!-- other -->
+                    <vs-col vs-type="flex" vs-w="4" class="p-1">
+                        <label for="">Documento</label>
+                    </vs-col>
+                    <vs-col vs-type="flex" vs-w="4" class="p-1">
+                        <vs-input class="inputx" placeholder="" v-model="form.NroDocumento" />
+                    </vs-col>
+                    <!-- Other -->
+                    <vs-row>
+                    </vs-row>
+                </div>
+            </vs-card>
+        </vs-col>
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pr-1" vs-w="7">
+            <vs-card>
+
+
+            </vs-card>
+        </vs-col>
+        <!-- <vs-col vs-type="flex" vs-justify="center" vs-align="center" class="pr-1" vs-w="8">
             <vs-card class="cardx">
                 <div slot="header">
                     <h3>Consultar envíos</h3>
@@ -23,100 +68,35 @@
                     </form>
                 </div>
             </vs-card>
-        </vs-col>
-        <vs-col vs-w="12" class="mt-10">
-            <vs-card>
-                <vs-table pagination max-items="20" search :data="items">
-                    <template slot="header">
-                        <h3>
-                        Entregados
-                        </h3>
-                    </template>
-                    <template slot="thead">
-                        <vs-th sort-key="CodEnvio">
-                        # Envio
-                        </vs-th>
-                        <vs-th sort-key="CodCliente">
-                        # Cliente
-                        </vs-th>
-                        <vs-th sort-key="NroDocumento">
-                        # Documento
-                        </vs-th>
-                        <vs-th sort-key="CodMovimiento">
-                        # Movimiento
-                        </vs-th>
-                        <vs-th sort-key="CantidadPiezas">
-                        Piezas
-                        </vs-th>
-                        <vs-th sort-key="FechaModif">
-                        Fecha
-                        </vs-th>
-                        <vs-th sort-key="NombreMedioPago">
-                        Medio de pago
-                        </vs-th>
-                        <vs-th sort-key="NombreCliente">
-                        Nombre
-                        </vs-th>
-                        <vs-th sort-key="AgenciaOrigen">
-                        Origen
-                        </vs-th>
-                        <vs-th sort-key="AgenciaDestino">
-                        Destino
-                        </vs-th>
-                        <vs-th sort-key="Estado">
-                        Estado
-                        </vs-th>
-                    </template>
+        </vs-col> -->
+        <vs-col vs-type="flex" class="pl-1" vs-w="12">
 
-                    <template slot-scope="{data}">
-                        <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
-                            <vs-td :data="data[indextr].CodEnvio">
-                                {{data[indextr].CodEnvio}}
-                            </vs-td>
+             <vs-row v-if="items.length">
+                <vs-col vs-type="flex" class="pl-1" vs-w="12" vs-justify="center" vs-align="center">
+                    <h3>Todos los envíos</h3>
+                </vs-col>
+                <template v-for="item in items">
+                    <vs-col vs-type="flex" class="pl-1" vs-w="4">
+                        <vs-card  vz-color="danger" class="" v-bind:class="{'danger-color':item.Pago == '0'}">
+                            <div slot="header">
+                                <h3>{{ item.CodEnvio }}</h3>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li><b>AWB:</b> {{ item.CodEnvio }} </li>
+                                    <li><b>Fecha generado:</b> {{ item.FechaModif }} </li>
+                                    <li><b>Remitente:</b> {{ item.Remitente }} </li>
+                                    <li><b>Agencia de origen:</b> {{ item.AgenciaOrigen }} </li>
+                                    <li><b>Agencia de destino:</b> {{ item.AgenciaDestino }} </li>
+                                </ul>
+                            </div>
 
-                            <vs-td :data="data[indextr].CodCliente">
-                                {{data[indextr].CodCliente}}
-                            </vs-td>
+                        </vs-card>
+                    </vs-col>
+                </template>
+            </vs-row>
 
-                            <vs-td :data="data[indextr].NroDocumento">
-                                {{data[indextr].NroDocumento}}
-                            </vs-td>
 
-                            <vs-td :data="data[indextr].CodMovimiento">
-                                {{data[indextr].CodMovimiento}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].CantidadPiezas">
-                                {{data[indextr].CantidadPiezas}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].FechaModif">
-                                {{data[indextr].FechaModif}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].NombreMedioPago">
-                                {{data[indextr].NombreMedioPago}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].NombreCliente">
-                                {{data[indextr].NombreCliente}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].AgenciaOrigen">
-                                {{data[indextr].AgenciaOrigen}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].AgenciaDestino">
-                                {{data[indextr].AgenciaDestino}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].Estado">
-                                {{data[indextr].Estado}}
-                            </vs-td>
-                        </vs-tr>
-                    </template>
-                    </vs-table>
-            </vs-card>
         </vs-col>
     </vs-row>
 </template>
@@ -129,6 +109,9 @@ export default {
       form: {
           search: null,
           type: 1,
+          NroDocumento: null,
+          CodCliente: null,
+          CodEnvio: null
       },
       options: []
     }
@@ -166,6 +149,17 @@ export default {
         },
         makeQuery(){
             let me = this;
+
+            if(me.form.CodCliente){
+                me.form.search = me.form.CodCliente;
+                me.form.type = 1;
+            }else if(me.form.CodEnvio){
+                me.form.search = me.form.CodEnvio;
+                me.form.type = 3;
+            }else if(me.form.NroDocumento){
+                me.form.search = me.form.NroDocumento;
+                me.form.type = 2;
+            }
             axios.post('/api/get-envios-pendientes', this.form).then(res => {
                 let resp = Array.isArray(res.data.Envio) ? res.data.Envio : [ res.data.Envio ];
                 console.log(resp);
