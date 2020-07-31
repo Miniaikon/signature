@@ -112,7 +112,7 @@
                                     <vs-button color="success" @click.prevent="send()" style="width: 100%">Registrar entrega</vs-button>
                                 </vs-col>
                                 <vs-col vs-w="4" class="p-1">
-                                        <vs-button color="danger" @click="init()" style="width: 100%">Cancelar</vs-button>
+                                        <vs-button color="warning" @click="init()" style="width: 100%">Nueva busqueda</vs-button>
                                 </vs-col>
                             </vs-row>
                         </vs-col>
@@ -148,8 +148,8 @@
                                     <li><b>Cantidad de piezas:</b> {{ item.CantidadPiezas }} </li>
                                     <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
                                     <li><b>Codigo de Movimiento:</b> {{ item.CodMovimiento }} </li>
-                                    <li><b>Método de pago:</b> {{ item.NombreMedioPago }} </li>
-                                    <li v-if="item.importeFlete"><b>Flete:</b> {{ item.importeFlete }} </li>
+                                    <li><b>Método de pago:</b> {{ item.Pago ? item.NombreMedioPago : 'Impago' }} </li>
+                                    <li v-if="!item.Pago"><b>Flete:</b> {{ item.importeFlete }} </li>
                                     <li><b>Pagado:</b> {{ item.Pago == '0' ? 'No' : 'Si' }} </li>
                                 </ul>
                             </div>

@@ -111,6 +111,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -253,11 +256,12 @@ var render = function() {
                   "vs-col",
                   {
                     staticClass: "p-1",
-                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                    attrs: { "vs-type": "flex", "vs-w": "8" }
                   },
                   [
                     _c("vs-input", {
                       staticClass: "inputx",
+                      staticStyle: { width: "100%" },
                       attrs: { placeholder: "Nro. Cliente" },
                       model: {
                         value: _vm.form.CodCliente,
@@ -267,33 +271,6 @@ var render = function() {
                         expression: "form.CodCliente"
                       }
                     })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "vs-col",
-                  {
-                    staticClass: "p-1",
-                    attrs: {
-                      "vs-type": "flex",
-                      "vs-justify": "center",
-                      "vs-w": "4"
-                    }
-                  },
-                  [
-                    _c(
-                      "vs-button",
-                      {
-                        attrs: { color: "primary" },
-                        on: {
-                          click: function($event) {
-                            return _vm.makeQuery()
-                          }
-                        }
-                      },
-                      [_vm._v("Buscar")]
-                    )
                   ],
                   1
                 ),
@@ -353,11 +330,12 @@ var render = function() {
                   "vs-col",
                   {
                     staticClass: "p-1",
-                    attrs: { "vs-type": "flex", "vs-w": "4" }
+                    attrs: { "vs-type": "flex", "vs-w": "8" }
                   },
                   [
                     _c("vs-input", {
                       staticClass: "inputx",
+                      staticStyle: { width: "100%" },
                       attrs: { placeholder: "" },
                       model: {
                         value: _vm.form.NroDocumento,
@@ -367,6 +345,60 @@ var render = function() {
                         expression: "form.NroDocumento"
                       }
                     })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: {
+                      "vs-type": "flex",
+                      "vs-justify": "center",
+                      "vs-w": "6"
+                    }
+                  },
+                  [
+                    _c(
+                      "vs-button",
+                      {
+                        attrs: { color: "primary" },
+                        on: {
+                          click: function($event) {
+                            return _vm.makeQuery()
+                          }
+                        }
+                      },
+                      [_vm._v("Buscar")]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-col",
+                  {
+                    staticClass: "p-1",
+                    attrs: {
+                      "vs-type": "flex",
+                      "vs-justify": "center",
+                      "vs-w": "6"
+                    }
+                  },
+                  [
+                    _c(
+                      "vs-button",
+                      {
+                        attrs: { color: "warning" },
+                        on: {
+                          click: function($event) {
+                            return _vm.init()
+                          }
+                        }
+                      },
+                      [_vm._v("Nueva busqueda")]
+                    )
                   ],
                   1
                 ),

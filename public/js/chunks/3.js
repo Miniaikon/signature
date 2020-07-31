@@ -1147,14 +1147,14 @@ var render = function() {
                                   "vs-button",
                                   {
                                     staticStyle: { width: "100%" },
-                                    attrs: { color: "danger" },
+                                    attrs: { color: "warning" },
                                     on: {
                                       click: function($event) {
                                         return _vm.init()
                                       }
                                     }
                                   },
-                                  [_vm._v("Cancelar")]
+                                  [_vm._v("Nueva busqueda")]
                                 )
                               ],
                               1
@@ -1249,11 +1249,17 @@ var render = function() {
                                   _c("li", [
                                     _c("b", [_vm._v("Método de pago:")]),
                                     _vm._v(
-                                      " " + _vm._s(item.NombreMedioPago) + " "
+                                      " " +
+                                        _vm._s(
+                                          item.Pago
+                                            ? item.NombreMedioPago
+                                            : "Impago"
+                                        ) +
+                                        " "
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  item.importeFlete
+                                  !item.Pago
                                     ? _c("li", [
                                         _c("b", [_vm._v("Flete:")]),
                                         _vm._v(

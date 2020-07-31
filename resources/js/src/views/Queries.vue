@@ -11,11 +11,8 @@
                     <vs-col vs-type="flex" vs-w="4" class="p-1">
                         <label for="">Nro. Cliente</label>
                     </vs-col>
-                     <vs-col vs-type="flex" vs-w="4" class="p-1">
-                        <vs-input class="inputx" v-model="form.CodCliente" placeholder="Nro. Cliente" />
-                    </vs-col>
-                    <vs-col vs-type="flex" vs-justify="center" vs-w="4" class="p-1">
-                         <vs-button color="primary" v-on:click="makeQuery()">Buscar</vs-button>
+                     <vs-col vs-type="flex" vs-w="8" class="p-1">
+                        <vs-input class="inputx" style="width: 100%;" v-model="form.CodCliente" placeholder="Nro. Cliente" />
                     </vs-col>
                     <!-- other -->
                     <vs-row>
@@ -30,10 +27,16 @@
                     <vs-col vs-type="flex" vs-w="4" class="p-1">
                         <label for="">Documento</label>
                     </vs-col>
-                    <vs-col vs-type="flex" vs-w="4" class="p-1">
-                        <vs-input class="inputx" placeholder="" v-model="form.NroDocumento" />
+                    <vs-col vs-type="flex" vs-w="8" class="p-1">
+                        <vs-input class="inputx" style="width: 100%;" placeholder="" v-model="form.NroDocumento" />
                     </vs-col>
                     <!-- Other -->
+                    <vs-col vs-type="flex" vs-justify="center" vs-w="6" class="p-1">
+                         <vs-button color="primary" v-on:click="makeQuery()">Buscar</vs-button>
+                    </vs-col>
+                    <vs-col vs-type="flex" vs-justify="center" vs-w="6" class="p-1">
+                         <vs-button color="warning" v-on:click="init()">Nueva busqueda</vs-button>
+                    </vs-col>
                     <vs-row>
                     </vs-row>
                 </div>
