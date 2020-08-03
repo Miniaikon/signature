@@ -25,7 +25,7 @@
                     </vs-row>
                     <!-- other -->
                     <vs-col vs-type="flex" vs-w="4" class="p-1">
-                        <label for="">Documento</label>
+                        <label for="">Nro. de Documento</label>
                     </vs-col>
                     <vs-col vs-type="flex" vs-w="8" class="p-1">
                         <vs-input class="inputx" style="width: 100%;" placeholder="" v-model="form.NroDocumento" />
@@ -91,6 +91,13 @@
                                     <li><b>Remitente:</b> {{ item.Remitente }} </li>
                                     <li><b>Agencia de origen:</b> {{ item.AgenciaOrigen }} </li>
                                     <li><b>Agencia de destino:</b> {{ item.AgenciaDestino }} </li>
+                                </ul><br>
+                                <h5>Detalle del envío</h5>
+                                <ul>
+                                    <li><b>Forma de pago:</b> {{ item.MedioPago }} </li>
+                                    <li><b>Peso:</b> {{ item.Peso }} </li>
+                                    <li><b>Importe:</b> {{ item.ImporteFlete }} </li>
+                                    <li><b>Estado del envio:</b> {{ item.Estado }} </li>
                                 </ul>
                             </div>
 

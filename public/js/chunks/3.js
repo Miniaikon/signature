@@ -234,6 +234,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _form;
@@ -1235,6 +1236,11 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [
+                                    _c("b", [_vm._v("Peso:")]),
+                                    _vm._v(" " + _vm._s(item.Peso) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
                                     _c("b", [_vm._v("Ubicación:")]),
                                     _vm._v(" " + _vm._s(item.Ubicacion) + " ")
                                   ]),
@@ -1247,13 +1253,24 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [
-                                    _c("b", [_vm._v("Método de pago:")]),
+                                    _c("b", [_vm._v("Pago:")]),
                                     _vm._v(
                                       " " +
                                         _vm._s(
                                           item.Pago
                                             ? item.NombreMedioPago
                                             : "Impago"
+                                        ) +
+                                        " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Envio:")]),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(
+                                          item.Pago == "0" ? "Impago" : "Pago"
                                         ) +
                                         " "
                                     )
@@ -1266,16 +1283,7 @@ var render = function() {
                                           " " + _vm._s(item.importeFlete) + " "
                                         )
                                       ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c("b", [_vm._v("Pagado:")]),
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(item.Pago == "0" ? "No" : "Si") +
-                                        " "
-                                    )
-                                  ])
+                                    : _vm._e()
                                 ])
                               ])
                             ]

@@ -146,11 +146,12 @@
                                 <ul>
                                     <li><b>AWB:</b> {{ item.CodEnvio }} </li>
                                     <li><b>Cantidad de piezas:</b> {{ item.CantidadPiezas }} </li>
+                                    <li><b>Peso:</b> {{ item.Peso }} </li>
                                     <li><b>Ubicación:</b> {{ item.Ubicacion }} </li>
                                     <li><b>Codigo de Movimiento:</b> {{ item.CodMovimiento }} </li>
-                                    <li><b>Método de pago:</b> {{ item.Pago ? item.NombreMedioPago : 'Impago' }} </li>
+                                    <li><b>Pago:</b> {{ item.Pago ? item.NombreMedioPago : 'Impago' }} </li>
+                                    <li><b>Envio:</b> {{ item.Pago == '0' ? 'Impago' : 'Pago' }} </li>
                                     <li v-if="!item.Pago"><b>Flete:</b> {{ item.importeFlete }} </li>
-                                    <li><b>Pagado:</b> {{ item.Pago == '0' ? 'No' : 'Si' }} </li>
                                 </ul>
                             </div>
 

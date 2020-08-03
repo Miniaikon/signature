@@ -114,6 +114,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -323,7 +330,11 @@ var render = function() {
                     staticClass: "p-1",
                     attrs: { "vs-type": "flex", "vs-w": "4" }
                   },
-                  [_c("label", { attrs: { for: "" } }, [_vm._v("Documento")])]
+                  [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Nro. de Documento")
+                    ])
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
@@ -500,6 +511,33 @@ var render = function() {
                                     _vm._v(
                                       " " + _vm._s(item.AgenciaDestino) + " "
                                     )
+                                  ])
+                                ]),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("h5", [_vm._v("Detalle del envío")]),
+                                _vm._v(" "),
+                                _c("ul", [
+                                  _c("li", [
+                                    _c("b", [_vm._v("Forma de pago:")]),
+                                    _vm._v(" " + _vm._s(item.MedioPago) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Peso:")]),
+                                    _vm._v(" " + _vm._s(item.Peso) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Importe:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.ImporteFlete) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Estado del envio:")]),
+                                    _vm._v(" " + _vm._s(item.Estado) + " ")
                                   ])
                                 ])
                               ])
