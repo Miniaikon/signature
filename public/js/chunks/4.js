@@ -121,6 +121,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -503,6 +504,13 @@ var render = function() {
                                     _c("b", [_vm._v("Agencia de origen:")]),
                                     _vm._v(
                                       " " + _vm._s(item.AgenciaOrigen) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _c("b", [_vm._v("Destinatario:")]),
+                                    _vm._v(
+                                      " " + _vm._s(item.NombreCliente) + " "
                                     )
                                   ]),
                                   _vm._v(" "),

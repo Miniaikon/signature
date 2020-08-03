@@ -90,6 +90,7 @@
                                     <li><b>Fecha generado:</b> {{ item.FechaModif }} </li>
                                     <li><b>Remitente:</b> {{ item.Remitente }} </li>
                                     <li><b>Agencia de origen:</b> {{ item.AgenciaOrigen }} </li>
+                                    <li><b>Destinatario:</b> {{ item.NombreCliente }} </li>
                                     <li><b>Agencia de destino:</b> {{ item.AgenciaDestino }} </li>
                                 </ul><br>
                                 <h5>Detalle del envío</h5>

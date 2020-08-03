@@ -54960,14 +54960,14 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./resources/assets/images/portrait/small/avatar-s-11.jpg":
-/*!****************************************************************!*\
-  !*** ./resources/assets/images/portrait/small/avatar-s-11.jpg ***!
-  \****************************************************************/
+/***/ "./resources/assets/images/logo/logo.png":
+/*!***********************************************!*\
+  !*** ./resources/assets/images/logo/logo.png ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/avatar-s-11.jpg?1a620230b75dd161d37ad2d21948e9cb";
+module.exports = "/images/logo.png?fe1d4bd76c882fe5972ccdb575d6693e";
 
 /***/ }),
 
@@ -56273,10 +56273,10 @@ __webpack_require__.r(__webpack_exports__);
 var userDefaults = {
   uid: 0,
   // From Auth
-  displayName: "John Doe",
+  displayName: "Agencia Exur",
   // From Auth
   about: "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
-  photoURL: __webpack_require__(/*! @assets/images/portrait/small/avatar-s-11.jpg */ "./resources/assets/images/portrait/small/avatar-s-11.jpg"),
+  photoURL: __webpack_require__(/*! @assets/images/logo/logo.png */ "./resources/assets/images/logo/logo.png"),
   // From Auth
   status: "online",
   userRole: "admin"
