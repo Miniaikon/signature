@@ -150,6 +150,7 @@ export default {
             });
         },
         init(){
+            let me = this;
             this.form = {
                 'imagen': '',
                 'id_cliente': '',
@@ -157,6 +158,7 @@ export default {
                 'comentario': ''
             };
             this.verifyAuth();
+            me.items = [];
         },
         makeQuery(){
             let me = this;

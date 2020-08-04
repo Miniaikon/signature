@@ -316,6 +316,7 @@ export default {
                 'TipoDocumentoRetira': '1'
             };
             this.options = [];
+            this.items = [];
             this.loadData();
             document.querySelector('#img_sig').setAttribute('src', '');
         },

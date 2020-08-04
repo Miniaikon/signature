@@ -339,6 +339,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'TipoDocumentoRetira': '1'
       };
       this.options = [];
+      this.items = [];
       this.loadData();
       document.querySelector('#img_sig').setAttribute('src', '');
     },

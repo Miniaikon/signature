@@ -164,6 +164,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     init: function init() {
+      var me = this;
       this.form = {
         'imagen': '',
         'id_cliente': '',
@@ -171,6 +172,7 @@ __webpack_require__.r(__webpack_exports__);
         'comentario': ''
       };
       this.verifyAuth();
+      me.items = [];
     },
     makeQuery: function makeQuery() {
       var me = this;
