@@ -192,6 +192,8 @@ __webpack_require__.r(__webpack_exports__);
         var resp = Array.isArray(res.data.Envio) ? res.data.Envio : [res.data.Envio];
         console.log(resp);
         me.items = resp;
+      }).catch(function (err) {
+        alert(err.response.data);
       });
     }
   }

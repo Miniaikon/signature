@@ -5,10 +5,10 @@
 
     <vs-dropdown-menu class="notification-dropdown dropdown-custom vx-navbar-dropdown">
 
-      <div class="notification-top text-center p-5 bg-primary text-white">
+      <!-- <div class="notification-top text-center p-5 bg-primary text-white">
         <h3 class="text-white">{{ unreadNotifications.length }} New</h3>
         <p class="opacity-75">App Notifications</p>
-      </div>
+      </div> -->
 
       <VuePerfectScrollbar ref="mainSidebarPs" class="scroll-area--nofications-dropdown p-0 mb-10" :settings="settings" :key="$vs.rtl">
         <ul class="bordered-items">

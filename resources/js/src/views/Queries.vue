@@ -177,6 +177,8 @@ export default {
                 let resp = Array.isArray(res.data.Envio) ? res.data.Envio : [ res.data.Envio ];
                 console.log(resp);
                 me.items = resp;
+            }).catch(err => {
+                alert(err.response.data);
             });
         }
     }

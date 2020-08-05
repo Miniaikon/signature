@@ -964,10 +964,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -987,8 +983,6 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Logo: _Logo_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     Bookmarks: _components_Bookmarks_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SearchBar: _components_SearchBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    NotificationDropDown: _components_NotificationDropDown_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     ProfileDropDown: _components_ProfileDropDown_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   computed: {
@@ -1074,9 +1068,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -1091,8 +1082,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     Bookmarks: _components_Bookmarks_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SearchBar: _components_SearchBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    NotificationDropDown: _components_NotificationDropDown_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     ProfileDropDown: _components_ProfileDropDown_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   computed: {
@@ -3855,10 +3844,6 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("search-bar"),
-            _vm._v(" "),
-            _c("notification-drop-down"),
-            _vm._v(" "),
             _c("profile-drop-down")
           ],
           1
@@ -3919,10 +3904,6 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("vs-spacer"),
-            _vm._v(" "),
-            _c("search-bar"),
-            _vm._v(" "),
-            _c("notification-drop-down"),
             _vm._v(" "),
             _c("profile-drop-down")
           ],
@@ -4265,23 +4246,6 @@ var render = function() {
             "notification-dropdown dropdown-custom vx-navbar-dropdown"
         },
         [
-          _c(
-            "div",
-            {
-              staticClass:
-                "notification-top text-center p-5 bg-primary text-white"
-            },
-            [
-              _c("h3", { staticClass: "text-white" }, [
-                _vm._v(_vm._s(_vm.unreadNotifications.length) + " New")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "opacity-75" }, [
-                _vm._v("App Notifications")
-              ])
-            ]
-          ),
-          _vm._v(" "),
           _c(
             "VuePerfectScrollbar",
             {
@@ -6801,7 +6765,7 @@ __webpack_require__.r(__webpack_exports__);
 ==========================================================================================*/
 /* harmony default export */ __webpack_exports__["default"] = ([{
   url: "/",
-  name: "Home",
+  name: "Entrega de envios",
   slug: "home",
   icon: "HomeIcon"
 }, {

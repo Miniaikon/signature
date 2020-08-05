@@ -23,9 +23,6 @@
 
         <vs-spacer />
 
-        <search-bar />
-
-        <notification-drop-down />
 
         <profile-drop-down />
 
@@ -51,8 +48,6 @@ export default {
   },
   components: {
     Bookmarks,
-    SearchBar,
-    NotificationDropDown,
     ProfileDropDown,
   },
   computed: {
