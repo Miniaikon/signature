@@ -1498,43 +1498,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4387,148 +4350,26 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("vs-dropdown-menu", { staticClass: "vx-navbar-dropdown" }, [
-                _c(
-                  "ul",
-                  { staticStyle: { "min-width": "9rem" } },
-                  [
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router
-                              .push("/pages/profile")
-                              .catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "UserIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Profile")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/email").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "MailIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Inbox")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/todo").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: {
-                            icon: "CheckSquareIcon",
-                            svgClasses: "w-4 h-4"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Tasks")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/chat").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: {
-                            icon: "MessageSquareIcon",
-                            svgClasses: "w-4 h-4"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Chat")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router
-                              .push("/apps/eCommerce/wish-list")
-                              .catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "HeartIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [
-                          _vm._v("Wish List")
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("vs-divider", { staticClass: "m-1" }),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: { click: _vm.logout }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "LogOutIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Logout")])
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
+                _c("ul", { staticStyle: { "min-width": "9rem" } }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
+                      on: { click: _vm.logout }
+                    },
+                    [
+                      _c("feather-icon", {
+                        attrs: { icon: "LogOutIcon", svgClasses: "w-4 h-4" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "ml-2" }, [
+                        _vm._v("Cerrar Sesión")
+                      ])
+                    ],
+                    1
+                  )
+                ])
               ])
             ],
             1
@@ -6770,7 +6611,7 @@ __webpack_require__.r(__webpack_exports__);
   icon: "HomeIcon"
 }, {
   url: "/consultar",
-  name: "Consultar",
+  name: "Consultar envios",
   slug: "consultar",
   icon: "FileIcon"
 }]);

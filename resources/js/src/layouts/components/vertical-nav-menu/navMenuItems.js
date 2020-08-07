@@ -17,7 +17,7 @@ export default [
   },
   {
     url: "/consultar",
-    name: "Consultar",
+    name: "Consultar envios",
     slug: "consultar",
     icon: "FileIcon",
   },
