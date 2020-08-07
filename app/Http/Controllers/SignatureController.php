@@ -70,9 +70,7 @@ class SignatureController extends Controller
         curl_close($curl);
         $res = json_decode($response);
 
-        dd($res->Mensaje);
-
-        if(isset($res->Mensaje) && $res->Mensaje->CodMensaje == 0)
+        if(isset($res->Mensaje) && $res->Mensaje->Mensaje != "OK")
             return response()->json($res->Mensaje->Mensaje, 412);
 
         $item = Signature::create([
@@ -119,7 +117,7 @@ class SignatureController extends Controller
         curl_close($curl);
         $res = json_decode($response);
 
-        if(isset($res->Mensaje) && $res->Mensaje->CodMensaje == 0)
+        if(isset($res->Mensaje) && $res->Mensaje->Mensaje != "OK")
             return response()->json($res->Mensaje->Mensaje, 412);
 
         return response()->json($res, 200);
