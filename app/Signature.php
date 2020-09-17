@@ -11,6 +11,18 @@ class Signature extends Model
         'id_cliente',
         'id_paquete',
         'firma',
-        'comentario'
+        'comentario',
+        'envio',
+        'remitente',
+        'destinatario',
+        'tipo_servicio',
+        'agencia_origen',
+        'agencia_destino',
+        'numero_pcs',
+        'peso',
+        'ubicacion',
+        'nombre',
+        'cedula',
+        'fecha_entrega'
     ];
 }

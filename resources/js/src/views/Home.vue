@@ -162,58 +162,14 @@
 
 
         </vs-col>
-        <vs-popup classContent="popup-example" :active.sync="modals.option">
-        <vs-col vs-w="12" class="mt-10">
-                <vs-table pagination max-items="3" search :data="options">
-                    <template slot="header">
-                        <h3>
-                        Seleccione un paquete
-                        </h3>
-                    </template>
-                    <template slot="thead">
-                        <vs-th sort-key="CodEnvio">
-                            # Envío
-                        </vs-th>
-                        <vs-th sort-key="CantidadPiezas">
-                            # Piezas
-                        </vs-th>
-                        <vs-th sort-key="CodMovimiento">
-                            Código de movimiento
-                        </vs-th>
-                        <vs-th sort-key="Estado">
-                            Estado
-                        </vs-th>
-                        <vs-th>
-                            Seleccionar
-                        </vs-th>
-                    </template>
-
-                    <template slot-scope="{data}">
-                        <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" >
-                            <vs-td :data="data[indextr].CodEnvio">
-                                {{data[indextr].CodEnvio}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].CantidadPiezas">
-                                {{data[indextr].CantidadPiezas}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].CodMovimiento">
-                                {{data[indextr].CodMovimiento}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].Estado">
-                                {{data[indextr].Estado}}
-                            </vs-td>
-
-                            <vs-td>
-                                <vs-button v-on:click="form = data[indextr]; modals.option = false">Seleccion</vs-button>
-                            </vs-td>
-                        </vs-tr>
-                    </template>
-                </vs-table>
-        </vs-col>
-    </vs-popup>
+        <vs-popup classContent="popup-example" title="Paquete procesado" :active.sync="modals.option">
+            <vs-col vs-w="12" class="mt-10">
+                <center><h3>Paquetes procesados con éxito</h3></center>
+                <u>
+                    <li v-for="item in paquetes" :key="item"><a :href="'/auth/imprimir-envio/'+item" target="blank">imprimir factura de envio {{ item }}</a></li>
+                </u>
+            </vs-col>
+        </vs-popup>
     </vs-row>
 </template>
 <style lang="stylus">
@@ -246,7 +202,8 @@ export default {
             ],
             modals: {
                 option: false
-            }
+            },
+            paquetes: []
         }
     },
     mounted(){
@@ -376,7 +333,8 @@ export default {
                         NroDocumentoRetira: '',
                         TipoDocumentoRetira: '1'
                     };
-                    alert('Paquetes procesados con éxito');
+                    this.paquetes = listaEnvio.split('|');
+                    this.modals.option = true;
                     // location.reload();
                 }).catch(err => {
                     alert(err.response.data);

@@ -73,14 +73,54 @@ class SignatureController extends Controller
         if(isset($res->Mensaje) && $res->Mensaje->Mensaje != "OK")
             return response()->json($res->Mensaje->Mensaje, 412);
 
-        $item = Signature::create([
-            'id_cliente' => $request->unNroDocumento,
-            'id_paquete' => 'sdsdasd',
-            'firma' => $request->unaFirma,
-            'comentario' => 'asdasdds'
-        ]);
+        $envios = explode('|', $request->unaListaEnvios);
 
-        return response()->json($res, 201);
+        for($i = 0; $i < count($envios); $i++){
+            $item = Signature::create([
+                'id_cliente' => $request->unNroDocumento,
+                'id_paquete' => $envios[$i],
+                'firma' => $request->unaFirma,
+                'comentario' => 'asdasdds',
+            ]);
+        }
+
+        // return response()->json($res, 201);
+    }
+
+    public function printPackage($id){
+        $paquetes = Signature::where('id_paquete', $id)->first();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://exurcompras.com/ExurController.php",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "method=PendientesPorEnvio&search=$paquetes->id_paquete",
+        CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer 67ac2b5faf2c0513ccfa2000f769d905",
+                "Content-Type: application/x-www-form-urlencoded"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $res = json_decode($response);
+
+        if(isset($res->Mensaje) && $res->Mensaje->Mensaje != "OK")
+            return response()->json($res->Mensaje->Mensaje, 412);
+
+        $resp = is_array($res->Envio) ? $res->Envio[0] : $res->Envio ;
+
+        return view('tag', compact('paquetes', 'resp'));
+
+
     }
 
     public function EnviosPendientes(Request $request){
@@ -97,7 +137,7 @@ class SignatureController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://exurcompras.com/ExurController.php",
+        CURLOPT_URL => "https://exurcompras.com/ExurController.php",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,

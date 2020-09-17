@@ -25,5 +25,12 @@ Route::prefix('auth')->group(function(){
     Route::get('logout', function() {
         Auth::logout();
     });
+
+    Route::get('/imprimir-envio/{id}', 'SignatureController@printPackage')->name('signature.printPackage');
+
+});
+
+Route::prefix('factura')->group(function () {
+    // Route::get()
 });
 

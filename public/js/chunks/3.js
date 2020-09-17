@@ -191,50 +191,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _form;
@@ -252,7 +208,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       options: [],
       modals: {
         option: false
-      }
+      },
+      paquetes: []
     };
   },
   mounted: function mounted() {
@@ -357,6 +314,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     send: function send() {
+      var _this4 = this;
+
       var validator = true;
       var paquete = this.options.find(function (item) {
         return item.NombreMedioPago == 'PAGO PENDIENTE';
@@ -395,7 +354,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             NroDocumentoRetira: '',
             NombreRetira: ''
           }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _defineProperty(_me$form, "NroDocumentoRetira", ''), _defineProperty(_me$form, "TipoDocumentoRetira", '1'), _me$form);
-          alert('Paquetes procesados con éxito'); // location.reload();
+          _this4.paquetes = listaEnvio.split('|');
+          _this4.modals.option = true; // location.reload();
         }).catch(function (err) {
           alert(err.response.data);
         });
@@ -435,7 +395,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(me.form.NroDocumentoRetira);
     },
     getByDocument: function getByDocument() {
-      var _this4 = this;
+      var _this5 = this;
 
       var me = this;
       axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento=' + me.form.NroDocumento).then(function (response) {
@@ -445,7 +405,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           me.options = res;
           me.form = res[0];
           var f = new Date();
-          me.form.FechaRetira = f.getFullYear() + "-" + _this4.zfill(f.getMonth() + 1, 2) + "-" + _this4.zfill(f.getDate(), 2);
+          me.form.FechaRetira = f.getFullYear() + "-" + _this5.zfill(f.getMonth() + 1, 2) + "-" + _this5.zfill(f.getDate(), 2);
           me.form.TipoDocumentoRetira = '1';
         } else {
           alert('No se encontró ningun envío');
@@ -453,7 +413,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     getByClient: function getByClient() {
-      var _this5 = this;
+      var _this6 = this;
 
       var me = this;
       axios.get('https://exurcompras.com/getPaquetes.php?id_cliente=' + (me.form.CodCliente ? me.form.CodCliente : 'null')).then(function (response) {
@@ -463,7 +423,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           me.options = res;
           me.form = res[0];
           var f = new Date();
-          me.form.FechaRetira = f.getFullYear() + "-" + _this5.zfill(f.getMonth() + 1, 2) + "-" + _this5.zfill(f.getDate(), 2);
+          me.form.FechaRetira = f.getFullYear() + "-" + _this6.zfill(f.getMonth() + 1, 2) + "-" + _this6.zfill(f.getDate(), 2);
           me.form.TipoDocumentoRetira = '1';
         } else {
           alert("No se encontró ningun envío");
@@ -471,7 +431,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     getBySend: function getBySend() {
-      var _this6 = this;
+      var _this7 = this;
 
       var me = this;
       axios.get('https://exurcompras.com/getCodeSend.php?send_code=' + (me.form.CodEnvio ? me.form.CodEnvio : 'null')).then(function (response) {
@@ -481,7 +441,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           me.options = res;
           me.form = res[0];
           var f = new Date();
-          me.form.FechaRetira = f.getFullYear() + "-" + _this6.zfill(f.getMonth() + 1, 2) + "-" + _this6.zfill(f.getDate(), 2);
+          me.form.FechaRetira = f.getFullYear() + "-" + _this7.zfill(f.getMonth() + 1, 2) + "-" + _this7.zfill(f.getDate(), 2);
           me.form.TipoDocumentoRetira = '1';
         } else {
           alert("No se encontró ningun envío");
@@ -1305,7 +1265,11 @@ var render = function() {
       _c(
         "vs-popup",
         {
-          attrs: { classContent: "popup-example", active: _vm.modals.option },
+          attrs: {
+            classContent: "popup-example",
+            title: "Paquete procesado",
+            active: _vm.modals.option
+          },
           on: {
             "update:active": function($event) {
               return _vm.$set(_vm.modals, "option", $event)
@@ -1317,150 +1281,27 @@ var render = function() {
             "vs-col",
             { staticClass: "mt-10", attrs: { "vs-w": "12" } },
             [
+              _c("center", [
+                _c("h3", [_vm._v("Paquetes procesados con éxito")])
+              ]),
+              _vm._v(" "),
               _c(
-                "vs-table",
-                {
-                  attrs: {
-                    pagination: "",
-                    "max-items": "3",
-                    search: "",
-                    data: _vm.options
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(ref) {
-                        var data = ref.data
-                        return _vm._l(data, function(tr, indextr) {
-                          return _c(
-                            "vs-tr",
-                            { key: indextr, attrs: { data: tr } },
-                            [
-                              _c(
-                                "vs-td",
-                                { attrs: { data: data[indextr].CodEnvio } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].CodEnvio) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                {
-                                  attrs: { data: data[indextr].CantidadPiezas }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].CantidadPiezas) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                {
-                                  attrs: { data: data[indextr].CodMovimiento }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].CodMovimiento) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                { attrs: { data: data[indextr].Estado } },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(data[indextr].Estado) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "vs-td",
-                                [
-                                  _c(
-                                    "vs-button",
-                                    {
-                                      on: {
-                                        click: function($event) {
-                                          _vm.form = data[indextr]
-                                          _vm.modals.option = false
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Seleccion")]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        })
-                      }
-                    }
+                "u",
+                _vm._l(_vm.paquetes, function(item) {
+                  return _c("li", { key: item }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "/auth/imprimir-envio/" + item,
+                          target: "blank"
+                        }
+                      },
+                      [_vm._v("imprimir factura de envio " + _vm._s(item))]
+                    )
                   ])
-                },
-                [
-                  _c("template", { slot: "header" }, [
-                    _c("h3", [
-                      _vm._v(
-                        "\n                        Seleccione un paquete\n                        "
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "template",
-                    { slot: "thead" },
-                    [
-                      _c("vs-th", { attrs: { "sort-key": "CodEnvio" } }, [
-                        _vm._v(
-                          "\n                            # Envío\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "CantidadPiezas" } }, [
-                        _vm._v(
-                          "\n                            # Piezas\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "CodMovimiento" } }, [
-                        _vm._v(
-                          "\n                            Código de movimiento\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", { attrs: { "sort-key": "Estado" } }, [
-                        _vm._v(
-                          "\n                            Estado\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-th", [
-                        _vm._v(
-                          "\n                            Seleccionar\n                        "
-                        )
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                2
+                }),
+                0
               )
             ],
             1
