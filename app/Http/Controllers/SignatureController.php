@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Signature;
 use Auth;
+use stdClass;
 
 class SignatureController extends Controller
 {
@@ -87,38 +88,63 @@ class SignatureController extends Controller
         // return response()->json($res, 201);
     }
 
-    public function printPackage($id){
-        $paquetes = Signature::where('id_paquete', $id)->first();
+    public function printPackage($ids){
 
-        $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://exurcompras.com/ExurController.php",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "method=PendientesPorEnvio&search=$paquetes->id_paquete",
-        CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer 67ac2b5faf2c0513ccfa2000f769d905",
-                "Content-Type: application/x-www-form-urlencoded"
-            ),
-        ));
+        $envios = explode('|', $ids);
+        $datos = [];
 
-        $response = curl_exec($curl);
+        for($i = 0; $i < count($envios); $i++){
+            $paquetes = Signature::where('id_paquete', $envios[$i])->first();
 
-        curl_close($curl);
-        $res = json_decode($response);
+            $curl = curl_init();
 
-        if(isset($res->Mensaje) && $res->Mensaje->Mensaje != "OK")
-            return response()->json($res->Mensaje->Mensaje, 412);
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://exurcompras.com/ExurController.php",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "method=PendientesPorEnvio&search=$envios[$i]",
+            CURLOPT_HTTPHEADER => array(
+                    "Authorization: Bearer 67ac2b5faf2c0513ccfa2000f769d905",
+                    "Content-Type: application/x-www-form-urlencoded"
+                ),
+            ));
 
-        $resp = is_array($res->Envio) ? $res->Envio[0] : $res->Envio ;
+            $response = curl_exec($curl);
 
-        return view('tag', compact('paquetes', 'resp'));
+            curl_close($curl);
+            $res = json_decode($response);
+
+            if(isset($res->Mensaje) && $res->Mensaje->Mensaje != "OK")
+                return response()->json($res->Mensaje->Mensaje, 412);
+
+            $resp = is_array($res->Envio) ? $res->Envio[0] : $res->Envio ;
+
+            $objeto = new stdClass();
+            $objeto->id_paquete = $envios[$i];
+            $objeto->Remitente = $resp->Remitente;
+            $objeto->NombreCliente = $resp->NombreCliente;
+            $objeto->AgenciaOrigen = $resp->AgenciaOrigen;
+            $objeto->AgenciaDestino = $resp->AgenciaDestino;
+            $objeto->Peso = $resp->Peso;
+            $objeto->Ubicacion = $resp->Ubicacion;
+            $objeto->firma = $paquetes->firma;
+            $objeto->NroDocumento = $resp->NroDocumento;
+
+            $datos[] = $objeto;
+
+
+        }
+
+
+
+
+        return view('tag', compact('datos'));
 
 
     }

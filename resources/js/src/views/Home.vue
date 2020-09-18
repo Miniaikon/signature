@@ -164,10 +164,8 @@
         </vs-col>
         <vs-popup classContent="popup-example" title="Paquete procesado" :active.sync="modals.option">
             <vs-col vs-w="12" class="mt-10">
-                <center><h3>Paquetes procesados con éxito</h3></center>
-                <u>
-                    <li v-for="item in paquetes" :key="item"><a :href="'/auth/imprimir-envio/'+item" target="blank">imprimir factura de envio {{ item }}</a></li>
-                </u>
+                <center><h3>Paquetes procesados con éxito</h3></center><br><br><br>
+                <a :href="'/auth/imprimir-envio/'+paquetes" class="vs-button vs-button-success vs-button-filled" target="blank">Imprimir factura</a>
             </vs-col>
         </vs-popup>
     </vs-row>
@@ -203,7 +201,7 @@ export default {
             modals: {
                 option: false
             },
-            paquetes: []
+            paquetes: null
         }
     },
     mounted(){
@@ -333,7 +331,8 @@ export default {
                         NroDocumentoRetira: '',
                         TipoDocumentoRetira: '1'
                     };
-                    this.paquetes = listaEnvio.split('|');
+                    window.open('/auth/imprimir-envio/'+listaEnvio, '_blank');
+                    this.paquetes = listaEnvio;
                     this.modals.option = true;
                     // location.reload();
                 }).catch(err => {

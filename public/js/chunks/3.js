@@ -189,8 +189,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _form;
@@ -209,7 +207,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       modals: {
         option: false
       },
-      paquetes: []
+      paquetes: null
     };
   },
   mounted: function mounted() {
@@ -354,7 +352,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             NroDocumentoRetira: '',
             NombreRetira: ''
           }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _defineProperty(_me$form, "NroDocumentoRetira", ''), _defineProperty(_me$form, "TipoDocumentoRetira", '1'), _me$form);
-          _this4.paquetes = listaEnvio.split('|');
+          window.open('/auth/imprimir-envio/' + listaEnvio, '_blank');
+          _this4.paquetes = listaEnvio;
           _this4.modals.option = true; // location.reload();
         }).catch(function (err) {
           alert(err.response.data);
@@ -1286,22 +1285,15 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c(
-                "u",
-                _vm._l(_vm.paquetes, function(item) {
-                  return _c("li", { key: item }, [
-                    _c(
-                      "a",
-                      {
-                        attrs: {
-                          href: "/auth/imprimir-envio/" + item,
-                          target: "blank"
-                        }
-                      },
-                      [_vm._v("imprimir factura de envio " + _vm._s(item))]
-                    )
-                  ])
-                }),
-                0
+                "a",
+                {
+                  staticClass: "vs-button vs-button-success vs-button-filled",
+                  attrs: {
+                    href: "/auth/imprimir-envio/" + _vm.paquetes,
+                    target: "blank"
+                  }
+                },
+                [_vm._v("Imprimir factura")]
               )
             ],
             1

@@ -74,19 +74,21 @@ ul li#t_01{
 </head>
 <body>
 
+@foreach($datos as $item)
+
 <div class="content">
 	<div style="border-bottom: solid 1px #000000; padding-bottom:10px;">
-  <div style="text-align: center;"  class="center">
-        <ul style="padding: 0px; margin: 0px;" class="box">
-  <li id="t_01">
-       <img src="{{ asset('assets/images/logo-light.png') }}" alt="">
-        </li>
-  </ul>
-  </div>
-<!--   <div class="center" style="text-align:center;">Casillero express Usa - 3509 nw 115 Ave,<br />
- Doral FL 33178 USA - Tel. (305)-591-8361</div> -->
-  <div class="clear"></div>
-</div>
+        <div style="text-align: center;"  class="center">
+            <ul style="padding: 0px; margin: 0px;" class="box">
+                <li id="t_01">
+                    <img src="{{ asset('assets/images/logo-light.png') }}" alt="">
+                </li>
+            </ul>
+        </div>
+        <!--   <div class="center" style="text-align:center;">Casillero express Usa - 3509 nw 115 Ave,<br />
+        Doral FL 33178 USA - Tel. (305)-591-8361</div> -->
+        <div class="clear"></div>
+    </div>
 	<div style="border-bottom: solid 1px #000000; padding-bottom:6px; padding-top:10px;">
 	    <div class="left">
             <span class="style5"><img src="http://signature.courierplus.net/images/logo/logo.png" alt=""> </span>
@@ -95,7 +97,7 @@ ul li#t_01{
         <div class="right">
             <div align="right">
                 <span class="style2">AWB</span><br />
-                <span class="style5">{{ $paquetes->id_paquete }}</span>
+                <span class="style5">{{ $item->id_paquete }}</span>
             </div>
         </div>
         <div class="clear"></div>
@@ -103,22 +105,22 @@ ul li#t_01{
     <div style="border-bottom: solid 1px #000000; padding-bottom:8px; padding-top:10px;">
 	    <div class="left">
             <span class="style2">Remitente:</span><br />
-            <span class="style5">{{ $resp->Remitente }}</span>
+            <span class="style5">{{ $item->Remitente }}</span>
         </div>
         <div align="right">
             <span class="style2">Destinatario:</span>:<br />
-                {{ $resp->NombreCliente }}
+                {{ $item->NombreCliente }}
         </div>
         <div class="clear"></div>
     </div>
     <div style="border-bottom: solid 1px #000000; padding-bottom:8px; padding-top:10px;">
         <div class="left" style="width:5cm;">
             <span class="style2">Agencia origen:</span><br />
-            <span class="style5">{{ $resp->AgenciaOrigen }}</span>
+            <span class="style5">{{ $item->AgenciaOrigen }}</span>
         </div>
         <div align="right">
             <span class="style2">Agencia destino</span><br />
-            <span class="style5">{{ $resp->AgenciaDestino }}</span>
+            <span class="style5">{{ $item->AgenciaDestino }}</span>
         </div>
 
         <div class="clear"></div>
@@ -126,12 +128,12 @@ ul li#t_01{
     <div style="border-bottom: solid 1px #000000; padding-bottom:8px; padding-top:10px;">
         <div class="left" style="width:5cm;">
             <span class="style2">Peso:</span><br />
-            <span class="style5">{{ $resp->Peso  }} </span>
+            <span class="style5">{{ $item->Peso  }} </span>
         </div>
 
         <div align="right">
             <span class="style2">Ubicación</span><br />
-            <span class="style5">Alto: {{ $resp->Ubicacion }}</span>
+            <span class="style5">Alto: {{ $item->Ubicacion }}</span>
         </div>
 
         <div class="clear"></div>
@@ -140,23 +142,13 @@ ul li#t_01{
     <div style="border-bottom: solid 1px #000000; padding-bottom:8px; padding-top:10px;">
 
         <div style="text-align: left;">
-            <img src="data:image/gif;base64,{{ $paquetes->firma }}" width="150px" alt=""><br>
-            {{ $resp->NombreCliente }} - {{ $resp->NroDocumento }}
+            <img src="data:image/gif;base64,{{ $item->firma }}" width="150px" alt=""><br>
+            {{ $item->NombreCliente }} - {{ $item->NroDocumento }}
         </div>
         <div class="clear"></div>
     </div>
-  <div class="clear"> </div>
-  <div id="conten" style="width:10cm; margin-top:7px; padding-bottom:7px; height:30px;" >
-  <h1 style="margin: 0; text-align: center;">
-
-  </h1>
-
-  </div>
+    <div class="clear"> </div>
 </div><p>
-<div class="saltopagina"></div>
-
-
-
-
+@endforeach
 </body>
 </html>
