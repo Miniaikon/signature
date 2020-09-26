@@ -95,7 +95,7 @@ class SignatureController extends Controller
         $datos = [];
 
         for($i = 0; $i < count($envios); $i++){
-            $paquetes = Signature::where('id_paquete', $envios[$i])->first();
+            $paquetes = Signature::where('id_paquete', $envios[$i])->orderBy('id', 'desc')->first();
 
             $curl = curl_init();
 
