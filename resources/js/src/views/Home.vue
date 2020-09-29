@@ -334,7 +334,7 @@ export default {
                     window.open('/auth/imprimir-envio/'+listaEnvio, '_blank');
                     this.paquetes = listaEnvio;
                     this.modals.option = true;
-                    location.reload();
+                    // location.reload();
                 }).catch(err => {
                     alert(err.response.data);
                 });
