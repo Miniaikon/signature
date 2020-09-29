@@ -354,7 +354,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _defineProperty(_me$form, "NroDocumentoRetira", ''), _defineProperty(_me$form, "TipoDocumentoRetira", '1'), _me$form);
           window.open('/auth/imprimir-envio/' + listaEnvio, '_blank');
           _this4.paquetes = listaEnvio;
-          _this4.modals.option = true; // location.reload();
+          _this4.modals.option = true;
+          location.reload();
         }).catch(function (err) {
           alert(err.response.data);
         });
@@ -1283,6 +1284,9 @@ var render = function() {
               _c("center", [
                 _c("h3", [_vm._v("Paquetes procesados con éxito")])
               ]),
+              _c("br"),
+              _c("br"),
+              _c("br"),
               _vm._v(" "),
               _c(
                 "a",
