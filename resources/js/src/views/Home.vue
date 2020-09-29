@@ -199,7 +199,7 @@ export default {
 
             ],
             modals: {
-                option: false
+                option: true
             },
             paquetes: null
         }

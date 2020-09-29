@@ -85,7 +85,7 @@ class SignatureController extends Controller
             ]);
         }
 
-        // return response()->json($res, 201);
+        return response()->json('Hola',200);
     }
 
     public function printPackage($ids){

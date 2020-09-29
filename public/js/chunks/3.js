@@ -205,7 +205,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, _defineProperty(_form, "CodCliente", ''), _defineProperty(_form, "CodEnvio", ''), _defineProperty(_form, "NroDocumento", ''), _defineProperty(_form, "NombreCliente", ''), _defineProperty(_form, "NroDocumentoRetira", ''), _defineProperty(_form, "TipoDocumentoRetira", '1'), _form),
       options: [],
       modals: {
-        option: false
+        option: true
       },
       paquetes: null
     };
@@ -354,8 +354,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }, _defineProperty(_me$form, "CodCliente", ''), _defineProperty(_me$form, "CodEnvio", ''), _defineProperty(_me$form, "NroDocumento", ''), _defineProperty(_me$form, "NombreCliente", ''), _defineProperty(_me$form, "NroDocumentoRetira", ''), _defineProperty(_me$form, "TipoDocumentoRetira", '1'), _me$form);
           window.open('/auth/imprimir-envio/' + listaEnvio, '_blank');
           _this4.paquetes = listaEnvio;
-          _this4.modals.option = true;
-          location.reload();
+          _this4.modals.option = true; // location.reload();
         }).catch(function (err) {
           alert(err.response.data);
         });
