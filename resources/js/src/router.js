@@ -46,6 +46,11 @@ const router = new Router({
                 name: 'consultar',
                 component: () => import('./views/Queries.vue')
               },
+              {
+                path: '/historial',
+                name: 'hisrotial',
+                component: () => import('./views/Historial.vue')
+              },
             ],
         },
     // =============================================================================

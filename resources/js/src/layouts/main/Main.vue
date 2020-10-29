@@ -9,7 +9,7 @@
 
 
 <template>
-  <div class="layout--main" :class="[layoutTypeClass, navbarClasses, footerClasses, {'no-scroll': isAppPage}]">
+  <div v-if="show" class="layout--main" :class="[layoutTypeClass, navbarClasses, footerClasses, {'no-scroll': isAppPage}]">
 
     <v-nav-menu
       :navMenuItems = "navMenuItems"
@@ -146,7 +146,11 @@ export default {
       navMenuItems      : navMenuItems,
       routerTransition  : themeConfig.routerTransition || 'none',
       routeTitle        : this.$route.meta.pageTitle,
+      show: false,
     }
+  },
+  mounted() {
+      this.verifyAuth();
   },
   watch: {
     "$route"() {
@@ -196,6 +200,18 @@ export default {
     windowWidth()          { return this.$store.state.windowWidth }
   },
   methods: {
+    verifyAuth(){
+        axios.get('/auth/who-am-i').then(response => {
+            console.log(response.data);
+            if(response.data == true){
+                this.show = true;
+            }else{
+                this.$router.push('/pages/login');
+            }
+        }).catch(error => {
+                this.$router.push('/pages/login');
+        });
+    },
     changeRouteTitle(title) {
       this.routeTitle = title
     },

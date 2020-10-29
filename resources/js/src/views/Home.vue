@@ -199,28 +199,15 @@ export default {
 
             ],
             modals: {
-                option: true
+                option: false
             },
-            paquetes: null
+            paquetes: null,
         }
     },
     mounted(){
         this.init();
-        this.verifyAuth();
     },
     methods: {
-        verifyAuth(){
-            axios.get('/auth/who-am-i').then(response => {
-                console.log(response.data);
-                if(response.data == true){
-                    this.loadData();
-                }else{
-                    this.$router.push('/pages/login');
-                }
-            }).catch(error => {
-                    this.$router.push('/pages/login');
-            });
-        },
         loadData(){
             axios.get(this.url+'api/entregados').then(response => {
                 this.items = response.data;
@@ -334,7 +321,7 @@ export default {
                     window.open('/auth/imprimir-envio/'+listaEnvio, '_blank');
                     this.paquetes = listaEnvio;
                     this.modals.option = true;
-                    // location.reload();
+                    location.reload();
                 }).catch(err => {
                     alert(err.response.data);
                 });
@@ -372,7 +359,7 @@ export default {
         },
         getByDocument(){
             let me = this;
-            axios.get('https://exurcompras.com/getPaquetesByDocument.php?documento='+me.form.NroDocumento).then(response => {
+            axios.get('http://entregas.exurenvios.com/getPaquetesByDocument.php?documento='+me.form.NroDocumento).then(response => {
                 let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
                 if(res[0]){
                     me.options = res;
@@ -387,7 +374,7 @@ export default {
         },
         getByClient(){
             let me = this;
-            axios.get('https://exurcompras.com/getPaquetes.php?id_cliente='+(me.form.CodCliente ? me.form.CodCliente : 'null')).then(response => {
+            axios.get('http://entregas.exurenvios.com/getPaquetes.php?id_cliente='+(me.form.CodCliente ? me.form.CodCliente : 'null')).then(response => {
                 let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
                 if(res[0]){
                     me.options = res;
@@ -403,7 +390,7 @@ export default {
         },
         getBySend(){
             let me = this;
-            axios.get('https://exurcompras.com/getCodeSend.php?send_code='+(me.form.CodEnvio ? me.form.CodEnvio : 'null')).then(response => {
+            axios.get('http://entregas.exurenvios.com/getCodeSend.php?send_code='+(me.form.CodEnvio ? me.form.CodEnvio : 'null')).then(response => {
                 let res = Array.isArray(response.data.Envio) ? response.data.Envio : [ response.data.Envio ];
                 if(res[0]){
                     me.options = res;

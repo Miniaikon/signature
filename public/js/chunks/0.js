@@ -2554,8 +2554,12 @@ __webpack_require__.r(__webpack_exports__);
       navbarType: _themeConfig_js__WEBPACK_IMPORTED_MODULE_6__["default"].navbarType || 'floating',
       navMenuItems: _layouts_components_vertical_nav_menu_navMenuItems_js__WEBPACK_IMPORTED_MODULE_2__["default"],
       routerTransition: _themeConfig_js__WEBPACK_IMPORTED_MODULE_6__["default"].routerTransition || 'none',
-      routeTitle: this.$route.meta.pageTitle
+      routeTitle: this.$route.meta.pageTitle,
+      show: false
     };
+  },
+  mounted: function mounted() {
+    this.verifyAuth();
   },
   watch: {
     "$route": function $route() {
@@ -2614,6 +2618,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    verifyAuth: function verifyAuth() {
+      var _this = this;
+
+      axios.get('/auth/who-am-i').then(function (response) {
+        console.log(response.data);
+
+        if (response.data == true) {
+          _this.show = true;
+        } else {
+          _this.$router.push('/pages/login');
+        }
+      }).catch(function (error) {
+        _this.$router.push('/pages/login');
+      });
+    },
     changeRouteTitle: function changeRouteTitle(title) {
       this.routeTitle = title;
     },
@@ -5085,286 +5104,308 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "layout--main",
-      class: [
-        _vm.layoutTypeClass,
-        _vm.navbarClasses,
-        _vm.footerClasses,
-        { "no-scroll": _vm.isAppPage }
-      ]
-    },
-    [
-      _c("v-nav-menu", {
-        attrs: {
-          navMenuItems: _vm.navMenuItems,
-          title: "EXUR Envios",
-          parent: ".layout--main"
-        }
-      }),
-      _vm._v(" "),
-      _c(
+  return _vm.show
+    ? _c(
         "div",
         {
-          class: [_vm.contentAreaClass, { "show-overlay": _vm.bodyOverlay }],
-          attrs: { id: "content-area" }
+          staticClass: "layout--main",
+          class: [
+            _vm.layoutTypeClass,
+            _vm.navbarClasses,
+            _vm.footerClasses,
+            { "no-scroll": _vm.isAppPage }
+          ]
         },
         [
-          _c("div", { attrs: { id: "content-overlay" } }),
+          _c("v-nav-menu", {
+            attrs: {
+              navMenuItems: _vm.navMenuItems,
+              title: "EXUR Envios",
+              parent: ".layout--main"
+            }
+          }),
           _vm._v(" "),
-          _vm.mainLayoutType === "horizontal" && _vm.windowWidth >= 1200
-            ? [
-                _c("the-navbar-horizontal", {
-                  class: [
-                    { "text-white": _vm.isNavbarDark && !_vm.isThemeDark },
-                    { "text-base": !_vm.isNavbarDark && _vm.isThemeDark }
-                  ],
-                  attrs: { navbarType: _vm.navbarType }
-                }),
-                _vm._v(" "),
-                _vm.navbarType === "static"
-                  ? _c("div", { staticStyle: { height: "62px" } })
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("h-nav-menu", {
-                  class: [
-                    { "text-white": _vm.isNavbarDark && !_vm.isThemeDark },
-                    { "text-base": !_vm.isNavbarDark && _vm.isThemeDark }
-                  ],
-                  attrs: { navMenuItems: _vm.navMenuItems }
-                })
-              ]
-            : [
-                _c("the-navbar-vertical", {
-                  class: [
-                    { "text-white": _vm.isNavbarDark && !_vm.isThemeDark },
-                    { "text-base": !_vm.isNavbarDark && _vm.isThemeDark }
-                  ],
-                  attrs: { navbarColor: _vm.navbarColor }
-                })
+          _c(
+            "div",
+            {
+              class: [
+                _vm.contentAreaClass,
+                { "show-overlay": _vm.bodyOverlay }
               ],
-          _vm._v(" "),
-          _c("div", { staticClass: "content-wrapper" }, [
-            _c("div", { staticClass: "router-view" }, [
-              _c(
-                "div",
-                { staticClass: "router-content" },
-                [
-                  _c("transition", { attrs: { name: _vm.routerTransition } }, [
-                    _vm.$route.meta.breadcrumb || _vm.$route.meta.pageTitle
-                      ? _c(
-                          "div",
-                          {
-                            staticClass:
-                              "router-header flex flex-wrap items-center mb-6"
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "content-area__heading",
-                                class: {
-                                  "pr-4 border-0 md:border-r border-solid border-grey-light":
-                                    _vm.$route.meta.breadcrumb
-                                }
-                              },
-                              [
-                                _c("h2", { staticClass: "mb-1" }, [
-                                  _vm._v(_vm._s(_vm.routeTitle))
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _vm.$route.meta.breadcrumb
-                              ? _c("vx-breadcrumb", {
-                                  staticClass: "ml-4 md:block hidden",
-                                  attrs: {
-                                    route: _vm.$route,
-                                    isRTL: _vm.$vs.rtl
-                                  }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "vs-dropdown",
-                              {
-                                staticClass:
-                                  "ml-auto md:block hidden cursor-pointer",
-                                attrs: { "vs-trigger-click": "" }
-                              },
-                              [
-                                _c("vs-button", {
-                                  attrs: {
-                                    radius: "",
-                                    icon: "icon-settings",
-                                    "icon-pack": "feather"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "vs-dropdown-menu",
-                                  { staticClass: "w-32" },
-                                  [
-                                    _c("vs-dropdown-item", [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center",
-                                          on: {
-                                            click: function($event) {
-                                              _vm.$router
-                                                .push("/pages/profile")
-                                                .catch(function() {})
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c("feather-icon", {
-                                            staticClass: "inline-block mr-2",
-                                            attrs: {
-                                              icon: "UserIcon",
-                                              svgClasses: "w-4 h-4"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("span", [_vm._v("Profile")])
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("vs-dropdown-item", [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center",
-                                          on: {
-                                            click: function($event) {
-                                              _vm.$router
-                                                .push("/apps/todo")
-                                                .catch(function() {})
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c("feather-icon", {
-                                            staticClass: "inline-block mr-2",
-                                            attrs: {
-                                              icon: "CheckSquareIcon",
-                                              svgClasses: "w-4 h-4"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("span", [_vm._v("Tasks")])
-                                        ],
-                                        1
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("vs-dropdown-item", [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "flex items-center",
-                                          on: {
-                                            click: function($event) {
-                                              _vm.$router
-                                                .push("/apps/email")
-                                                .catch(function() {})
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c("feather-icon", {
-                                            staticClass: "inline-block mr-2",
-                                            attrs: {
-                                              icon: "MailIcon",
-                                              svgClasses: "w-4 h-4"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("span", [_vm._v("Inbox")])
-                                        ],
-                                        1
-                                      )
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
+              attrs: { id: "content-area" }
+            },
+            [
+              _c("div", { attrs: { id: "content-overlay" } }),
+              _vm._v(" "),
+              _vm.mainLayoutType === "horizontal" && _vm.windowWidth >= 1200
+                ? [
+                    _c("the-navbar-horizontal", {
+                      class: [
+                        { "text-white": _vm.isNavbarDark && !_vm.isThemeDark },
+                        { "text-base": !_vm.isNavbarDark && _vm.isThemeDark }
+                      ],
+                      attrs: { navbarType: _vm.navbarType }
+                    }),
+                    _vm._v(" "),
+                    _vm.navbarType === "static"
+                      ? _c("div", { staticStyle: { height: "62px" } })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("h-nav-menu", {
+                      class: [
+                        { "text-white": _vm.isNavbarDark && !_vm.isThemeDark },
+                        { "text-base": !_vm.isNavbarDark && _vm.isThemeDark }
+                      ],
+                      attrs: { navMenuItems: _vm.navMenuItems }
+                    })
+                  ]
+                : [
+                    _c("the-navbar-vertical", {
+                      class: [
+                        { "text-white": _vm.isNavbarDark && !_vm.isThemeDark },
+                        { "text-base": !_vm.isNavbarDark && _vm.isThemeDark }
+                      ],
+                      attrs: { navbarColor: _vm.navbarColor }
+                    })
+                  ],
+              _vm._v(" "),
+              _c("div", { staticClass: "content-wrapper" }, [
+                _c("div", { staticClass: "router-view" }, [
                   _c(
                     "div",
-                    { staticClass: "content-area__content" },
+                    { staticClass: "router-content" },
                     [
-                      !_vm.hideScrollToTop
-                        ? _c(
-                            "back-to-top",
+                      _c(
+                        "transition",
+                        { attrs: { name: _vm.routerTransition } },
+                        [
+                          _vm.$route.meta.breadcrumb ||
+                          _vm.$route.meta.pageTitle
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "router-header flex flex-wrap items-center mb-6"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "content-area__heading",
+                                      class: {
+                                        "pr-4 border-0 md:border-r border-solid border-grey-light":
+                                          _vm.$route.meta.breadcrumb
+                                      }
+                                    },
+                                    [
+                                      _c("h2", { staticClass: "mb-1" }, [
+                                        _vm._v(_vm._s(_vm.routeTitle))
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.$route.meta.breadcrumb
+                                    ? _c("vx-breadcrumb", {
+                                        staticClass: "ml-4 md:block hidden",
+                                        attrs: {
+                                          route: _vm.$route,
+                                          isRTL: _vm.$vs.rtl
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "vs-dropdown",
+                                    {
+                                      staticClass:
+                                        "ml-auto md:block hidden cursor-pointer",
+                                      attrs: { "vs-trigger-click": "" }
+                                    },
+                                    [
+                                      _c("vs-button", {
+                                        attrs: {
+                                          radius: "",
+                                          icon: "icon-settings",
+                                          "icon-pack": "feather"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "vs-dropdown-menu",
+                                        { staticClass: "w-32" },
+                                        [
+                                          _c("vs-dropdown-item", [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex items-center",
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.$router
+                                                      .push("/pages/profile")
+                                                      .catch(function() {})
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("feather-icon", {
+                                                  staticClass:
+                                                    "inline-block mr-2",
+                                                  attrs: {
+                                                    icon: "UserIcon",
+                                                    svgClasses: "w-4 h-4"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("span", [_vm._v("Profile")])
+                                              ],
+                                              1
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("vs-dropdown-item", [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex items-center",
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.$router
+                                                      .push("/apps/todo")
+                                                      .catch(function() {})
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("feather-icon", {
+                                                  staticClass:
+                                                    "inline-block mr-2",
+                                                  attrs: {
+                                                    icon: "CheckSquareIcon",
+                                                    svgClasses: "w-4 h-4"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("span", [_vm._v("Tasks")])
+                                              ],
+                                              1
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("vs-dropdown-item", [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex items-center",
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.$router
+                                                      .push("/apps/email")
+                                                      .catch(function() {})
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("feather-icon", {
+                                                  staticClass:
+                                                    "inline-block mr-2",
+                                                  attrs: {
+                                                    icon: "MailIcon",
+                                                    svgClasses: "w-4 h-4"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("span", [_vm._v("Inbox")])
+                                              ],
+                                              1
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "content-area__content" },
+                        [
+                          !_vm.hideScrollToTop
+                            ? _c(
+                                "back-to-top",
+                                {
+                                  attrs: {
+                                    bottom: "5%",
+                                    right: _vm.$vs.rtl
+                                      ? "calc(100% - 2.2rem - 38px)"
+                                      : "30px",
+                                    visibleoffset: "500"
+                                  }
+                                },
+                                [
+                                  _c("vs-button", {
+                                    staticClass: "shadow-lg btn-back-to-top",
+                                    attrs: {
+                                      "icon-pack": "feather",
+                                      icon: "icon-arrow-up"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "transition",
                             {
                               attrs: {
-                                bottom: "5%",
-                                right: _vm.$vs.rtl
-                                  ? "calc(100% - 2.2rem - 38px)"
-                                  : "30px",
-                                visibleoffset: "500"
+                                name: _vm.routerTransition,
+                                mode: "out-in"
                               }
                             },
                             [
-                              _c("vs-button", {
-                                staticClass: "shadow-lg btn-back-to-top",
-                                attrs: {
-                                  "icon-pack": "feather",
-                                  icon: "icon-arrow-up"
+                              _c("router-view", {
+                                key: _vm.$route.fullPath,
+                                on: {
+                                  changeRouteTitle: _vm.changeRouteTitle,
+                                  setAppClasses: function(classesStr) {
+                                    return _vm.$emit(
+                                      "setAppClasses",
+                                      classesStr
+                                    )
+                                  }
                                 }
                               })
                             ],
                             1
                           )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "transition",
-                        {
-                          attrs: { name: _vm.routerTransition, mode: "out-in" }
-                        },
-                        [
-                          _c("router-view", {
-                            key: _vm.$route.fullPath,
-                            on: {
-                              changeRouteTitle: _vm.changeRouteTitle,
-                              setAppClasses: function(classesStr) {
-                                return _vm.$emit("setAppClasses", classesStr)
-                              }
-                            }
-                          })
                         ],
                         1
                       )
                     ],
                     1
                   )
-                ],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("the-footer")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("the-footer")
+            ],
+            2
+          )
         ],
-        2
+        1
       )
-    ],
-    1
-  )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -6613,6 +6654,11 @@ __webpack_require__.r(__webpack_exports__);
   url: "/consultar",
   name: "Consultar envios",
   slug: "consultar",
+  icon: "FileIcon"
+}, {
+  url: "/historial",
+  name: "Historial de procesados",
+  slug: "historial",
   icon: "FileIcon"
 }]);
 

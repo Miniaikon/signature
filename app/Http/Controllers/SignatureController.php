@@ -52,7 +52,7 @@ class SignatureController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://exurcompras.com/proccessSend.php",
+        CURLOPT_URL => "http://entregas.exurenvios.com/proccessSend.php",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -71,7 +71,7 @@ class SignatureController extends Controller
         curl_close($curl);
         $res = json_decode($response);
 
-        if(isset($res->Mensaje) && $res->Mensaje->Mensaje != "OK")
+        if(isset($res->Mensaje) && $res->Mensaje->Mensaje != "Procedimiento finalizado correctamente.")
             return response()->json($res->Mensaje->Mensaje, 412);
 
         $envios = explode('|', $request->unaListaEnvios);
@@ -85,7 +85,8 @@ class SignatureController extends Controller
             ]);
         }
 
-        return response()->json('Hola',200);
+        return response()->json($res);
+
     }
 
     public function printPackage($ids){
@@ -94,13 +95,14 @@ class SignatureController extends Controller
         $envios = explode('|', $ids);
         $datos = [];
 
+
         for($i = 0; $i < count($envios); $i++){
             $paquetes = Signature::where('id_paquete', $envios[$i])->orderBy('id', 'desc')->first();
 
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://exurcompras.com/ExurController.php",
+            CURLOPT_URL => "http://entregas.exurenvios.com/api/ExurController.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -162,21 +164,18 @@ class SignatureController extends Controller
 
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://exurcompras.com/ExurController.php",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "method=$method&search=$request->search",
-        CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer 67ac2b5faf2c0513ccfa2000f769d905",
-                "Content-Type: application/x-www-form-urlencoded"
-            ),
-        ));
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => "http://entregas.exurenvios.com/api/ExurController.php",
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => "",
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 0,
+		  CURLOPT_SSL_VERIFYHOST => 0,
+		  CURLOPT_FOLLOWLOCATION => true,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => "POST",
+		  CURLOPT_POSTFIELDS => array('method' => $method,'search' => $request->search),
+		));
 
         $response = curl_exec($curl);
 
@@ -187,6 +186,13 @@ class SignatureController extends Controller
             return response()->json($res->Mensaje->Mensaje, 412);
 
         return response()->json($res, 200);
+
+    }
+
+    public function ObtenerEnvios(){
+        $signature = Signature::orderBy('created_at', 'desc')->get();
+
+        return response()->json($signature);
 
     }
 }

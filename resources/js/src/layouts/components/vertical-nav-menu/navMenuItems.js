@@ -21,4 +21,10 @@ export default [
     slug: "consultar",
     icon: "FileIcon",
   },
+  {
+    url: "/historial",
+    name: "Historial de procesados",
+    slug: "historial",
+    icon: "FileIcon",
+  },
 ]
