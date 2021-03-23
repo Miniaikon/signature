@@ -34,7 +34,7 @@
                       icon-no-border
                       icon="icon icon-user"
                       icon-pack="feather"
-                      label-placeholder="Email"
+                      label-placeholder="Usuario"
                       v-model="email"
                       class="w-full"/>
 
@@ -49,7 +49,7 @@
                       class="w-full mt-6" />
 
                   <div class="flex flex-wrap justify-between my-5">
-                      <vs-checkbox v-model="checkbox_remember_me" class="mb-3">Remember Me</vs-checkbox>
+                      <!-- <vs-checkbox v-model="checkbox_remember_me" class="mb-3">Remember Me</vs-checkbox> -->
                   </div>
                   <vs-button @click.prevent="login()">Login</vs-button>
 
@@ -80,8 +80,13 @@ export default{
   methods: {
     login(){
         axios.post('/auth/login', {'email': this.email, 'password': this.password}).then(response => {
-            this.$router.push('/');
-            localStorage.setItem('userCode', response.data);
+            console.log(response.data);
+            localStorage.setItem('userCode', response.data.CodUsuario);
+            localStorage.setItem('CodAgencia', response.data.CodAgencia);
+            localStorage.setItem('agencia', response.data.NombreAgencia);
+            localStorage.setItem('userName', response.data.LoginUsuario);
+            window.location.reload();
+            // this.$router.push('/');
         }).catch(error => {
             alert('Falló la autenticación');
         });
@@ -90,8 +95,17 @@ export default{
         axios.get('/auth/who-am-i').then(response => {
             console.log(response.data);
             if(response.data == true){
-                this.$router.push('/');
+                if(localStorage.getItem('userName')){
+                    this.$router.push('/');
+                }else{
+                    this.logout();
+                }
             }
+        });
+    },
+    logout(){
+        axios.get('/auth/logout').then(response => {
+            this.$router.push('/pages/login');
         });
     }
   }

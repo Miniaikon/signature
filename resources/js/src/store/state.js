@@ -18,7 +18,9 @@ import colors from "@/../themeConfig.js"
 
 const userDefaults = {
   uid         : 0,          // From Auth
-  displayName : "Agencia Exur", // From Auth
+  displayName : localStorage.getItem('userName'), // From Auth
+  agency      : localStorage.getItem('CodAgencia'),
+  agencyName  : localStorage.getItem('agencia'),
   about       : "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
   photoURL    : require("@assets/images/logo/logo.png"), // From Auth
   status      : "online",

@@ -56279,8 +56279,10 @@ __webpack_require__.r(__webpack_exports__);
 var userDefaults = {
   uid: 0,
   // From Auth
-  displayName: "Agencia Exur",
+  displayName: localStorage.getItem('userName'),
   // From Auth
+  agency: localStorage.getItem('CodAgencia'),
+  agencyName: localStorage.getItem('agencia'),
   about: "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
   photoURL: __webpack_require__(/*! @assets/images/logo/logo.png */ "./resources/assets/images/logo/logo.png"),
   // From Auth

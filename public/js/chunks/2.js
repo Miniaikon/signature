@@ -324,7 +324,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           unCodTipoDocumento: me.form.TipoDocumentoRetira,
           unNroDocumento: me.form.NroDocumentoRetira,
           unNombreClienteRetira: me.form.NombreRetira,
-          unCodUsuarioModif: localStorage.getItem('userCode')
+          unCodUsuarioModif: localStorage.getItem('userCode'),
+          CodAgencia: localStorage.getItem('CodAgencia')
         };
         axios.post('/api/enviar', data).then(function (res) {
           var _me$form;
@@ -382,7 +383,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this4 = this;
 
       var me = this;
-      axios.get('http://entregas.exurenvios.com/getPaquetesByDocument.php?documento=' + me.form.NroDocumento).then(function (response) {
+      axios.get('http://entregas.exurenvios.com/getPaquetesByDocument.php?documento=' + me.form.NroDocumento + '&id_agencia=' + localStorage.getItem('CodAgencia')).then(function (response) {
         var res = Array.isArray(response.data.Envio) ? response.data.Envio : [response.data.Envio];
 
         if (res[0]) {
@@ -400,7 +401,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this5 = this;
 
       var me = this;
-      axios.get('http://entregas.exurenvios.com/getPaquetes.php?id_cliente=' + (me.form.CodCliente ? me.form.CodCliente : 'null')).then(function (response) {
+      axios.get('http://entregas.exurenvios.com/getPaquetes.php?id_cliente=' + (me.form.CodCliente ? me.form.CodCliente : 'null') + '&id_agencia=' + localStorage.getItem('CodAgencia')).then(function (response) {
         var res = Array.isArray(response.data.Envio) ? response.data.Envio : [response.data.Envio];
 
         if (res[0]) {
@@ -418,7 +419,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this6 = this;
 
       var me = this;
-      axios.get('http://entregas.exurenvios.com/getCodeSend.php?send_code=' + (me.form.CodEnvio ? me.form.CodEnvio : 'null')).then(function (response) {
+      axios.get('http://entregas.exurenvios.com/getCodeSend.php?send_code=' + (me.form.CodEnvio ? me.form.CodEnvio : 'null') + '&id_agencia=' + localStorage.getItem('CodAgencia')).then(function (response) {
         var res = Array.isArray(response.data.Envio) ? response.data.Envio : [response.data.Envio];
 
         if (res[0]) {

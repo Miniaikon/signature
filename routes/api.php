@@ -29,7 +29,7 @@ Route::post('/enviar', 'SignatureController@enviarPaquetes')->name('signature.en
 
 Route::post('/get-envios-pendientes', 'SignatureController@EnviosPendientes')->name('signature.EnviosPendientes');
 
-Route::get('/get-envios-procesados', 'SignatureController@ObtenerEnvios')->name('signature.EnviosProcesados');
+Route::get('/get-envios-procesados/{id}', 'SignatureController@ObtenerEnvios')->name('signature.EnviosProcesados');
 
 Route::get('test', function(){
     return view('test');

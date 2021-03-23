@@ -89,28 +89,40 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     login: function login() {
-      var _this = this;
-
       axios.post('/auth/login', {
         'email': this.email,
         'password': this.password
       }).then(function (response) {
-        _this.$router.push('/');
-
-        localStorage.setItem('userCode', response.data);
+        console.log(response.data);
+        localStorage.setItem('userCode', response.data.CodUsuario);
+        localStorage.setItem('CodAgencia', response.data.CodAgencia);
+        localStorage.setItem('agencia', response.data.NombreAgencia);
+        localStorage.setItem('userName', response.data.LoginUsuario);
+        window.location.reload(); // this.$router.push('/');
       }).catch(function (error) {
         alert('Falló la autenticación');
       });
     },
     verifyAuth: function verifyAuth() {
-      var _this2 = this;
+      var _this = this;
 
       axios.get('/auth/who-am-i').then(function (response) {
         console.log(response.data);
 
         if (response.data == true) {
-          _this2.$router.push('/');
+          if (localStorage.getItem('userName')) {
+            _this.$router.push('/');
+          } else {
+            _this.logout();
+          }
         }
+      });
+    },
+    logout: function logout() {
+      var _this2 = this;
+
+      axios.get('/auth/logout').then(function (response) {
+        _this2.$router.push('/pages/login');
       });
     }
   }
@@ -252,7 +264,7 @@ var render = function() {
                                   "icon-no-border": "",
                                   icon: "icon icon-user",
                                   "icon-pack": "feather",
-                                  "label-placeholder": "Email"
+                                  "label-placeholder": "Usuario"
                                 },
                                 model: {
                                   value: _vm.email,
@@ -282,30 +294,10 @@ var render = function() {
                                 }
                               }),
                               _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "flex flex-wrap justify-between my-5"
-                                },
-                                [
-                                  _c(
-                                    "vs-checkbox",
-                                    {
-                                      staticClass: "mb-3",
-                                      model: {
-                                        value: _vm.checkbox_remember_me,
-                                        callback: function($$v) {
-                                          _vm.checkbox_remember_me = $$v
-                                        },
-                                        expression: "checkbox_remember_me"
-                                      }
-                                    },
-                                    [_vm._v("Remember Me")]
-                                  )
-                                ],
-                                1
-                              ),
+                              _c("div", {
+                                staticClass:
+                                  "flex flex-wrap justify-between my-5"
+                              }),
                               _vm._v(" "),
                               _c(
                                 "vs-button",

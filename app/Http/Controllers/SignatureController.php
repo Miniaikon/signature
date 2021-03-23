@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Signature;
 use Auth;
+use Carbon\Carbon;
 use stdClass;
 
 class SignatureController extends Controller
@@ -189,8 +190,8 @@ class SignatureController extends Controller
 
     }
 
-    public function ObtenerEnvios(){
-        $signature = Signature::orderBy('created_at', 'desc')->get();
+    public function ObtenerEnvios($id){
+        $signature = Signature::where('created_at', Carbon::now())->orderBy('created_at', 'desc')->where('id_agencia', $id)->get();
 
         return response()->json($signature);
 

@@ -2,31 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use Auth;
+use Hash;
 
 class LoginController extends Controller
 {
-    public function login(Request $request){
-        $credentials = $request->only('email', 'password');
+    public function login(Request $request)
+    {
+        $codigoUsuario = $this->loginUser($request->email, $request->password);
 
-        if (Auth::attempt($credentials)) {
+        dd($codigoUsuario);
 
-            $codigoUsuario = $this->loginUser(Auth::user()->name, $request->password);
+        if ($codigoUsuario) {
+            $user = User::where('email', $request->email)->first();
+            if ($user === null) {
+                $user = new User();
+                $user->id = $codigoUsuario;
+                $user->email = $request->email;
+                $user->name = $request->email;
+                $user->password = Hash::make($request->password);
+                $user->save();
+            }
 
-            // Authentication passed
-            return response()->json($codigoUsuario, 200);
-        }else{
-            return response()->json(false, 412);
+            Auth::login($user, true);
+            if (Auth::check()) {
+                return response()->json($codigoUsuario, 200);
+            }
+            return response()->json($codigoUsuario, 500);
         }
+
+        return response()->json($codigoUsuario, 500);
     }
 
-    public function loginUser($name, $pass){
+    public function loginUser($name, $pass)
+    {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://exurcompras.com/getCodeUser.php",
+            CURLOPT_URL => "http://entregas.exurenvios.com/getCodeUser.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -43,7 +59,6 @@ class LoginController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        return (int)$response;
-
+        return $response;
     }
 }

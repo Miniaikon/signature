@@ -8,6 +8,7 @@ class Signature extends Model
 {
     protected $table = 'signatures';
     protected $fillable = [
+        'id_agencia',
         'id_cliente',
         'id_paquete',
         'firma',

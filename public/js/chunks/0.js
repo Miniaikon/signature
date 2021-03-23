@@ -4341,7 +4341,14 @@ var render = function() {
                 _vm._v(_vm._s(_vm.activeUserInfo.displayName))
               ]),
               _vm._v(" "),
-              _c("small", [_vm._v("Available")])
+              _c("small", [
+                _vm._v(
+                  "Agencia " +
+                    _vm._s(_vm.activeUserInfo.agencyName) +
+                    " #" +
+                    _vm._s(_vm.activeUserInfo.agency)
+                )
+              ])
             ]
           ),
           _vm._v(" "),

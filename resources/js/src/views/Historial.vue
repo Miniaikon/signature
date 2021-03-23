@@ -68,7 +68,7 @@ export default {
   methods: {
       getEnvios(){
           let me = this;
-          axios.get('/api/get-envios-procesados').then(res => {
+          axios.get('/api/get-envios-procesados/' + localStorage.getItem('CodAgencia')).then(res => {
               me.items = res.data;
           });
       }

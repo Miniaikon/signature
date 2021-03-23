@@ -78,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getEnvios: function getEnvios() {
       var me = this;
-      axios.get('/api/get-envios-procesados').then(function (res) {
+      axios.get('/api/get-envios-procesados/' + localStorage.getItem('CodAgencia')).then(function (res) {
         me.items = res.data;
       });
     }
