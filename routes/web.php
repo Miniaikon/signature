@@ -29,6 +29,8 @@ Route::prefix('auth')->group(function () {
     Route::get('/imprimir-envio/{id}', 'SignatureController@printPackage')->name('signature.printPackage');
 });
 
+
 Route::prefix('factura')->group(function () {
     // Route::get()
+    Route::get('/imprimir-test/{id}', 'SignatureController@printPackage')->name('signature.printPackage');
 });
