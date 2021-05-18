@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title></title>
 
 
@@ -98,7 +98,7 @@
     <script src="{{ asset('zip/WebContent/deflate.js') }}"></script>
     <script src="{{ asset('node_modules/jsprintmanager/JSPrintManager.js') }}"></script>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="{{ asset('bluebird.min.js') }}"></script>
     <script src="{{ asset('jquery-3.2.1.slim.min.js') }}"></script>
     <!-- https://github.com/niklasvh/html2canvas/releases/download/v1.0.0-rc.5/html2canvas.min.js -->
@@ -192,7 +192,8 @@
     <script src="{{ asset('js/qz-tray.js') }}"></script>
     <script>
         qz.websocket.connect().then(() => {
-            return qz.printers.find("Microsoft Print to PDF");
+			console.log(qz.printers.find());
+            return qz.printers.find("Exur");
         }).then(found => {
             let html = document.querySelector('#PrintLabel');
             let config = qz.configs.create(found);
@@ -204,7 +205,9 @@
             }];
 
             qz.print(config, data);
-        })
+        }).then(() => {
+			window.close();
+		})
     </script>
 
 </body>
